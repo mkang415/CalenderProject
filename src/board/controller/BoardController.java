@@ -9,28 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class BoardController
- */
-@WebServlet("/BoardController")
+
+@WebServlet("/main")
 public class BoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public BoardController() {
-		super();
-	}
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		// VIEW 지정 
+		request.getRequestDispatcher("/WEB-INF/views/main.jsp").forward(request, response);
+		
 	}
-
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		super.doPost(request, response);
-	}   
 	
-	
-	
-
 }

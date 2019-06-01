@@ -1,5 +1,6 @@
 package board.dao.face;
 
+<<<<<<< Updated upstream
 import java.util.List;
 
 import dto.Board;
@@ -25,4 +26,8 @@ public interface BoardDao {
 	
 	
 
+=======
+public interface BoardDao {
+
+>>>>>>> Stashed changes
 }

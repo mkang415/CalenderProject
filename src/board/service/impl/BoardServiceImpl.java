@@ -1,5 +1,6 @@
 package board.service.impl;
 
+<<<<<<< Updated upstream
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -134,3 +135,17 @@ public class BoardServiceImpl implements BoardService {
 
 
 
+=======
+import board.dao.face.BoardDao;
+import board.dao.impl.BoardDaoImpl;
+import board.service.face.BoardService;
+
+public class BoardServiceImpl implements BoardService {
+
+	// DAO 객체 
+	private BoardDao boardDao = new BoardDaoImpl();
+	private CommentDao commentDao = new CommentDaoImpl();
+	
+	
+}
+>>>>>>> Stashed changes

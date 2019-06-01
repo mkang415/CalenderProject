@@ -12,18 +12,29 @@ import board.service.impl.BoardServiceImpl;
 import dto.Comment;
 
 
-@WebServlet("/comment/insert")
-public class CommentInsertController extends HttpServlet {
+@WebServlet("/comment/delete")
+public class CommentDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
-	private BoardService boardService = new BoardServiceImpl();
+       
+    private BoardService boardService = new BoardServiceImpl();
 	
+    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
-
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Comment comment = boardService.getComment(request);
+		
+		Comment comment = new Comment();
+		
+		String commentNo = (String) request.getParameter("commentNo");
+		
+		comment.setCommentNo(Integer.parseInt(commentNo));
+		
+		boolean success = boardService.deleteComment(comment);
+		
+		response.getWriter().append("{\"success\":"+success+"}");
+		
 	}
 
 }

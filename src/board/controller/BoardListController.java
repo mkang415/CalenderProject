@@ -24,7 +24,7 @@ public class BoardListController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		//게시판 목록 조회
-		List list = boardService.getList();
+		List list = boardService.getList(); // Paging 생성해야함 
 		
 		//view 지정
 		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(req, resp);

@@ -3,9 +3,11 @@ package board.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 
 import board.dao.face.BoardDao;
 import dbutil.DBConn;
+import util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
 

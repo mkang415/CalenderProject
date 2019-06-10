@@ -14,6 +14,7 @@ import oracle.net.aso.e;
 import reply.dao.face.ReplyDao;
 
 public class ReplyDaoImpl implements ReplyDao {
+	
 	// DB 연결 객체 
 	private Connection conn = DBConn.getConnection();
 	

@@ -22,6 +22,8 @@ public class ManageDaoImpl implements ManageDao {
 	@Override
 	public List selectAll(Paging paging) {
 		
+		System.out.println(paging.toString());
+		
 		//게시글 목록 조회쿼리
 		String sql = "";
 		sql += "SELECT * FROM (";
@@ -51,6 +53,7 @@ public class ManageDaoImpl implements ManageDao {
 				board.setUserid(rs.getString("userid"));
 				board.setInsertdate(rs.getDate("Insertdate"));
 				
+				System.out.println(board.toString());
 				list.add(board);
 			}
 			
@@ -88,6 +91,7 @@ public class ManageDaoImpl implements ManageDao {
 			
 			while (rs.next()) {
 				totalCount = rs.getInt(1);
+				System.out.println(totalCount);
 			}
 			
 		} catch (SQLException e) {
@@ -152,6 +156,36 @@ public class ManageDaoImpl implements ManageDao {
 		
 		
 	}
+
+	@Override
+	public void delete(String names) {
+		 String sql = "delete from board where boardno in ("+names+")";
+	    
+	      
+	      try {
+	         ps = conn.prepareStatement(sql);
+	         ps.executeUpdate();
+	         
+	      } catch (SQLException e) {
+	         
+	         e.printStackTrace();
+	      } finally {
+
+	         try {
+	            if (rs != null)
+	               rs.close();
+	            if (ps != null)
+	               ps.close();
+	         } catch (SQLException e) {
+	            
+	            e.printStackTrace();
+	         }
+	      }
+	}
+
+	
+
+
 	
 	
 	

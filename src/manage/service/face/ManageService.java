@@ -24,6 +24,15 @@ public interface ManageService {
 	 * @return Paging - 페이징 계산이 완료된 객체
 	 */
 	public Paging getCurPage(HttpServletRequest req);
+
+	public Board getBoardno(HttpServletRequest req);
+
+	public Board view(Board viewBoard);
+
+	public void delete(String names);
+
 	
+
+
 	
 }

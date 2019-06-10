@@ -1,3 +1,4 @@
+
 package manage.controller;
 
 import java.io.IOException;
@@ -32,11 +33,14 @@ public class ManagePageController extends HttpServlet {
 		//게시판 목록 조회
 		List list = manageService.getList(paging);
 		
+	
 		//MODEL로 조회 결과 넣기
 		req.setAttribute("list", list);
 		
 		req.getRequestDispatcher("/WEB-INF/views/manage/page.jsp").forward(req, resp);;
 		
 	}
+	
+	
 	
 }

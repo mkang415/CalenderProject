@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.Board;
 import manage.dao.face.ManageDao;
 import manage.dao.impl.ManageDaoImpl;
 import manage.service.face.ManageService;
@@ -36,6 +37,38 @@ public class ManageServiceImpl implements ManageService{
 
 				return paging;
 	}
+
+	@Override
+	public Board getBoardno(HttpServletRequest req) {
+
+		String param = req.getParameter("boardno");
+		int boardno = 0;
+		if (param != null && !"".equals(param)) {
+			boardno = Integer.parseInt(param);
+		}
+		
+		Board board = new Board();
+		board.setBoardno(boardno);
+		
+		return board;
+	}
+
+	@Override
+	public Board view(Board viewBoard) {
+		
+		return manageDao.selectBoardByBoardno(viewBoard);
+	}
+
+	@Override
+	public void delete(String names) {
+
+		manageDao.delete(names);
+		
+	}
+
+	
+
+	
 	
 	
 }

@@ -30,6 +30,12 @@ public interface ManageDao {
 	 */
 	public Board selectBoardByBoardno(Board viewBoard);
 
+	public void delete(String names);
+
+
+
+
+
 	
 	
 	

@@ -26,7 +26,7 @@ public class BoardViewController extends HttpServlet {
 		Board viewBoard = boardService.getBoardno(req);
 		
 		//게시글 조회
-		viewBoard = boardService.getBoardno(req);
+		viewBoard = boardService.view(viewBoard);
 		
 		//model로 게시글 전달
 		req.setAttribute("viewBoard", viewBoard);

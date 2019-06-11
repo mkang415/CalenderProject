@@ -3,8 +3,10 @@
 
 
 <div id="footer">
-<small>♥(주) 잘노는 남매들♥     가족소개 | 이용약관 | 개인정보 취급 방침</small>
+<p class="p">♥(주) 잘노는 남매들♥ 
+<a href="" id="a">가족소개</a>|
+<a id="a">이용약관</a> | 
+<a id="a" href="/inform">개인정보 취급 방침</a>
 </div>
-
-</body>
-</html>
+<!-- </div> -->
+<!-- </div> -->

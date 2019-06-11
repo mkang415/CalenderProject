@@ -25,7 +25,7 @@
 
 		<c:if test="${paging.curPage ne 1 }">
 		<li>
-			<a href="/board/list?curPage=${paging.curPage-1 }&search=${param.search }"><span>&laquo;</span></a>
+			<a href="/board/list?curPage=${paging.curPage-1 }"><span>&laquo;</span></a>
 	    </li>
 	    </c:if>
 
@@ -41,13 +41,13 @@
 			<!-- 현재 보고 있는 페이지번호만 강조해주기 -->
 			<c:if test="${paging.curPage eq i}">
 			<li class="active">
-				<a href="/board/list?curPage=${i }&search=${param.search }">${i }</a>
+				<a href="/board/list?curPage=${i }">${i }</a>
 			</li>
 			</c:if>
 		
 			<c:if test="${paging.curPage ne i}">
 			<li>
-				<a href="/board/list?curPage=${i }&search=${param.search }">${i }</a>
+				<a href="/board/list?curPage=${i }">${i }</a>
 			</li>
 			</c:if>
 			
@@ -65,7 +65,7 @@
 
 		<c:if test="${paging.curPage ne paging.totalPage }">
 		<li>
-			<a href="/board/list?curPage=${paging.curPage+1 }&search=${param.search }">
+			<a href="/board/list?curPage=${paging.curPage+1 }">
 			<span>&raquo;</span>
 		</a>
 		</li>

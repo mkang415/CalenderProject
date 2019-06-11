@@ -16,11 +16,32 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao boardDao = new BoardDaoImpl();
 
 	@Override //list 전체검색
-	public List getList() {
-		return boardDao.selectAll();
+	public List getList(Paging paging) {
+		return boardDao.selectAll(paging);
 	}
+	
+	//게시글 curPage 파싱
+	@Override
+	public Paging getCurPage(HttpServletRequest req) {
+		//전달파라미터 curPage 파싱
+		String param = req.getParameter("curPage");
+		int curPage = 0;
+		if(param!=null &&!"".equals(param)) {
+			curPage = Integer.parseInt(param);
+		}
 
-	@Override //게시판 글번호 꺼내오기?
+		//전체 게시글 수
+		int totalCount = boardDao.selectCntAll();
+		
+		//페이징 객체 생성
+		Paging paging = new Paging(totalCount, curPage);
+		
+		
+		return paging;
+	}
+		
+
+	@Override //글번호로 게시글 조회
 	public Board getBoardno(HttpServletRequest req) {
 		
 		//전달파라미터 boardno 파싱
@@ -33,7 +54,9 @@ public class BoardServiceImpl implements BoardService {
 		//board객체 생성
 		Board board = new Board();
 		board.setBoardno(boardno);
-		return null;
+		
+		
+		return board;
 	}
 
 	@Override //게시판 상세보기
@@ -47,26 +70,37 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	//게시글 작성
-	@SuppressWarnings("unused")
+	//게시글 작성 **
 	@Override
 	public void write(HttpServletRequest req) {
 		
-		Board board = null;
+		Board board = new Board();
 		
-		int boardno = boardDao.selectBoardno();
+		board.setTitle(req.getParameter("title"));
+		board.setContent(req.getParameter("content"));
 		
-		if (board != null) {
-				board.setBoardno(boardno);
-			
-			if(board.getTitle()==null || "".equals(board.getTitle())){
-				board.setTitle("(제목없음)");
-			
-				//작성자 아이디 처리
-				board.setContent((String) req.getSession().getAttribute("userid"));
-			}
-			boardDao.insert(board);
-		}
+		boardDao.insert(board);
+		
+		
+		
+		
+//		Board board = null;
+//		board = new Board();
+//		int boardno = boardDao.selectBoardno();
+//		
+//		boardDao.insert(board);
+		
+//		if (board != null) {
+//				board.setBoardno(boardno);
+//			
+//			if(board.getTitle()==null || "".equals(board.getTitle())){
+//				board.setTitle("(제목없음)");
+//			
+//				//작성자 아이디 처리
+//				board.setUserid((String) req.getSession().getAttribute("userid"));
+//			}
+//			boardDao.insert(board);
+//		}
 		
 		
 		
@@ -78,7 +112,7 @@ public class BoardServiceImpl implements BoardService {
 	public boolean checkWriter(HttpServletRequest req) {
 		
 		//로그인한 세션 ID 얻기
-		String loginId = (String) req.getSession().getAttribute("userid");
+//		String loginId = (String) req.getSession().getAttribute("userid");
 		
 		//작성한 게시글 번호 얻기
 		Board board = getBoardno(req);
@@ -94,13 +128,33 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	//게시글 수정
+	//게시글 수정 **
 	@Override
 	public void update(HttpServletRequest req) {
 		
+		Board board = null;
+		
+		board = new Board();
+		
+		board.setTitle(req.getParameter("title"));
+		board.setContent(req.getParameter("content"));
+		
+		boardDao.update(board);
+		
+		 
+		
 			
 		}
-			
+
+	
+	//게시글 삭제
+	@Override
+	public void delete(Board board) {
+
+		boardDao.delete(board);
+	}
+
+	
 	}
 	
 				

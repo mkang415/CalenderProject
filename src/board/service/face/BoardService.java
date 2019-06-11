@@ -10,7 +10,10 @@ import util.Paging;
 public interface BoardService {
 
 	//게시글 리스트 조회
-	public List getList();
+	public List getList(Paging paging);
+	
+	//요청파라미터 curPage 파싱
+	public Paging getCurPage(HttpServletRequest req);
 
 	//요청파라미터에서 boardno 파싱
 	public Board getBoardno(HttpServletRequest req);
@@ -26,5 +29,13 @@ public interface BoardService {
 
 	//게시글 수정
 	public void update(HttpServletRequest req);
+
+	//게시글 삭제
+	public void delete(Board board);
+
+	
+	
+
+	
 
 }

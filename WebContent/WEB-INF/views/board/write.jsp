@@ -32,32 +32,80 @@ $(document).ready(function() {
 
 <style type="text/css">
 #content {
-	width: 98%;
+	width: 99%;
+}
+
+
+#up {
+	width: 1100px;
+	height: 100px;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 15px;
+}
+
+#hwrite {
+	text-align: center;
 }
 </style>
 
 <div class="container">
 
-<h3>게시글 쓰기</h3>
+<h3 id="hwrite">게시글 쓰기</h3>
 <hr>
 
-<div>
-<form action="/board/write" method="post" enctype="multipart/form-data">
-<table class="table table-bordered">
-<tr><td class="info">아이디</td><td>${userid }</td></tr>
-<tr><td class="info">닉네임</td><td>${usernick }</td></tr>
-<tr><td class="info">제목</td><td><input type="text" name="title" style="width:100%"/></td></tr>
-<tr><td class="info" colspan="2">본문</td></tr>
+<div style="text-align: center">
+<form action="/board/write" method="post">
+<table border="1" id="up" class="table tale-bordered">
+<tr><td class="success" style="text-align: center">아이디</td><td>${userid }</td></tr>
+
+
+<tr><td class="secondary" style="text-align: center">제목</td><td><input type="text" name="title" style="width:100%"/></td></tr>
+<tr><td class="warning" style="text-align: center">직관날짜 <button>달력</button></td> <!-- 직관날짜는 boarddto에 없음 -->
+<td style="text-align: center" class="info">응원하는 팀<br>
+<select>
+<option>야구</option>
+<option>기아타이거즈</option>
+<option>두산베어스</option>
+<option>롯데자이언츠</option>
+<option>삼성라이온즈</option>
+<option>키움히어로즈</option>
+<option>한화이글스</option>
+<option>KT위즈</option>
+<option>LG트윈즈</option>
+<option>NC다이노스</option>
+<option>SK와이번스</option>
+</select>
+<select>
+<option>축구</option>
+<option>강원FC</option>
+<option>경남FC</option>
+<option>대구FC</option>
+<option>상주FC</option>
+<option>성남FC</option>
+<option>수원삼성블루윙즈</option>
+<option>울산현대</option>
+<option>인천유나이티드</option>
+<option>전북현대모터스</option>
+<option>제주유나이티드</option>
+
+
+
+
+</select></td></tr>
+<tr><td class="danger" colspan="2" style="text-align: center">본문</td></tr>
 <tr><td colspan="2">
 	<textarea id="content" name="content" rows="10" cols="100"></textarea>
 </td></tr>
 </table>
-
-
 </form>
 </div>
 
+
 <div class="text-center">	
+	<br><br><br>
 	<button type="button" id="btnWrite" class="btn btn-info">작성</button>
 	<button type="button" id="btnCancel" class="btn btn-danger">취소</button>
 </div>

@@ -23,8 +23,19 @@ public class BoardListController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
+		//요청 파라미터에서 curPage 얻어오기
+		Paging paging = boardService.getCurPage(req);
+		
+		//model로 Paging 객체 넣기
+		req.setAttribute("paging", paging);
+//		System.out.println(paging);
+		
 		//게시판 목록 조회
-		List list = boardService.getList(); // Paging 생성해야함 
+
+		List list = boardService.getList(paging);
+		
+		//model로 조회 결과 넣기
+		req.setAttribute("list", list);
 		
 		//view 지정
 		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(req, resp);

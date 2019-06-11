@@ -1,6 +1,4 @@
 /board/
-<<<<<<< HEAD
-=======
 /dbutil/
 /dto/
 /manage/
@@ -9,4 +7,3 @@
 /report/
 /schedule/
 /util/
->>>>>>> mergeEvent

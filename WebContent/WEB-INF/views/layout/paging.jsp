@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 
-=======
->>>>>>> mergeEvent
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <div class="text-center">
@@ -28,11 +25,7 @@
 
 		<c:if test="${paging.curPage ne 1 }">
 		<li>
-<<<<<<< HEAD
-			<a href="/board/list?curPage=${paging.curPage-1 }&search=${param.search }"><span>&laquo;</span></a>
-=======
 			<a href="/board/list?curPage=${paging.curPage-1 }"><span>&laquo;</span></a>
->>>>>>> mergeEvent
 	    </li>
 	    </c:if>
 
@@ -48,28 +41,17 @@
 			<!-- 현재 보고 있는 페이지번호만 강조해주기 -->
 			<c:if test="${paging.curPage eq i}">
 			<li class="active">
-<<<<<<< HEAD
-				<a href="/board/list?curPage=${i }&search=${param.search }">${i }</a>
-=======
 				<a href="/board/list?curPage=${i }">${i }</a>
->>>>>>> mergeEvent
 			</li>
 			</c:if>
 		
 			<c:if test="${paging.curPage ne i}">
 			<li>
-<<<<<<< HEAD
-				<a href="/board/list?curPage=${i }&search=${param.search }">${i }</a>
-=======
 				<a href="/board/list?curPage=${i }">${i }</a>
->>>>>>> mergeEvent
 			</li>
 			</c:if>
 			
 	    </c:forEach>
-
-
-
 		
 		<!-- 다음 페이지 -->
 		<c:if test="${paging.curPage eq paging.totalPage }">
@@ -80,11 +62,7 @@
 
 		<c:if test="${paging.curPage ne paging.totalPage }">
 		<li>
-<<<<<<< HEAD
-			<a href="/board/list?curPage=${paging.curPage+1 }&search=${param.search }">
-=======
 			<a href="/board/list?curPage=${paging.curPage+1 }">
->>>>>>> mergeEvent
 			<span>&raquo;</span>
 		</a>
 		</li>

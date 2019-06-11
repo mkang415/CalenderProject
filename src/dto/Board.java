@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class Board {
 
-	private int boardno;
-	private String userid;
-	private String title;
-	private String content;
-	private int scheduleno;
-	private Date insertdate;
-	private int hit;
+	private int boardno; //게시판번호
+	private String userid; //유저아이디
+	private String title; //글제목
+	private String content; //글본문
+	private int scheduleno; //스케줄넘버?
+	private Date insertdate; //글쓴날짜
+	private int hit; //조회수
 	
 	@Override
 	public String toString() {

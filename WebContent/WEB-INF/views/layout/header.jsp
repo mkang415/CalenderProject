@@ -119,6 +119,7 @@ $(document).ready(function(){
 <body>
 
 <div id="header">
+
 	<span style="font-size:3.5em;" id="h"><a href="/main">직관의 민족</a></span>
 	<span>
 	<button type="button">일정</button></span>

@@ -8,5 +8,9 @@
 </head>
 <body>
 
+<h1>로그인 성공!</h1>
+
+<button type="button" onClick="location.href='/mypage/pwupdate'">확인</button>
+
 </body>
 </html>

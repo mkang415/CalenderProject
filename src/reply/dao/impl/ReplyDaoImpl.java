@@ -23,7 +23,7 @@ public class ReplyDaoImpl implements ReplyDao {
 	private ResultSet rs;
 	
 	@Override
-	public List selectReplyList(Board board) {
+	public List selectReply(Board board) {
 		String sql
 		= "SELECT * FROM ("
 				+ "SELECT rownum rnum, B.* FROM ("
@@ -123,4 +123,5 @@ public class ReplyDaoImpl implements ReplyDao {
 			}
 		}
 	}
+
 }

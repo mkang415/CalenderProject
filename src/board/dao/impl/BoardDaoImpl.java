@@ -320,35 +320,4 @@ public class BoardDaoImpl implements BoardDao {
 		
 	}
 
-
-	
-
-}	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> master
+}

@@ -13,7 +13,7 @@ public interface ReplyDao {
 	 * @param board - 댓글이 조회될 게시글
 	 * @return List - 조회된 댓글 리스트 
 	 */
-	public List<?> selectReply(Board board);
+	public List selectReply(Board board);
 	
 	/*
 	 * 코멘트 INSERT

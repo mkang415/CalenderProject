@@ -9,16 +9,6 @@ import util.Paging;
 import dto.Reply;
 
 public interface BoardService {
-
-	//게시글 리스트 조회
-	public List getList(Paging paging);
-	
-	//요청파라미터 curPage 파싱
-	public Paging getCurPage(HttpServletRequest req);
-
-	//요청파라미터에서 boardno 파싱
-	public Board getBoardno(HttpServletRequest req);
-
 	
 	/**
 	 * 게시글 리스트 조회

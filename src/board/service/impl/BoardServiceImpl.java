@@ -1,10 +1,16 @@
 package board.service.impl;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import board.dao.face.BoardDao;
 import board.dao.impl.BoardDaoImpl;
 import board.service.face.BoardService;
+import dto.Board;
 import reply.dao.face.ReplyDao;
 import reply.dao.impl.ReplyDaoImpl;
+import util.Paging;
 
 public class BoardServiceImpl implements BoardService {
 	
@@ -155,7 +161,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	}
+
 
 	
 }

@@ -8,5 +8,9 @@
 </head>
 <body>
 
+<h1>로그인 실패</h1>
+<p>비밀번호를 확인해주세요</p>
+<button type="button" onClick="location.href='/mypage/pwupdate'">확인</button>
+
 </body>
 </html>

@@ -1,16 +1,16 @@
 package board.service.impl;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import board.dao.face.BoardDao;
 import board.dao.impl.BoardDaoImpl;
 import board.service.face.BoardService;
-import dto.Board;
-import util.Paging;
+import reply.dao.face.ReplyDao;
+import reply.dao.impl.ReplyDaoImpl;
 
 public class BoardServiceImpl implements BoardService {
+	
+	// DAO 객체 
+
+	private ReplyDao replyDao = new ReplyDaoImpl();
 
 	//BoardDao객체
 	private BoardDao boardDao = new BoardDaoImpl();
@@ -156,35 +156,6 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	}
+
 	
-				
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

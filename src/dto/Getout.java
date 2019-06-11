@@ -14,18 +14,23 @@ public class Getout {
 	public String getGetoutid() {
 		return getoutid;
 	}
+	
 	public void setGetoutid(String getoutid) {
 		this.getoutid = getoutid;
 	}
+	
 	public String getReason() {
 		return reason;
 	}
+	
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
+	
 	public String getExplain() {
 		return explain;
 	}
+	
 	public void setExplain(String explain) {
 		this.explain = explain;
 	}

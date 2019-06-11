@@ -14,8 +14,9 @@ import dto.Board;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
+	// BoardDao에서 insert(), selectAll(), updateHit(), selectBoardByBoardno, selectBoardno() 누락되서 발생하는 error 표시 
 
-	//DB관련 객체
+	// DB 관련 객체 
 	private Connection conn = DBConn.getConnection();
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
@@ -350,3 +351,4 @@ public class BoardDaoImpl implements BoardDao {
 
 
 
+>>>>>>> master

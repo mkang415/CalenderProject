@@ -52,8 +52,6 @@ public class BoardUpdateController extends HttpServlet {
 		
 		//목록으로 리다이렉션
 		resp.sendRedirect("/board/list");
-		
-		
 	
 	}
 }

@@ -52,9 +52,6 @@
 			</c:if>
 			
 	    </c:forEach>
-
-
-
 		
 		<!-- 다음 페이지 -->
 		<c:if test="${paging.curPage eq paging.totalPage }">

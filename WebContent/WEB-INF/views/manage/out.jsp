@@ -6,7 +6,7 @@
 
 <c:import url="/WEB-INF/views/layout/header.jsp" />
 
-<h1>회원 관리</h1>
+<h1>회원 정보</h1>
 <hr>
 
 <table class="table table-striped table-hover table-condensed">

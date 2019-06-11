@@ -22,7 +22,7 @@ public class ManageMemberDaoImpl implements ManageMemberDao {
 	@Override
 	public List selectAll(Paging paging) {
 		
-System.out.println(paging.toString());
+		System.out.println(paging.toString());
 		
 		//게시글 목록 조회쿼리
 		String sql = "";
@@ -134,7 +134,7 @@ System.out.println(paging.toString());
 						viewMember.setGender(rs.getString("gender"));
 						viewMember.setIconno(rs.getInt("iconno"));
 						viewMember.setNickname(rs.getString("nickname"));
-						viewMember.setJoindate(rs.getDate("joinDate"));
+						viewMember.setJoindate(rs.getDate("joindate"));
 						viewMember.setTeamname(rs.getString("teamname"));
 						viewMember.setIntroduce(rs.getString("introduce"));
 						

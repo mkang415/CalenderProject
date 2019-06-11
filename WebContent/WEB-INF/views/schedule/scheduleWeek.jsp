@@ -37,7 +37,7 @@
 <div style="width:200px; background: #b4b4b4; float:left; height:660px; text-align: center">
 <br>
 <br>
-<h4>상세검색</h4>
+
 
 </div>
 <div style="width:1200px; height: 660px;">

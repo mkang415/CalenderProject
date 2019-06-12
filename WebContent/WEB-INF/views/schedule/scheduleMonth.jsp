@@ -20,9 +20,9 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 }
 
 .schedule {
-	height : 180px;
+	height : 200px;
 	text-align: center;
-	font-size: 12px;
+	font-size: 13px;
 	
 }
 </style>
@@ -55,8 +55,10 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	monthMap.put(i, monthList);
 }%>
 
+<!-- 서블릿에서 전달한 iconList 저장 -->
 <% List<Icon> iconList = (List)request.getAttribute("iconList"); %>
 
+<!-- icon 사용을 위해 hashmap 사용. 키는 아이콘이름=팀이름. 값은 아이콘 파일명 -->
 <% Map<String, String> chkIcon = new HashMap<>(); %>
 <%  for(int i=0; i<iconList.size(); i++) {
 	chkIcon.put(iconList.get(i).getIconname(), iconList.get(i).getStorename());
@@ -212,7 +214,7 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	</tr>
 	<% for(int i=1; i<=lastDate+startDay; i++) { /* 달력 생성을 위한 반복문 */
 		if(i%7==1) { %>
-			<tr style="height: 210px;">
+			<tr style="height: 230px;">
 		<% } %>
 		<td>
 		<% if(i>startDay) { %>	<!-- 달력 1일 날짜 위치에서 시작하기 위한 조건문 -->
@@ -222,11 +224,15 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<div class="schedule">
 			<% List<Schedule> monthList = monthMap.get(i-startDay-1);
 				for(int j=0; j<monthList.size(); j++) { %>	<!-- 해당날짜 일정 출력 -->
-					<%= chkIcon.get(monthList.get(j).getHometeam()) %>
-					<%-- <img src="/ --%>
+					<!-- 홈팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
+					<img src="/logo/<%= chkIcon.get(monthList.get(j).getHometeam())%>"
+						style="width: 21px; height: 21px;"/>
 					<%= (monthList.get(j).getHometeam()) %>
 						 : <%= (monthList.get(j).getAwayteam()) %>
-						 		<%= chkIcon.get(monthList.get(j).getAwayteam()) %><br>
+					<!-- 어웨이팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
+					<img src="/logo/<%= chkIcon.get(monthList.get(j).getAwayteam())%>"
+						style="width: 21px; height: 21px;"/><br>
+						 		
 				<% } %>
 			<% } %>
 		</div>	

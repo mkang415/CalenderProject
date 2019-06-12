@@ -67,10 +67,9 @@ public class ScheduleMonthController extends HttpServlet {
 			}
 		} 
 		
+		// 아이콘 DB 값 iconList에 저장
 		List iconList = scheduleService.iconList();
-		
-		System.out.println(iconList.get(0).toString());
-		
+				
 		//	값 전달.
 		req.setAttribute("month", month);
 		req.setAttribute("lastDate", lastDate);

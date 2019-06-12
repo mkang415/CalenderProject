@@ -80,6 +80,9 @@ public class ScheduleWeekController extends HttpServlet {
 			}
 		} 
  		
+ 		// 아이콘 DB 값 iconList에 저장
+ 		List iconList = scheduleService.iconList();
+ 		
 		req.setAttribute("month", month);
 		req.setAttribute("week", week);
 		req.setAttribute("monthWeek", monthWeek);
@@ -88,6 +91,7 @@ public class ScheduleWeekController extends HttpServlet {
 		req.setAttribute("lastDate", lastDate);
 		req.setAttribute("sunOfWeek", sunOfWeek);
 		req.setAttribute("monthMap", monthMap);
+		req.setAttribute("iconList", iconList);
 		
 		req.getRequestDispatcher(	//	jsp 경로 지정
 				"/WEB-INF/views/schedule/scheduleWeek.jsp").forward(req, resp);

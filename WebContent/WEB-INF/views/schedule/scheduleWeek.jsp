@@ -1,3 +1,4 @@
+<%@page import="dto.Icon"%>
 <%@page import="dto.Schedule"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
@@ -15,7 +16,7 @@
 }
 
 .schedule {
-	height : 180px;
+	height : 200px;
 	text-align: center;
 	font-size: 12px;
 	
@@ -50,6 +51,15 @@
 <% for(int i=0; i<lastDate; i++) {
 	List<Schedule> monthList = (List)((HashMap)request.getAttribute("monthMap")).get(i);
 	monthMap.put(i, monthList);
+}%>
+
+<!-- 서블릿에서 전달한 iconList 저장 -->
+<% List<Icon> iconList = (List)request.getAttribute("iconList"); %>
+
+<!-- icon 사용을 위해 hashmap 사용. 키는 아이콘이름=팀이름. 값은 아이콘 파일명 -->
+<% Map<String, String> chkIcon = new HashMap<>(); %>
+<%  for(int i=0; i<iconList.size(); i++) {
+	chkIcon.put(iconList.get(i).getIconname(), iconList.get(i).getStorename());
 }%>
 
 <!-- 좌측 레이아웃 -->
@@ -206,7 +216,7 @@
 		<td align="center" style="width: 150px;">금</td>
 		<td align="center" style="width: 150px;">토</td> 
 	</tr>
-	<tr style="height: 210px;">
+	<tr style="height: 230px;">
 	<% if(week==1) { 
 		for(int i=1; i<=7; i++) { %>
 		<td>
@@ -215,11 +225,16 @@
 			<%= i-startDay %>&nbsp;&nbsp;&nbsp;
 			</div>
 			<div class="schedule">
-			<br>
 			<% List<Schedule> monthList = monthMap.get(i-startDay-1);
-					for(int j=0; j<monthList.size(); j++) { %>
-						<%= (monthList.get(j).getHometeam()) %>
-							 : <%= (monthList.get(j).getAwayteam()) %><br>
+				for(int j=0; j<monthList.size(); j++) { %>
+					<!-- 홈팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
+					<img src="/logo/<%= chkIcon.get(monthList.get(j).getHometeam())%>"
+						style="width: 21px; height: 21px;"/>
+					<%= (monthList.get(j).getHometeam()) %>
+						 : <%= (monthList.get(j).getAwayteam()) %>
+					<!-- 어웨이 팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
+					<img src="/logo/<%= chkIcon.get(monthList.get(j).getAwayteam())%>"
+						style="width: 21px; height: 21px;"/><br>
 					<% } %>
 			</div>
 		<% } %>
@@ -234,10 +249,16 @@
 			<div class="schedule">
 			<br>
 			<% List<Schedule> monthList = monthMap.get(i-1);
-					for(int j=0; j<monthList.size(); j++) { %>
-						<%= (monthList.get(j).getHometeam()) %>
-							 : <%= (monthList.get(j).getAwayteam()) %><br>
-					<% } %>
+				for(int j=0; j<monthList.size(); j++) { %>
+					<!-- 홈팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
+					<img src="/logo/<%= chkIcon.get(monthList.get(j).getHometeam())%>"
+						style="width: 21px; height: 21px;"/>
+					<%= (monthList.get(j).getHometeam()) %>
+						 : <%= (monthList.get(j).getAwayteam()) %>
+					<!-- 어웨이 팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
+					<img src="/logo/<%= chkIcon.get(monthList.get(j).getAwayteam())%>"
+						style="width: 21px; height: 21px;"/><br>
+				<% } %>
 			</div>
 		<% } %>
 		</td>
@@ -250,9 +271,15 @@
 			<div class="schedule">
 			<br>
 			<% List<Schedule> monthList = monthMap.get(i-1);
-					for(int j=0; j<monthList.size(); j++) { %>
-						<%= (monthList.get(j).getHometeam()) %>
-							 : <%= (monthList.get(j).getAwayteam()) %><br>
+				for(int j=0; j<monthList.size(); j++) { %>
+					<!-- 홈팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
+					<img src="/logo/<%= chkIcon.get(monthList.get(j).getHometeam())%>"
+						style="width: 21px; height: 21px;"/>
+					<%= (monthList.get(j).getHometeam()) %>
+						 : <%= (monthList.get(j).getAwayteam()) %>
+					<!-- 어웨이 팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
+					<img src="/logo/<%= chkIcon.get(monthList.get(j).getAwayteam())%>"
+						style="width: 21px; height: 21px;"/><br>
 					<% } %>
 			</div>
 		<% } %>

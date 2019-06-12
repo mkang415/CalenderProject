@@ -102,10 +102,16 @@ public class MemberDaoImpl implements MemberDao{
 	@Override
 	public void insert(Member member) {
 
+		System.out.println(member.getUserid());
+		System.out.println(member.getPassword());
+		System.out.println(member.getNickname());
+		System.out.println(member.getAge());
+		System.out.println(member.getGender());
+		
 		String sql = "";
 		sql+="INSERT INTO MEMBER";
-		sql+="(userid, password, nickname, iconno, age, gender, teamname, joindate, grade)";
-		sql+=" VALUES(?,?,?,1001,?,?,none,sysdate,2)";
+		sql+="(userid, password, nickname, iconno, age, gender, teamname, introduce, joindate, grade)";
+		sql+=" VALUES(?,?,?,1001,?,?,none,default,sysdate,2)";
 		
 		try {
 			ps=conn.prepareStatement(sql);

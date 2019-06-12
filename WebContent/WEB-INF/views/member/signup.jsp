@@ -110,7 +110,7 @@ function isSame() { // 비밀번호 일치 여부 검사 스크립트
 $(document).ready(function() {
 	$("#verifycode").click(function() { // 이메일 입력 시 해당 이메일 주소로 인증번호 발송하는 스크립트 - MailController와 연결
 		console.log("verify code send");
-		
+		console.log(code);
 		var verifyemail = $("#email").val();
 
 		$.ajax({
@@ -174,11 +174,17 @@ function join() {
 	console.log(nicknameConfirm);
 	
 	
-	if(emailConfirm == true && pwConfirm == true && nicknameConfirm == true) {
+	if(emailConfirm && pwConfirm && nicknameConfirm) {
 
 		console.log("모두 성공");
 		$("#sendJoinRequest").submit();
 	} else {
+		console.log("==============");
+		console.log(emailConfirm);
+		console.log(pwConfirm);
+		console.log(nicknameConfirm);
+		console.log("==============");
+		
 		document.getElementById('reject').innerHTML="입력한 정보를 다시 확인해주세요";
 	}
 }
@@ -213,8 +219,8 @@ email : <input type="text" id="email" name="email" placeholder="이메일 입력
 		<option value="60">60대</option>
 </select><br>
 
-성별 : <input type="radio" name="gender" value="M">남 
-	<input type="radio" name="gender" value="F">여<br>
+성별 : <input type="radio" name="gender" value="남성">남 
+	<input type="radio" name="gender" value="여성">여<br>
 
 <div><p id="reject"></p></div>
 

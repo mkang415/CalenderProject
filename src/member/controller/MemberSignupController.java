@@ -29,7 +29,7 @@ public class MemberSignupController extends HttpServlet {
 
 		memberservice.join(req);
 		
-		resp.sendRedirect("/WEB-INF/schedule/scheduleweek.jsp");
+		resp.sendRedirect("/WEB-INF/views/schedule/scheduleWeek.jsp");
 		
 	}
 	

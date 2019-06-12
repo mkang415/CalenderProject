@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,9 +124,23 @@ $(document).ready(function(){
 
 	<span style="font-size:3.5em;" id="h"><a href="/main">직관의 민족</a></span>
 	<span>
-	<button type="button">일정</button></span>
+	<button type="button" onclick='location.href="/schedule/week";'>일정</button></span>
 	<span>
 	<button type="button" onclick="location.href='/board/list'">직관매칭</button></span>
+	
+	
+	
+	    <!-- 비로그인상태 -->
+    <c:if test="${not login }">
+    <button onclick='location.href="/login";'>로그인</button>
+    <button onclick='location.href="/signup";'>회원가입</button>
+    </c:if>
+	
+	    <!-- 로그인상태 -->
+    <c:if test="${not login }">
+	
+	
+	
 	
 	<span style="float:right; padding: 20px 10px;" class="more">
 	<span class="blind">
@@ -141,6 +156,7 @@ $(document).ready(function(){
   	</ul>
 	</div>
 	
+</c:if>
 </div>	
 
 <!-- <div class="wrap"> -->

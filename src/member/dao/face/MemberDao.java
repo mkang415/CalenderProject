@@ -22,4 +22,6 @@ public interface MemberDao {
 	public boolean pwCheck(Member member);
 	
 	public void pwUpdate(Member member);
+	
+	public boolean nicknameCheck(String nickname);
 }

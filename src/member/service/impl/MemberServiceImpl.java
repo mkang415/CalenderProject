@@ -18,7 +18,15 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void join(HttpServletRequest req) {
 		
-
+		Member member = new Member();
+		
+		member.setUserid(req.getParameter("email"));
+		member.setPassword(req.getParameter("password"));
+		member.setNickname(req.getParameter("nickname"));
+		member.setAge(Integer.parseInt(req.getParameter("age")));
+		member.setGender(req.getParameter("gender"));
+		
+		memberdao.insert(member);
 	}
 
 	@Override
@@ -132,6 +140,11 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return res;
+	}
+
+	@Override
+	public boolean nicknameCheck(String nickname) {
+		return memberdao.nicknameCheck(nickname);
 	}
 	
 		

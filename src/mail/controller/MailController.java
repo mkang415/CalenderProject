@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 
 import mail.service.face.MailService;
 import mail.service.impl.MailServiceImpl;
-import util.ConfirmUUID;
+import util.ConfirmCode;
 import util.MailAuth;
 
 @WebServlet("/send")
@@ -37,19 +37,7 @@ public class MailController extends HttpServlet {
 			req.setAttribute("result", "이미 가입되어있음");
 			return;
 		}
-
-		ConfirmUUID cu = new ConfirmUUID(); // 4자리 인증번호 생성을 위한 uuid 발생 클래스
 		
-		String confirmcode = cu.confirmCode();
-				
-		HttpSession frontsession = req.getSession();
-		
-		frontsession.setAttribute("confirmcode", confirmcode);
-		
-		PrintWriter out = resp.getWriter();
-		out.print(confirmcode);
-		
-//		System.out.println(confirmcode); // test code
 		
 		// FROM
 		final String FROM = "genenune@gmail.com"; // <<------------------------------수정하세요
@@ -64,7 +52,7 @@ public class MailController extends HttpServlet {
 		// 메일 본문
 		final String BODY = String.join(
 				"<h1>회원가입을 위한 이메일 인증 코드 발송입니다.</h1>",
-				"<p>인증 코드는 "+ confirmcode + " 입니다.</p>"); // <<------------------------------수정하세요
+				"<p>인증 코드는 "+ req.getParameter("code") + " 입니다.</p>"); // <<------------------------------수정하세요
 
 		// 인증 객체
 		Authenticator auth = new MailAuth("genenune@gmail.com", "dudgus13"); // <<------------------------------수정하세요

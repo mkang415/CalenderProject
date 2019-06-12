@@ -26,4 +26,6 @@ public interface MemberService {
 	public List getList(Paging paging, String userid);
 	
 	public boolean pwUpdate(HttpServletRequest req);
+	
+	public boolean nicknameCheck(String nickname);
 }

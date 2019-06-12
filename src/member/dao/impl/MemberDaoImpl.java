@@ -101,7 +101,31 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public void insert(Member member) {
-		// TODO Auto-generated method stub
+
+		String sql = "";
+		sql+="INSERT INTO MEMBER";
+		sql+="(userid, password, nickname, iconno, age, gender, teamname, joindate, grade)";
+		sql+=" VALUES(?,?,?,1001,?,?,none,sysdate,2)";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, member.getUserid());
+			ps.setString(2, member.getPassword());
+			ps.setString(3, member.getNickname());
+			ps.setInt(4, member.getAge());
+			ps.setString(5, member.getGender());
+			
+			ps.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null)	ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
@@ -246,6 +270,43 @@ public class MemberDaoImpl implements MemberDao{
 			}
 		}
 				
+	}
+
+	@Override
+	public boolean nicknameCheck(String nickname) {
+
+		boolean res = false;
+		
+		String sql = "";
+		sql+="SELECT count(*) FROM MEMBER";
+		sql+=" WHERE nickname=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, nickname);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				if(rs.getInt("count(*)")==0) {
+					res = true;
+				} else {
+					res = false;
+				}
+			}
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return res;
 	}
 
 

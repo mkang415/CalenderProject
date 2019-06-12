@@ -131,9 +131,10 @@ $(document).ready(function(){
 
 	<span style="font-size:3.5em;" id="h"><a href="/main">직관의 민족</a></span>
 	<span>
-	<button type="button">일정</button></span>
+	<button type="button" onclick='location.href="/schedule/week";'>일정</button></span>
+	
 	<span>
-	<button type="button" onclick="location.href='/board/list'">직관매칭</button></span>
+	<button type="button" onclick="location.href='/board/list';">직관매칭</button></span>
 	
 	
 	

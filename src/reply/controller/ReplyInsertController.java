@@ -23,11 +23,13 @@ public class ReplyInsertController extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Reply reply = boardService.getReply(request);
 		
 		boardService.insertReply(reply);
 		
 		response.sendRedirect("/board/view?boardno="+reply.getBoardno());
+		
 	}
 
 }

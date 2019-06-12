@@ -10,7 +10,6 @@ import java.util.List;
 import dbutil.DBConn;
 import dto.Board;
 import dto.Reply;
-import oracle.net.aso.e;
 import reply.dao.face.ReplyDao;
 
 public class ReplyDaoImpl implements ReplyDao {
@@ -40,6 +39,7 @@ public class ReplyDaoImpl implements ReplyDao {
 				+ ") ORDER BY replyno";
 		
 		List replyList = new ArrayList();
+		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, board.getBoardno());
@@ -122,6 +122,12 @@ public class ReplyDaoImpl implements ReplyDao {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public int countReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

@@ -14,6 +14,7 @@ import dto.Reply;
 
 @WebServlet("/reply/delete")
 public class ReplyDeleteController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
 	private BoardService boardService = new BoardServiceImpl();
@@ -26,9 +27,14 @@ public class ReplyDeleteController extends HttpServlet {
 		
 		Reply reply = boardService.getReply(request);
 		
-		boardService.insertReply(reply);
+		String replyno = (String) request.getParameter("replyno");
 		
-		response.sendRedirect("/board/view?boardno="+reply.getBoardno());
+		reply.setReplyno(Integer.parseInt(replyno));
+		
+		boolean deleted = boardService.deleteReply(reply);  // 삭제 처리 결과 저장하는 boolean 타입 변수
+		
+		response.getWriter().append("{\"+success\": "+deleted+"}"); // 결과 출
+		
 	}
 
 }

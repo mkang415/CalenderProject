@@ -15,4 +15,5 @@ public interface ScheduleService {
 	public int getSysWeek();
 	public int getsunOfWeek(int year, int month, int week);
 	public List searchSchedule(int year, int month, int day, String event, String team, String region);
+	public List iconList();
 }

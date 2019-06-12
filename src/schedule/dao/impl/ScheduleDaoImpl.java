@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dbutil.DBConn;
+import dto.Icon;
 import dto.Schedule;
 import schedule.dao.face.ScheduleDao;
 
@@ -290,5 +291,42 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		
 		
 		
+	}
+
+	@Override
+	public List iconList() {	//	아이콘 DB List에 저장
+		List iconList = new ArrayList();
+		;
+		String sql = "";
+		sql += "select iconno, iconname, storename";
+		sql += " from icon order by iconno";
+
+		try {
+			ps = conn.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Icon icon = new Icon();
+				icon.setIconno(rs.getInt("iconno"));
+				icon.setIconname(rs.getString("iconname"));
+				icon.setStorename(rs.getString("storename"));
+
+				iconList.add(icon);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return iconList;
 	}
 }

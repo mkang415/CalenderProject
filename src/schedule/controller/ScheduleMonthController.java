@@ -67,11 +67,16 @@ public class ScheduleMonthController extends HttpServlet {
 			}
 		} 
 		
+		List iconList = scheduleService.iconList();
+		
+		System.out.println(iconList.get(0).toString());
+		
 		//	값 전달.
 		req.setAttribute("month", month);
 		req.setAttribute("lastDate", lastDate);
 		req.setAttribute("startDay", startDay);
 		req.setAttribute("monthMap", monthMap);
+		req.setAttribute("iconList", iconList);
 		
 
 		req.getRequestDispatcher(	//	jsp 경로 지정

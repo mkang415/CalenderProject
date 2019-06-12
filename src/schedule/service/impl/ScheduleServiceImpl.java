@@ -389,9 +389,14 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public List searchSchedule(int year, int month, int day, String event, String team, String region) {
 		
-		List searchList = scheduleDao.getsearchList(year, month, day, event, team, region);
-		return searchList;
+		return scheduleDao.getsearchList(year, month, day, event, team, region);
 		
+	}
+
+	@Override
+	public List iconList() {
+		
+		return scheduleDao.iconList();
 	}
 	
 }

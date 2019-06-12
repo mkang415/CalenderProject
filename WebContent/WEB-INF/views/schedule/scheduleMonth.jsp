@@ -1,3 +1,4 @@
+<%@page import="dto.Icon"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
@@ -49,10 +50,19 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <%	int startDay = (int)request.getAttribute("startDay"); %>
 
 <%	Map<Integer, List> monthMap = new HashMap<>(); %>
-<% for(int i=0; i<lastDate; i++) {
+<%	for(int i=0; i<lastDate; i++) {
 	List<Schedule> monthList = (List)((HashMap)request.getAttribute("monthMap")).get(i);
 	monthMap.put(i, monthList);
 }%>
+
+<% List<Icon> iconList = (List)request.getAttribute("iconList"); %>
+
+<% Map<String, String> chkIcon = new HashMap<>(); %>
+<%  for(int i=0; i<iconList.size(); i++) {
+	chkIcon.put(iconList.get(i).getIconname(), iconList.get(i).getStorename());
+}%>
+
+
 
 <!-- 좌측 레이아웃 -->
 <div style="width:200px; background: #b4b4b4; float:left; height:1510px; text-align: center">
@@ -212,8 +222,11 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<div class="schedule">
 			<% List<Schedule> monthList = monthMap.get(i-startDay-1);
 				for(int j=0; j<monthList.size(); j++) { %>	<!-- 해당날짜 일정 출력 -->
+					<%= chkIcon.get(monthList.get(j).getHometeam()) %>
+					<%-- <img src="/ --%>
 					<%= (monthList.get(j).getHometeam()) %>
-						 : <%= (monthList.get(j).getAwayteam()) %><br>
+						 : <%= (monthList.get(j).getAwayteam()) %>
+						 		<%= chkIcon.get(monthList.get(j).getAwayteam()) %><br>
 				<% } %>
 			<% } %>
 		</div>	

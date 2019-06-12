@@ -155,8 +155,8 @@ $(document).ready(function(){
 	<div class="board">
   	<ul class="list">
   	<li> 프로필 </li>
-  	<li> 개인정보수정 </li>
-  	<li onclick='location.href="/logut"'> 로그아웃</li>
+  	<li onclick='location.href="/mypage";'> 개인정보수정 </li>
+  	<li onclick='location.href="/logut";'> 로그아웃</li>
   	</ul>
 	</div>
 	

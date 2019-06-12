@@ -29,5 +29,6 @@ public class BoardDeleteController extends HttpServlet {
 		//목록으로 리다이렉트
 		resp.sendRedirect("/board/list");
 	
+		//test
 	}
 }

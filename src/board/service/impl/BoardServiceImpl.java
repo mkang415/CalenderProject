@@ -8,6 +8,7 @@ import board.dao.face.BoardDao;
 import board.dao.impl.BoardDaoImpl;
 import board.service.face.BoardService;
 import dto.Board;
+import dto.Reply;
 import reply.dao.face.ReplyDao;
 import reply.dao.impl.ReplyDaoImpl;
 import util.Paging;
@@ -158,6 +159,33 @@ public class BoardServiceImpl implements BoardService {
 	public void delete(Board board) {
 
 		boardDao.delete(board);
+	}
+
+	
+	
+	//------------------댓글
+	@Override
+	public Reply getReply(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertReply(Reply reply) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List getReplyList(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deleteReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	

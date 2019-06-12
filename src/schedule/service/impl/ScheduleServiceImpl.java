@@ -3,6 +3,8 @@ package schedule.service.impl;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import dto.Schedule;
 import schedule.dao.face.ScheduleDao;
 import schedule.dao.impl.ScheduleDaoImpl;
@@ -68,8 +70,8 @@ public class ScheduleServiceImpl implements ScheduleService{
 	@Override
 	public List getmonthList(int year, int month, int day) {	//	sql에 저장된 날짜의 일정 list에 저장
 		
-		List montheList = scheduleDao.getmonthList(year, month, day);
-		return montheList;
+		List monthList = scheduleDao.getmonthList(year, month, day);
+		return monthList;
 	}
 
 	@Override
@@ -382,6 +384,14 @@ public class ScheduleServiceImpl implements ScheduleService{
 		}
 		
 		return sunOfWeek;
+	}
+
+	@Override
+	public List searchSchedule(int year, int month, int day, String event, String team, String region) {
+		
+		List searchList = scheduleDao.getsearchList(year, month, day, event, team, region);
+		return searchList;
+		
 	}
 	
 }

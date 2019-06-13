@@ -28,7 +28,7 @@ public class BoardDaoImpl implements BoardDao {
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += " SELECT rownum rnum, B.* FROM (";
-		sql += " 	SELECT boardno, userid, title, content, scheduleno, insertdate, hit FROM board";
+		sql += " 	SELECT boardno, nickname, title, content, gamedate, team, insertdate, hit FROM board";
 		sql += " 	ORDER BY boardno DESC";
 		sql += " )B";
 		sql += " ORDER BY rnum";
@@ -49,10 +49,11 @@ public class BoardDaoImpl implements BoardDao {
 				Board board = new Board();
 				
 				board.setBoardno(rs.getInt("boardno"));
-				board.setUserid(rs.getString("userid"));
+				board.setNickname(rs.getString("nickname"));
 				board.setTitle(rs.getString("title"));
 				board.setContent(rs.getString("content"));
-				board.setScheduleno(rs.getInt("scheduleno"));
+				board.setGamedate(rs.getDate("gamedate"));
+				board.setTeam(rs.getString("team"));
 				board.setInsertdate(rs.getDate("insertdate"));
 				board.setHit(rs.getInt("hit"));
 				
@@ -140,7 +141,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//게시글 조회
 		String sql = "";
-		sql += "SELECT boardno, userid, title, content, scheduleno, insertdate, hit FROM board";
+		sql += "SELECT boardno, nickname, title, content, gamedate, team, insertdate, hit FROM board";
 		sql += " WHERE boardno = ?";
 		
 		try {
@@ -151,10 +152,11 @@ public class BoardDaoImpl implements BoardDao {
 			
 			while (rs.next()) {
 				viewBoard.setBoardno(rs.getInt("boardno"));
-				viewBoard.setUserid(rs.getString("userid"));
+				viewBoard.setNickname(rs.getString("nickname"));
 				viewBoard.setTitle(rs.getString("title"));
 				viewBoard.setContent(rs.getString("content"));
-				viewBoard.setScheduleno(rs.getInt("scheduleno"));
+				viewBoard.setGamedate(rs.getDate("gamedate"));
+				viewBoard.setTeam(rs.getString("team"));
 				viewBoard.setInsertdate(rs.getDate("insertdate"));
 				viewBoard.setHit(rs.getInt("hit"));
 			}
@@ -214,17 +216,18 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//다음 게시글 번호 조회
 		String sql = "";
-		sql += "INSERT INTO board(BOARDNO, USERID, TITLE, CONTENT, SCHEDULENO, INSERTDATE, HIT)";
+		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, GAMEDATE, TEAM, INSERTDATE, HIT)";
 		sql += " VALUES(?,?,?,?,?,?,0)";
 		
 		try {
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, board.getBoardno());
-			ps.setString(2, board.getUserid());
+			ps.setString(2, board.getNickname());
 			ps.setString(3, board.getTitle());
 			ps.setString(4, board.getContent());
-			ps.setInt(5, board.getScheduleno());
-			ps.setDate(6, (Date) board.getInsertdate());
+			ps.setDate(5, (Date)board.getGamedate());
+			ps.setString(6, board.getTeam());
+			ps.setDate(7, (Date) board.getInsertdate());
 			
 			ps.executeUpdate();
 			
@@ -325,14 +328,14 @@ public class BoardDaoImpl implements BoardDao {
 		
 		String sql = "";
 		sql += "SELECT  * FROM (";
-		sql += " SELECT boardno, userid, title, content, scheduleno, inserdate, hit FROM board";
+		sql += " SELECT boardno, nickname, title, content, scheduleno, inserdate, hit FROM board";
 		sql += " ) ORDER BY insertdate";
 		sql += " WHERE userid = ?";
 		
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, board.getUserid());
+			ps.setString(1, board.getNickname());
 			
 			ps.executeUpdate();
 			
@@ -347,5 +350,4 @@ public class BoardDaoImpl implements BoardDao {
 			}
 		}
 	}
->>>>>>> master
 }

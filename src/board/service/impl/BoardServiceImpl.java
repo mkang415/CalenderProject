@@ -185,20 +185,14 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public List search(String event, String team, String region) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	//-----------------------------------------------
+//
 //	@Override
 //	public List search(String event, String team, String region) {
-//		List search = boardDao.getList(event, team, region);
-//		return search;
+//		// TODO Auto-generated method stub
+//		return null;
 //	}
+
+	
 
 	
 

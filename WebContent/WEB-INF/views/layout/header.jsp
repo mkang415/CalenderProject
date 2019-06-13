@@ -78,13 +78,13 @@
 
 .board {
   font-size:13px;
-  position:absolute;
+  position:absolute; 
   top:60px;
-  right: 300px;
-  width:150px;
-  height:80px;
+  right: 320px;
+  width:150px; 
+  height:80px; 
   background: #dcdcdc;
-  visibility:hidden;
+  visibility:hidden; 
 }
 
 .list {
@@ -144,7 +144,7 @@ $(document).ready(function(){
 	
 	<span style="float:right; padding: 20px 10px;" class="more">
 	<span class="blind">
-	<img src="/logo_upload/semi_default.png" width="60px" height="50px">
+	<img src="/logo/semi_default.png" width="60px" height="50px">
 	</span>
 	</span>
 	

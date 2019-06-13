@@ -13,9 +13,6 @@ $(document).ready(function(){
 		location.href="/board/write";
 	});
 	
-// 	$("btnSearch").click(function() {
-// 		location.href="/board/list?search="+$("#seach").val();
-// 	});
 
 });
 
@@ -41,14 +38,6 @@ function changes(value) {
 }
 
 
-
-// $("#selectForm").find("input[type=button]").click(function(){
-// 	$("#selectForm").attr({
-// 		"method": "get",
-// 		"action": "/board/list"
-// 	});
-// 	$("#selectForm").submit();
-// });
 </script>
 
 <style type="text/css">
@@ -156,8 +145,8 @@ table, th{
 <br>
 <div style="text-align:center">
 
-<button type="submit" id="btnSearch" class="btn">검색</button>
-<!-- <input type="button" id="optionbtn" value="검색"/> -->
+<input type="button" value="검색"/>
+<!-- <button type="submit" id="btnSearch" class="btn">검색</button> -->
 </div>
 </form>
 
@@ -180,12 +169,13 @@ table, th{
 <thead>
 	<tr>
 		<th style="width: 5%;">번호</th>
-		<th style="width: 10%;">작성자</th>
+		<th style="width: 10%;">닉네임</th>
 		<th style="width: 10%;">제목</th>
 		<th style="width: 35%;">내용</th>
-		<th style="width: 10%;">스케줄</th>
-		<th style="width: 20%;">작성일</th>
-		<th style="width: 10%;">조회수</th>
+		<th style="width: 10%;">경기일자</th>
+		<th style="width: 10%;">경기팀</th>
+		<th style="width: 15%;">작성일</th>
+		<th style="width: 5%;">조회수</th>
 	</tr>
 </thead>
 
@@ -194,10 +184,11 @@ table, th{
  <tr>
  
  	<td>${i.boardno }</td>
- 	<td>${i.userid }</td>
+ 	<td>${i.nickname }</td>
  	<td><a href="/board/view?boardno=${i.boardno}">${i.title }</a></td>
  	<td>${i.content }</td>
- 	<td>${i.scheduleno }</td>
+ 	<td>${i.gamedate }</td>
+ 	<td>${i.team }</td>
  	<td><fmt:formatDate value="${i.insertdate }" pattern="yyyy-MM-dd"/></td>
  	<td>${i.hit }</td>
  </tr>
@@ -242,16 +233,6 @@ table, th{
 
 
 
-
-<form name="option" method="get" action="/board/list" >
-<select onchange="document.getElementById('KeyWord').value= this.options[this.selectedIndex].text">
-<option value="1">전체</option>
-<option value="2">지갑</option>
-<option value="3">시계</option>
-<option value="4">의류</option>
-</select>
-<input type="text" id="KeyWord" name="KeyWord" value="" >
-</form>
 
 
 

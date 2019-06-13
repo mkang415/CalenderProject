@@ -31,33 +31,10 @@ public class BoardListController extends HttpServlet {
 //		System.out.println(paging);
 		
 		//게시판 목록 조회
-
 		List list = boardService.getList(paging);
-		
 
-		
-		
-		
-//		String event=(String)req.getParameter("event");	//	선택된 종목 값 전달받아 저장.
-//		int chkevent=0;	//	저장된 종목 값 숫자로 변환화여 저장할 변수 생성
-//		if(event!=null) {
-//			chkevent=Integer.parseInt(event);	//	종목 값 숫자로 변환하여 저장 1: 야구, 2: 축구
-//		}
-//		String team=null;	//	전달 받은 팀 이름 저장할 변수 생성
-//		String region=null;	//	전달 받은 지역 이름 저장할 변수 생성
-//		if(chkevent==1) {	//	야구 팀, 지역 저장
-//			team=(String)req.getParameter("baseballTeam");
-//			region=(String)req.getParameter("BBregion");
-//		} else if(chkevent==2){	//	축구 팀, 지역 저장
-//			team=(String)req.getParameter("soccerTeam");
-//			region=(String)req.getParameter("SCregion");
-//		}
-		
-		
-		
-		
-
-		
+		//MODEL로 결과 넣기
+		req.setAttribute("list", list);
 		
 		//view 지정
 		req.getRequestDispatcher("/WEB-INF/views/board/list.jsp").forward(req, resp);

@@ -174,7 +174,31 @@ public class BoardDaoImpl implements BoardDao {
 		return viewBoard;
 	}
 
+	// gameDate 기반으로 지역 조회
+	@Override
+	public Board selectBoardByGamedate(Board view){
 
+		String sql = "";
+		sql += "select region from team where teamname = (select hometeam from schedule where scheduleno = (select scheduleno from board where boardno = ?));";
+
+		try {
+
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)	rs.close();
+				if(ps!=null)	ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return viewBoard;
+	}
+
+
+	// 게시글 조회 
 	@Override
 	public int selectBoardno() {
 		

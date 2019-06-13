@@ -53,19 +53,19 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	}
 
 	@Override
-	public List getmonthList(int year, int month, int day) { // 해당 날짜 일정 리스트에 저장하여 반환
+	public List<Schedule> getmonthList(int year, int month, int day) { // 해당 날짜 일정 리스트에 저장하여 반환
 
 		String getyear = String.valueOf(year);
 		String getmonth = String.valueOf(month);
 		String getday = String.valueOf(day);
 		String getymd = getyear + "/" + getmonth + "/" + getday;
-
-		List monthList = new ArrayList();
+		
+		List<Schedule> monthList = new ArrayList();
 
 		String sql = "";
 		sql += "select hometeam, awayteam";
 		sql += " from schedule";
-		sql += " where gamedate = ? order by scheduleno";
+		sql += " where gamedate = ?";
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -77,9 +77,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 				Schedule schedule = new Schedule();
 				schedule.setHometeam(rs.getString("hometeam"));
 				schedule.setAwayteam(rs.getString("awayteam"));
-
 				monthList.add(schedule);
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -98,7 +96,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	}
 
 	@Override
-	public List getsearchList(int year, int month, int day, String event, String team, String region) {
+	public List<Schedule> getsearchList(int year, int month, int day, String event, String team, String region) {
 		
 		//DB에서 날짜 검색을 위해 연/월/일로 저장
 		String getyear = String.valueOf(year);
@@ -108,7 +106,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		
 		
 		
-		List searchList = new ArrayList();
+		List<Schedule> searchList = new ArrayList();
 		try {
 			if(event.equals("1")) {
 				if(team.equals("all")) { 
@@ -294,8 +292,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	}
 
 	@Override
-	public List iconList() {	//	아이콘 DB List에 저장
-		List iconList = new ArrayList();
+	public List<Icon> iconList() {	//	아이콘 DB List에 저장
+		List<Icon> iconList = new ArrayList();
 		;
 		String sql = "";
 		sql += "select iconno, iconname, storename";

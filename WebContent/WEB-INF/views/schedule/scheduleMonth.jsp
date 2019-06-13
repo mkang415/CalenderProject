@@ -116,35 +116,35 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	</div>
 	<div id="selBB" <% if(chkEvent==2) { %>style="display: none"<% } %>>	
 		<select  id="bbt" name="baseballTeam">	<!-- 야구 팀 선택 -->
-			<option value="all"<% if(team.equals("all")) { %>selected<% } %>>--- 야구팀 ---</option>
-			<option value="KT"<% if(team.equals("KT")) { %>selected<% } %>>KT 위즈</option>
-			<option value="LG"<% if(team.equals("LG")) { %>selected<% } %>>LG 트윈스</option>
-			<option value="NC"<% if(team.equals("NC")) { %>selected<% } %>>NC 다이노스</option>
-			<option value="SK"<% if(team.equals("SK")) { %>selected<% } %>>SK 와이번스</option>
-			<option value="기아"<% if(team.equals("기아")) { %>selected<% } %>>기아 타이거즈</option>
-			<option value="두산"<% if(team.equals("두산")) { %>selected<% } %>>두산 베어스</option>
-			<option value="롯데"<% if(team.equals("롯데")) { %>selected<% } %>>롯데 자이언츠</option>
-			<option value="삼성"<% if(team.equals("삼성")) { %>selected<% } %>>삼성 라이온즈</option>
-			<option value="키움"<% if(team.equals("키움")) { %>selected<% } %>>키움 히어로즈</option>
-			<option value="한화"<% if(team.equals("한화")) { %>selected<% } %>>한화 이글스</option>
+			<option value="all"<% if("all".equals(team)) { %>selected<% } %>>--- 야구팀 ---</option>
+			<option value="KT"<% if("KT".equals(team)) { %>selected<% } %>>KT 위즈</option>
+			<option value="LG"<% if("LG".equals(team)) { %>selected<% } %>>LG 트윈스</option>
+			<option value="NC"<% if("NC".equals(team)) { %>selected<% } %>>NC 다이노스</option>
+			<option value="SK"<% if("SK".equals(team)) { %>selected<% } %>>SK 와이번스</option>
+			<option value="기아"<% if("기아".equals(team)) { %>selected<% } %>>기아 타이거즈</option>
+			<option value="두산"<% if("두산".equals(team)) { %>selected<% } %>>두산 베어스</option>
+			<option value="롯데"<% if("롯데".equals(team)) { %>selected<% } %>>롯데 자이언츠</option>
+			<option value="삼성"<% if("삼성".equals(team)) { %>selected<% } %>>삼성 라이온즈</option>
+			<option value="키움"<% if("키움".equals(team)) { %>selected<% } %>>키움 히어로즈</option>
+			<option value="한화"<% if("한화".equals(team)) { %>selected<% } %>>한화 이글스</option>
 		</select>
 	</div>
 	
 	<div id="selSC" <% if(chkEvent!=2) { %>style="display: none"<% } %>>
 		<select id="sct" name="soccerTeam">	<!-- 축구 팀 선택 -->
-			<option value="all"<% if(team.equals("all")) { %>selected<% } %>>--- 축구팀 ---</option>
-			<option value="서울"<% if(team.equals("서울")) { %>selected<% } %>>FC 서울</option>
-			<option value="강원"<% if(team.equals("강원")) { %>selected<% } %>>강원 FC</option>
-			<option value="경남"<% if(team.equals("경남")) { %>selected<% } %>>경남 FC</option>
-			<option value="대구"<% if(team.equals("대구")) { %>selected<% } %>>대구 FC</option>
-			<option value="상주"<% if(team.equals("상주")) { %>selected<% } %>>상주 FC</option>
-			<option value="성남"<% if(team.equals("성남")) { %>selected<% } %>>성남 FC</option>
-			<option value="수원"<% if(team.equals("수원")) { %>selected<% } %>>수원 삼성</option>
-			<option value="울산"<% if(team.equals("울산")) { %>selected<% } %>>울산 현대</option>
-			<option value="인천"<% if(team.equals("인천")) { %>selected<% } %>>인천 유나이티드</option>
-			<option value="전북"<% if(team.equals("전북")) { %>selected<% } %>>전북 현대모터스</option>
-			<option value="제주"<% if(team.equals("제주")) { %>selected<% } %>>제주 유나이티드</option>
-			<option value="포항"<% if(team.equals("포항")) { %>selected<% } %>>포항 스틸러스</option>
+			<option value="all"<% if("all".equals(team)) { %>selected<% } %>>--- 축구팀 ---</option>
+			<option value="서울"<% if("서울".equals(team)) { %>selected<% } %>>FC 서울</option>
+			<option value="강원"<% if("강원".equals(team)) { %>selected<% } %>>강원 FC</option>
+			<option value="경남"<% if("경남".equals(team)) { %>selected<% } %>>경남 FC</option>
+			<option value="대구"<% if("대구".equals(team)) { %>selected<% } %>>대구 FC</option>
+			<option value="상주"<% if("상주".equals(team)) { %>selected<% } %>>상주 FC</option>
+			<option value="성남"<% if("성남".equals(team)) { %>selected<% } %>>성남 FC</option>
+			<option value="수원"<% if("수원".equals(team)) { %>selected<% } %>>수원 삼성</option>
+			<option value="울산"<% if("울산".equals(team)) { %>selected<% } %>>울산 현대</option>
+			<option value="인천"<% if("인천".equals(team)) { %>selected<% } %>>인천 유나이티드</option>
+			<option value="전북"<% if("전북".equals(team)) { %>selected<% } %>>전북 현대모터스</option>
+			<option value="제주"<% if("제주".equals(team)) { %>selected<% } %>>제주 유나이티드</option>
+			<option value="포항"<% if("포항".equals(team)) { %>selected<% } %>>포항 스틸러스</option>
 		</select>
 	</div>
 	
@@ -156,33 +156,33 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<!-- 야구 팀 지역 선택 -->
 	<div id="BBregion" <% if(chkEvent==2) { %>style="display: none"<% } %>>	
 		<select id="bbr" name="BBregion">
-			<option value="all"<% if(region.equals("all")) { %>selected<% } %>>--- 전국 ---</option>
-			<option value="서울"<% if(region.equals("서울")) { %>selected<% } %>>서울</option>
-			<option value="인천"<% if(region.equals("인천")) { %>selected<% } %>>인천</option>
-			<option value="수원"<% if(region.equals("수원")) { %>selected<% } %>>수원</option>
-			<option value="대전"<% if(region.equals("대전")) { %>selected<% } %>>대전</option>
-			<option value="대구"<% if(region.equals("대구")) { %>selected<% } %>>대구</option>
-			<option value="광주"<% if(region.equals("광주")) { %>selected<% } %>>광주</option>
-			<option value="부산"<% if(region.equals("부산")) { %>selected<% } %>>부산</option>
-			<option value="창원"<% if(region.equals("창원")) { %>selected<% } %>>창원</option>
+			<option value="all"<% if("all".equals(region)) { %>selected<% } %>>--- 전국 ---</option>
+			<option value="서울"<% if("서울".equals(region)) { %>selected<% } %>>서울</option>
+			<option value="인천"<% if("인천".equals(region)) { %>selected<% } %>>인천</option>
+			<option value="수원"<% if("수원".equals(region)) { %>selected<% } %>>수원</option>
+			<option value="대전"<% if("대전".equals(region)) { %>selected<% } %>>대전</option>
+			<option value="대구"<% if("대구".equals(region)) { %>selected<% } %>>대구</option>
+			<option value="광주"<% if("광주".equals(region)) { %>selected<% } %>>광주</option>
+			<option value="부산"<% if("부산".equals(region)) { %>selected<% } %>>부산</option>
+			<option value="창원"<% if("창원".equals(region)) { %>selected<% } %>>창원</option>
 		</select>
 	</div>
 	
 	<div id="SCregion" <% if(chkEvent!=2) { %>style="display: none"<% } %>>
 		<select id="scr" name="SCregion">	<!-- 축구 팀 지역 선택 -->
-			<option value="all"<% if(region.equals("all")) { %>selected<% } %>>--- 전국 ---</option>
-			<option value="서울"<% if(region.equals("서울")) { %>selected<% } %>>서울</option>
-			<option value="춘천"<% if(region.equals("춘천")) { %>selected<% } %>>춘천</option>
-			<option value="인천"<% if(region.equals("인천")) { %>selected<% } %>>인천</option>
-			<option value="성남"<% if(region.equals("성남")) { %>selected<% } %>>성남</option>
-			<option value="수원"<% if(region.equals("수원")) { %>selected<% } %>>수원</option>
-			<option value="상주"<% if(region.equals("상주")) { %>selected<% } %>>상주</option>
-			<option value="포항"<% if(region.equals("포항")) { %>selected<% } %>>포항</option>
-			<option value="전주"<% if(region.equals("전주")) { %>selected<% } %>>전주</option>
-			<option value="대구"<% if(region.equals("대구")) { %>selected<% } %>>대구</option>
-			<option value="울산"<% if(region.equals("울산")) { %>selected<% } %>>울산</option>
-			<option value="창원"<% if(team.equals("창원")) { %>selected<% } %>>창원</option>
-			<option value="제주"<% if(team.equals("제주")) { %>selected<% } %>>제주</option>
+			<option value="all"<% if("all".equals(region)) { %>selected<% } %>>--- 전국 ---</option>
+			<option value="서울"<% if("서울".equals(region)) { %>selected<% } %>>서울</option>
+			<option value="춘천"<% if("춘천".equals(region)) { %>selected<% } %>>춘천</option>
+			<option value="인천"<% if("인천".equals(region)) { %>selected<% } %>>인천</option>
+			<option value="성남"<% if("성남".equals(region)) { %>selected<% } %>>성남</option>
+			<option value="수원"<% if("수원".equals(region)) { %>selected<% } %>>수원</option>
+			<option value="상주"<% if("상주".equals(region)) { %>selected<% } %>>상주</option>
+			<option value="포항"<% if("포항".equals(region)) { %>selected<% } %>>포항</option>
+			<option value="전주"<% if("전주".equals(region)) { %>selected<% } %>>전주</option>
+			<option value="대구"<% if("대구".equals(region)) { %>selected<% } %>>대구</option>
+			<option value="울산"<% if("울산".equals(region)) { %>selected<% } %>>울산</option>
+			<option value="창원"<% if("창원".equals(region)) { %>selected<% } %>>창원</option>
+			<option value="제주"<% if("제주".equals(region)) { %>selected<% } %>>제주</option>
 		</select>
 	</div>
 	<div>

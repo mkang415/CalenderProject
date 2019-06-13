@@ -51,8 +51,8 @@ public class ReplyDaoImpl implements ReplyDao {
 				Reply reply = new Reply();
 				
 				reply.setReplyno(rs.getInt("replyno"));
-				reply.setBoardno(rs.getInt("boardno"));
 				reply.setNickname(rs.getString("nickname"));
+				reply.setBoardno(rs.getInt("boardno"));
 				reply.setReplyContent(rs.getString("recontent"));
 				reply.setInsertdate(rs.getDate("insertDate"));
 				
@@ -68,7 +68,7 @@ public class ReplyDaoImpl implements ReplyDao {
 				e.printStackTrace();
 			}
 		}
-		
+		System.out.println(replyList);
 		return replyList;
 	}
 
@@ -93,8 +93,8 @@ public class ReplyDaoImpl implements ReplyDao {
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1,  reply.getBoardno());
-			ps.setString(2,  reply.getNickname());
+			ps.setString(1,  reply.getNickname());
+			ps.setInt(2,  reply.getBoardno());
 			ps.setString(3,  reply.getReplyContent());
 			
 			ps.executeUpdate();
@@ -152,7 +152,7 @@ public class ReplyDaoImpl implements ReplyDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
+				if(rs!=null)	rs.close();
 				ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();

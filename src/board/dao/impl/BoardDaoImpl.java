@@ -214,10 +214,13 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void insert(Board board) {
 		
-		//다음 게시글 번호 조회
+		
+		
 		String sql = "";
-		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, scheduleno, TEAM, INSERTDATE, HIT)";
+		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, scheduleno, TEAM, HIT)";
 		sql += " VALUES(?,?,?,?,?,?,0)";
+		
+		
 		
 		try {
 			ps=conn.prepareStatement(sql);
@@ -227,7 +230,6 @@ public class BoardDaoImpl implements BoardDao {
 			ps.setString(4, board.getContent());
 			ps.setInt(5, board.getScheduleno());
 			ps.setString(6, board.getTeam());
-			ps.setDate(7, (Date) board.getInsertdate());
 			
 			ps.executeUpdate();
 			

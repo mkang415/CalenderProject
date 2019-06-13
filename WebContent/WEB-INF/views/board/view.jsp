@@ -25,7 +25,7 @@ $(document).ready(function() {
 		}).append(
 				$("<input>").attr({
 					type:"hidden",
-					name:"boardNo",
+					name:"boardno",
 					value:"${viewBoard.boardno}"
 				})
 				
@@ -80,7 +80,6 @@ table, tr{
 }
 
 #vbtn {
-	text-align: center;
 	position: fixed;
 	right: 50%;
 }
@@ -229,6 +228,7 @@ table, tr{
 
 <!---------------------댓글--------------------------------------------------->
 <div>
+<hr>
 <!-- 로그인 안한상태 -->
 <c:if test="${not login }">
 
@@ -245,13 +245,13 @@ table, tr{
 <div class="form-inline text-center"  id="reply">
 
 	<input type="text" size="10" class="form-control" id="replyWriter" value="${nickname }" readonly="readonly"/>
-	<input type="text" class="form-control" id="recontent"/>
+	<textarea rows="2" cols="100" class="form-control" id="replyContent" ></textarea>
 	<button id="btnReplyInsert" class="btn">입력</button>
 </div>	<!-- 댓글 입력 end -->
 </c:if>
 
 
-<br><br>
+<br><br><br><br><br>
 
 
 <!-- 댓글 리스트 -->
@@ -267,16 +267,15 @@ table, tr{
 
 <tbody id="replyBody">
 <c:forEach items="${replyList }" var="reply">
-<tr data-commentno="${reply.replyno }">
-	<td>${reply.rnum }</td>
-	<td>${reply.nickname }</td><!-- 닉네임으로 해도 좋음 -->
+<tr data-replyno="${reply.replyno }">
+	<td>${reply.nickname }</td>
 	<td>${reply.recontent }</td>
 	<td><fmt:formatDate value="${reply.insertDate }" pattern="yy-MM-dd hh:mm:ss" /></td>
 	<td>
-		<c:if test="${sessionScope.userid eq reply.userid }">
-		<button class="btn btn-default btn-xs"
-			onclick="deleteReply(${reply.replyNo });">삭제</button>
-		</c:if>
+<%-- 		<c:if test="${sessionScope.nickname eq reply.nickname }"> --%>
+<!-- 		<button class="btn btn-default btn-xs" -->
+<%-- 			onclick="deleteReply(${reply.replyno });">삭제</button> --%>
+<%-- 		</c:if> --%>
 	</td>
 	
 </tr>

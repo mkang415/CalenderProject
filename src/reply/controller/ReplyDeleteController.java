@@ -25,15 +25,15 @@ public class ReplyDeleteController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Reply reply = boardService.getReply(request);
-		
+		Reply reply = new Reply();
+				
 		String replyno = (String) request.getParameter("replyno");
 		
 		reply.setReplyno(Integer.parseInt(replyno));
 		
 		boolean deleted = boardService.deleteReply(reply);  // 삭제 처리 결과 저장하는 boolean 타입 변수
 		
-		response.getWriter().append("{\"+success\": "+deleted+"}"); // 결과 출
+		response.getWriter().append("{\"+success\": "+deleted+"}"); // 결과 출력
 		
 	}
 

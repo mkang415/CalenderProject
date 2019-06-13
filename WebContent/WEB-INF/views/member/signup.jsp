@@ -21,35 +21,6 @@ var emailConfirm; // email 인증번호 일치여부
 
 var nicknameConfirm; // 닉네임 중복여부 
 
-// $(document).ready(function() {
-// 	$("#nicknameCheck").click(function() { // 이메일 입력 시 해당 이메일 주소로 인증번호 발송하는 스크립트 - MailController와 연결
-// 		console.log("닉네임 중복검사");
-		
-// 		var nickname = $("#nickname").val();
-// 		alert(nickname);
-
-// 		$.ajax({
-// 			type:"post"
-// 			, url:"/nicknameCheck"
-// 			, data:{"nickname" : nickname}
-// 			, dataType:"text"
-// 			, success: function(val) {
-// 				console.log("성공");
-// 				console.log(val);
-// 				nicknameConfirm = val;
-// // 				console.log(nicknameConfirm);
-// 			}
-// 			, error: function() {
-// 				console.log("실패");
-// 			}
-// 		});
-		
-// 		if(nicknameConfirm == false) {
-// 			document.getElementById('sameNickname').innerHTML="이미 존재하는 닉네임입니다.";		
-// 		}
-// 	});
-// });
-
 function nickChk() { // 닉네임 일치 여부 검사 스크립트
 	var nickname = $("#nickname").val();
 	alert(nickname);

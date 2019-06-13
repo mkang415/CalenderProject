@@ -31,9 +31,14 @@ public interface BoardDao {
 	//게시글 삭제
 	public void delete(Board board);
 
+<<<<<<< HEAD
 //	public List getList(String event, String team, String region);
 
 	
+=======
+	// 내가 쓴 글 보기
+	public void myBoard(Board board);
+>>>>>>> master
 	
 	
 }

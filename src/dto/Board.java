@@ -5,10 +5,10 @@ import java.util.Date;
 public class Board {
 
 	private int boardno; //게시판번호
-	private String nickname; //유저아이디
+	private String nickname; //유저닉네임
 	private String title; //글제목
 	private String content; //글본문
-	private Date gamedate;	//경기일자
+	private int scheduleno;	//스케줄 번호
 	private String team;	//직관 경기 팀
 	private Date insertdate; //글쓴날짜
 	private int hit; //조회수
@@ -17,7 +17,7 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardno=" + boardno + ", nickname=" + nickname + ", title=" + title + ", content=" + content
-				+ ", gamedate=" + gamedate + ", team=" + team + ", insertdate=" + insertdate + ", hit=" + hit + "]";
+				+ ", gamedate=" + scheduleno + ", team=" + team + ", insertdate=" + insertdate + ", hit=" + hit + "]";
 	}
 	
 	public int getBoardno() {
@@ -44,11 +44,11 @@ public class Board {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getGamedate() {
-		return gamedate;
+	public int getScheduleno() {
+		return scheduleno;
 	}
-	public void setGamedate(Date gamedate) {
-		this.gamedate = gamedate;
+	public void setScheduleno(int scheduleno) {
+		this.scheduleno = scheduleno;
 	}
 	public String getTeam() {
 		return team;

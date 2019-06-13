@@ -13,9 +13,10 @@
 
 <thead>
 	<tr>
-		<th style="width: 30%">아이디</th>
-		<th style="width: 30%">닉네임</th>
-		<th style="width: 40%">가입일</th>
+		<th style="width: 25%">아이디</th>
+		<th style="width: 25%">닉네임</th>
+		<th style="width: 25%">나이</th>
+		<th style="width: 25%">가입일</th>
 	</tr>
 </thead>
 </table>
@@ -25,8 +26,9 @@
 <tbody>
 <c:forEach items="${list }" var="i">
 	<tr>
-		<td>${i.userid }</td>
-		<td><a href="/manage/managemember?nickname=${i.userid }">${i.nickname }</a></td>
+		<td><a href="/manage/memberinfo?userid=${i.userid }">${i.userid }</a></td>
+		<td>${i.nickname }</td>
+		<td>${i.age }</td>
 		<td><fmt:formatDate value="${i.joindate }" pattern="yyyy-MM-dd" /></td>
 	</tr>
 </c:forEach>

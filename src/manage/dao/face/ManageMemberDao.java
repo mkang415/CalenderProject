@@ -11,6 +11,10 @@ public interface ManageMemberDao {
 
 	public int selectCntAll();
 
-	public Member selectMemberByTeamname(Member viewMember);
+	public Member view(String param);
+	
+	public int cntReply(String reply);
+
+	public int cntBoard(String cntBoard);
 
 }

@@ -163,6 +163,30 @@ public class MemberServiceImpl implements MemberService{
 		
 		return res;
 	}
+	
+	@Override
+	public boolean pwCheck(HttpServletRequest req) { // 회원탈퇴시 비밀번호 확인 메소드
+
+		Member member = new Member();
+		
+		boolean res = false;
+		
+		try {
+			req.setCharacterEncoding("utf-8");
+
+			HttpSession session = req.getSession();
+
+			member.setUserid((String)session.getAttribute("userid"));
+			member.setPassword(req.getParameter("password"));
+			
+			res = memberdao.pwCheck(member);
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 
 	@Override
 	public boolean nicknameCheck(String nickname) { // 회원가입, 회원정보 수정을 위해 닉네임 중복 여부를 판단하는 서비스
@@ -182,5 +206,7 @@ public class MemberServiceImpl implements MemberService{
 		
 		return res;
 	}
+
+
 	
 }

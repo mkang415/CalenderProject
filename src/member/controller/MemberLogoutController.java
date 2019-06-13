@@ -1,6 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +25,7 @@ public class MemberLogoutController extends HttpServlet {
 		
 			session.setAttribute("login", false);
 			session.removeAttribute("userid");
-			session.removeAttribute("nickname");	
-			
+			session.removeAttribute("nickname");
 			
 			resp.sendRedirect("/main");
 

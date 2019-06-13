@@ -205,22 +205,22 @@
 		<% if(month != 1 || week != 1) { %>
 			<% if(week == 1) {
 				if(chkEvent==0) {%>	<!-- 상세검색 전달 -->
-					<a href="/schedule/month?mno=${month-1}&wno=${prevMonthWeek}">지난주</a>
+					<a href="/schedule/week?mno=${month-1}&wno=${prevMonthWeek}">지난주</a>
 				<% } else if(chkEvent==1){%>
-					<a href="/schedule/month?mno=${month-1}&wno=${prevMonthWeek}&event=${chkEvent}
+					<a href="/schedule/week?mno=${month-1}&wno=${prevMonthWeek}&event=${chkEvent}
 						&baseballTeam=${team}&BBregion=${region}">지난주</a>
 				<% } else {%>
-					<a href="/schedule/month?mno=${month-1}&wno=${prevMonthWeek}&event=${chkEvent}
+					<a href="/schedule/week?mno=${month-1}&wno=${prevMonthWeek}&event=${chkEvent}
 					&soccerTeam=${team}&SCregion=${region}">지난주</a>
 				<% } %>
 			<% } else {
 				if(chkEvent==0) {%>	<!-- 상세검색 전달 -->
-					<a href="/schedule/month?mno=${month-1}&wno=${week-1}">지난주</a>
+					<a href="/schedule/week?mno=${month}&wno=${week-1}">지난주</a>
 				<% } else if(chkEvent==1){%>
-					<a href="/schedule/month?mno=${month-1}&wno=${week-1}&event=${chkEvent}
+					<a href="/schedule/week?mno=${month}&wno=${week-1}&event=${chkEvent}
 						&baseballTeam=${team}&BBregion=${region}">지난주</a>
 					<% } else {%>
-					<a href="/schedule/month?mno=${month-1}&wno=${week-1}&event=${chkEvent}
+					<a href="/schedule/week?mno=${month}&wno=${week-1}&event=${chkEvent}
 						&soccerTeam=${team}&SCregion=${region}">지난주</a>
 					<% } %>
 				<% }
@@ -229,22 +229,22 @@
 		<% if(month != 12 || week != 5) { %>
 			<% if(week == monthWeek) {
 				if(chkEvent==0) {%>
-					<a href="/schedule/month?mno=${month+1}&wno=1">다음주</a>
+					<a href="/schedule/week?mno=${month+1}&wno=1">다음주</a>
 				<% } else if(chkEvent==1){%>
-					<a href="/schedule/month?mno=${month+1}&wno=1&event=${chkEvent}
+					<a href="/schedule/week?mno=${month+1}&wno=1&event=${chkEvent}
 						&baseballTeam=${team}&BBregion=${region}">다음주</a>
 				<% } else {%>
-					<a href="/schedule/month?mno=${month+1}&wno=1&event=${chkEvent}
+					<a href="/schedule/week?mno=${month+1}&wno=1&event=${chkEvent}
 						&soccerTeam=${team}&SCregion=${region}">다음주</a>
 				<% } %>
 			<% } else {
 				if(chkEvent==0) {%>
-					<a href="/schedule/month?mno=${month}&wno=${week+1}">다음주</a>
+					<a href="/schedule/week?mno=${month}&wno=${week+1}">다음주</a>
 				<% } else if(chkEvent==1){%>
-					<a href="/schedule/month?mno=${month}&wno=${week+1}&event=${chkEvent}
+					<a href="/schedule/week?mno=${month}&wno=${week+1}&event=${chkEvent}
 						&baseballTeam=${team}&BBregion=${region}">다음주</a>
 				<% } else {%>
-					<a href="/schedule/month?mno=${month}&wno=${week+1}&event=${chkEvent}
+					<a href="/schedule/week?mno=${month}&wno=${week+1}&event=${chkEvent}
 						&soccerTeam=${team}&SCregion=${region}">다음주</a>
 				<% } %>
 			<% }

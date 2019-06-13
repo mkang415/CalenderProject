@@ -22,34 +22,6 @@ public interface BoardService {
 	//상세보기 게시글 조회
 	public Board view(Board viewBoard);
 	
-	/**
-	 * 댓글 전달파라미터 꺼내기
-	 */
-	public Reply getReply(HttpServletRequest req);
-	
-	/**
-	 * 댓글 입력
-	 * 
-	 * @param comment - 삽입될 댓글
-	 */
-	public void insertReply(Reply reply);
-	
-	/**
-	 * 댓글 리스트
-	 * 
-	 * @param board - 댓글이 조회될 게시글
-	 * @return List - 댓글 리스트
-	 */
-	public List getReplyList(Board board);
-	
-	/**
-	 * 댓글 삭제
-	 *  
-	 * @param comment - 삭제할 댓글
-	 * @return boolean - 삭제 성공 여부
-	 */
-	public boolean deleteReply(Reply reply);
-
 	//게시글 작성
 	public void write(HttpServletRequest req);
 
@@ -63,5 +35,35 @@ public interface BoardService {
 	public void delete(Board board);
 	
 //	public List search(String event, String team, String region);
+	
+	//-------------------------댓글----------------------
+		/**
+		 * 댓글 전달파라미터 꺼내기
+		 */
+		public Reply getReply(HttpServletRequest req);
+		
+		/**
+		 * 댓글 입력
+		 * 
+		 * @param comment - 삽입될 댓글
+		 */
+		public void insertReply(Reply reply);
+		
+		/**
+		 * 댓글 리스트
+		 * 
+		 * @param board - 댓글이 조회될 게시글
+		 * @return List - 댓글 리스트
+		 */
+		public List getReplyList(Board board);
+		
+		/**
+		 * 댓글 삭제
+		 *  
+		 * @param comment - 삭제할 댓글
+		 * @return boolean - 삭제 성공 여부
+		 */
+		public boolean deleteReply(Reply reply);
+
 
 }

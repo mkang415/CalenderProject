@@ -21,9 +21,15 @@ public interface MemberService {
 
 	public void update(HttpServletRequest req); // 회원정보 수정 메소드
 	
-	public Paging getCurPage(HttpServletRequest req, String userid);
+	public Paging getCurPage(HttpServletRequest req, String userid); // 페이징 객체 반환 메소드
 
-	public List getList(Paging paging, String userid);
+	public List getList(Paging paging, String userid); // 회원 작성 게시글 리스트 반환
 	
-	public boolean pwUpdate(HttpServletRequest req);
+	public boolean pwUpdate(HttpServletRequest req); // 비밀번호 변경
+	
+	public boolean pwCheck(HttpServletRequest req); // 비밀번호 중복검사
+	
+	public boolean nicknameCheck(String nickname); // 닉네임 중복검사
+	
+	public boolean isMyNickname(String nickname, String userid); // 회원정보 변경 - 닉네임 중복 시 내 닉네임인지 검사
 }

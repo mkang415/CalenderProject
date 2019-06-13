@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Access Denied</title>
 </head>
 <body>
 
-<h1>비밀번호 변경 성공!</h1>
+<h1>로그인 후 이용해주세요</h1>
 
-<button type="button" onClick="history.go(-1)">확인</button>
+<button type="button" onClick="history.go(-1)">돌아가기</button>
 
 </body>
 </html>

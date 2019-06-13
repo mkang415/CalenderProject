@@ -36,9 +36,9 @@ $(document).ready(function(){
 
 <form action="/mypage/pwupdate" method="post" id="updateform">
 
-현재 비밀번호 : <input type="text" name="pwConfirm" id="pwConfirm" /><br>
-새 비밀번호 : <input type="text" name="newPw" id="newPw" /><br>
-새 비밀번호 확인 : <input type="text" name="newPwConfirm" id="newPwConfirm" /><br>
+현재 비밀번호 : <input type="password" name="pwConfirm" id="pwConfirm" /><br>
+새 비밀번호 : <input type="password" name="newPw" id="newPw" /><br>
+새 비밀번호 확인 : <input type="password" name="newPwConfirm" id="newPwConfirm" /><br>
 
 <button type="button" id="btnUpdate">변경하기</button>
 

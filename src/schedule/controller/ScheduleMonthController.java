@@ -40,20 +40,20 @@ public class ScheduleMonthController extends HttpServlet {
 		int startDay = scheduleService.getstartday(year, month);	//	월의 시작 요일 구해서 저장.
 		
 		String event=(String)req.getParameter("event");	//	선택된 종목 값 전달받아 저장.
-		int chkevent=0;	//	저장된 종목 값 숫자로 변환화여 저장할 변수 생성
+		int chkEvent=0;	//	저장된 종목 값 숫자로 변환화여 저장할 변수 생성
 		if(event!=null) {
-			chkevent=Integer.parseInt(event);	//	종목 값 숫자로 변환하여 저장 1: 야구, 2: 축구
+			chkEvent=Integer.parseInt(event);	//	종목 값 숫자로 변환하여 저장 1: 야구, 2: 축구
 		}
 		String team=null;	//	전달 받은 팀 이름 저장할 변수 생성
 		String region=null;	//	전달 받은 지역 이름 저장할 변수 생성
-		if(chkevent==1) {	//	야구 팀, 지역 저장
+		
+		if(chkEvent==1) {	//	야구 팀, 지역 저장
 			team=(String)req.getParameter("baseballTeam");
 			region=(String)req.getParameter("BBregion");
-		} else if(chkevent==2){	//	축구 팀, 지역 저장
+		} else if(chkEvent==2){	//	축구 팀, 지역 저장
 			team=(String)req.getParameter("soccerTeam");
 			region=(String)req.getParameter("SCregion");
 		}
-		
 		Map<Integer, List> monthMap = new HashMap<>();	//	hashmap 생성
 		if(event==null) {	//	종목 값 없을 경우 월 일정 모두 검색하여 저장
 			for(int i=0; i<lastDate; i++) {	//	각 날짜에 해당 날짜에 있는 경기 일정 저장.
@@ -77,6 +77,14 @@ public class ScheduleMonthController extends HttpServlet {
 		req.setAttribute("monthMap", monthMap);
 		req.setAttribute("iconList", iconList);
 		
+		if(chkEvent==0) {
+			req.setAttribute("chkEvent", chkEvent);
+			
+		} else {
+			req.setAttribute("chkEvent", chkEvent);
+			req.setAttribute("team", team);
+			req.setAttribute("region", region);
+		}
 
 		req.getRequestDispatcher(	//	jsp 경로 지정
 				"/WEB-INF/views/schedule/scheduleMonth.jsp").forward(req, resp);

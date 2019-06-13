@@ -100,7 +100,7 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public void insert(Member member) {
+	public void insert(Member member) { // 회원가입
 
 		System.out.println(member.getUserid());
 		System.out.println(member.getPassword());
@@ -109,9 +109,8 @@ public class MemberDaoImpl implements MemberDao{
 		System.out.println(member.getGender());
 		
 		String sql = "";
-		sql+="INSERT INTO MEMBER";
-		sql+="(userid, password, nickname, iconno, age, gender, teamname, introduce, joindate, grade)";
-		sql+=" VALUES(?,?,?,1001,?,?,none,default,sysdate,2)";
+		sql+="INSERT INTO MEMBER(userid, password, nickname, iconno, age, gender, teamname, introduce, joindate, grade)";
+		sql+=" VALUES(?,?,?,1001,?,?,?,?,sysdate,1)";
 		
 		try {
 			ps=conn.prepareStatement(sql);
@@ -120,6 +119,8 @@ public class MemberDaoImpl implements MemberDao{
 			ps.setString(3, member.getNickname());
 			ps.setInt(4, member.getAge());
 			ps.setString(5, member.getGender());
+			ps.setString(6, "None");
+			ps.setString(7, "Hello World!");
 			
 			ps.executeUpdate();
 		

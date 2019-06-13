@@ -44,7 +44,7 @@ public class MemberLoginController extends HttpServlet {
 			session.setAttribute("userid", loginmember.getUserid());
 			session.setAttribute("nickname", loginmember.getNickname());
 			session.setMaxInactiveInterval(0);
-			resp.sendRedirect("/WEB-INF/views/main.jsp");
+			resp.sendRedirect("/main");
 		
 			return;
 			

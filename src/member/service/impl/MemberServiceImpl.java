@@ -1,5 +1,6 @@
 package member.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,13 +21,21 @@ public class MemberServiceImpl implements MemberService{
 		
 		Member member = new Member();
 		
-		member.setUserid(req.getParameter("email"));
-		member.setPassword(req.getParameter("password"));
-		member.setNickname(req.getParameter("nickname"));
-		member.setAge(Integer.parseInt(req.getParameter("age")));
-		member.setGender(req.getParameter("gender"));
+		try {
+			
+			req.setCharacterEncoding("utf-8");
+			member.setUserid(req.getParameter("email"));
+			member.setPassword(req.getParameter("password"));
+			member.setNickname(req.getParameter("nickname"));
+			member.setAge(Integer.parseInt(req.getParameter("age")));
+			member.setGender(req.getParameter("gender"));
+			
+			memberdao.insert(member);
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		
-		memberdao.insert(member);
 	}
 
 	@Override

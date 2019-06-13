@@ -15,7 +15,7 @@ import member.service.face.MemberService;
 import member.service.impl.MemberServiceImpl;
 import util.Paging;
 
-@WebServlet("/mypage")
+@WebServlet("/mypage/myboard")
 public class MyPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

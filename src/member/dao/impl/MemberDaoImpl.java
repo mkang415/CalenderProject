@@ -168,17 +168,17 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public int selectCntAll(String userid) { // 페이징을 위한 유저 게시글 수 조회 쿼리
+	public int selectCntAll(String nickname) { // 페이징을 위한 유저 게시글 수 조회 쿼리
 
 		String sql = "";
 		sql+="SELECT COUNT(*) FROM board";
-		sql+=" WHERE userid=?";
+		sql+=" WHERE nickname=?";
 				
 		int totalCount = 0;
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, userid);
+			ps.setString(1, nickname);
 			rs = ps.executeQuery();
 
 			while(rs.next()) {
@@ -200,13 +200,13 @@ public class MemberDaoImpl implements MemberDao{
 	}
 
 	@Override
-	public List selectAll(Paging paging, String userid) { // 유저 게시판 작성 글 목록 을 위해 글 리스트 반환할 쿼리
+	public List selectAll(Paging paging, String nickname) { // 유저 게시판 작성 글 목록 을 위해 글 리스트 반환할 쿼리
 
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += "	SELECT rownum rnum, B.* FROM ("; 
 		sql += "		SELECT * FROM board";
-		sql += "		WHERE userid=?";
+		sql += "		WHERE nickname=?";
 		sql += "		ORDER BY BOARDNO desc";
 		sql += "	) B";
 		sql += "	ORDER BY RNUM"; 
@@ -218,7 +218,7 @@ public class MemberDaoImpl implements MemberDao{
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setString(1, userid);
+			ps.setString(1, nickname);
 			ps.setInt(2, paging.getStartNo());
 			ps.setInt(3, paging.getEndNo());
 			rs = ps.executeQuery();
@@ -228,7 +228,7 @@ public class MemberDaoImpl implements MemberDao{
 				Board board = new Board();
 				
 				board.setBoardno(rs.getInt("boardno"));
-				board.setUserid(rs.getString("userid"));
+				board.setNickname(rs.getString("nickname"));
 				board.setTitle(rs.getString("title"));
 				board.setContent(rs.getString("content"));
 				board.setScheduleno(rs.getInt("scheduleno"));
@@ -240,6 +240,13 @@ public class MemberDaoImpl implements MemberDao{
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return boardList;

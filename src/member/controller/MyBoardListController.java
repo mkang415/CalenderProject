@@ -18,7 +18,7 @@ import util.Paging;
 // 회원 작성 글 반환 서블릿
 
 @WebServlet("/mypage/myboard")
-public class MyPageController extends HttpServlet {
+public class MyBoardListController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	MemberService memberservice = new MemberServiceImpl();
@@ -30,15 +30,15 @@ public class MyPageController extends HttpServlet {
 		HttpSession session = req.getSession();
 			
 		// session 에서 userid 불러오기
-		String userid = (String)session.getAttribute("userid");
+		String nickname = (String)session.getAttribute("nickname");
 		
 		// 요청파라미터에서 curPage 얻어오기
-		Paging paging = memberservice.getCurPage(req, userid);
+		Paging paging = memberservice.getCurPage(req, nickname);
 					
 		// MODEL로 Paging 객체 넣기
 		req.setAttribute("paging", paging);
 					
-		List<Board> boardList = memberservice.getList(paging, userid);
+		List<Board> boardList = memberservice.getList(paging, nickname);
 					
 		req.setAttribute("boardList", boardList);
 				

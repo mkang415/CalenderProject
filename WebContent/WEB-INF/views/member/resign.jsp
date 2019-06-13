@@ -10,13 +10,6 @@
 
 var pwConfirm; // pw 중복여부
 
-$(document).ready(function() {
-	
-	$("#resignreason").hide();
-	
-});
-
-
 function pwCheck() { // pw 일치 여부 검사 스크립트
 	var password = $("#password").val();
 	alert("테스트코드, 입력받은 비밀번호 : " + password);
@@ -30,24 +23,37 @@ function pwCheck() { // pw 일치 여부 검사 스크립트
 			console.log("성공");
 			console.log(val);
 			
-			pwConfirm = val;
+			if(val) {
+				$("#pwChk").hide();
+				$("#resignreason").show();
+				
+			} else {
+				alert("비밀번호를 다시 확인해주세요");
+				
+			}
+					
 		}
 		, error: function() {
 			console.log("실패");
 		}
 	});
+	
+	
+// 	if(pwConfirm==false) {
+// 		alert("비밀번호를 다시 확인해주세요");
 		
-	if(pwConfirm) {
+// 	} else if(pwConfirm==true) {
+// 		$("#pwChk").hide();
+// 		$("#resignreason").show();
 		
-		$("#pwChk").hide();
-		$("#resignreason").show();
-		
-	} else {
+// 	}
+};
 
-		alert("비밀번호를 다시 확인해주세요");
-		
-	}
-}
+$(document).ready(function() {
+	
+	$("#resignreason").hide();
+	
+});
 
 </script>
 

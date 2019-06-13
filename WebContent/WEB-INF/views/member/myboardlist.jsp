@@ -43,12 +43,12 @@ table, th {
 </c:forEach>
 	
 </table>
+<c:import url="/WEB-INF/views/layout/myPagePaging.jsp" />
 
 <button type="button" onClick="location.href='/member/update'">개인정보 수정</button> 
 <button type="button">비밀번호 변경</button> 
 <button type="button">회원 탈퇴</button>
 </div>
 
-<c:import url="/WEB-INF/views/layout/myPagePaging.jsp" />
 </body>
 </html>

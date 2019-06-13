@@ -113,7 +113,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Paging getCurPage(HttpServletRequest req, String userid) { // 페이징
+	public Paging getCurPage(HttpServletRequest req, String nickname) { // 페이징
 
 		// 전달파라미터 curPage 파싱
 		String param = req.getParameter("curPage");
@@ -125,7 +125,7 @@ public class MemberServiceImpl implements MemberService{
 		}
 
 		// 전체 게시글 수
-		int totalCount = memberdao.selectCntAll(userid);
+		int totalCount = memberdao.selectCntAll(nickname);
 
 		// 페이징 객체 생성
 		Paging paging = new Paging(totalCount, curPage);
@@ -135,9 +135,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List getList(Paging paging, String userid) { // 페이징
+	public List getList(Paging paging, String nickname) { // 페이징
 
-		List boardList = memberdao.selectAll(paging, userid);
+		List boardList = memberdao.selectAll(paging, nickname);
 		
 		return boardList;
 	}

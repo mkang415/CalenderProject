@@ -6,6 +6,7 @@ public class Board {
 
 	private int boardno; //게시판번호
 	private String userid; //유저아이디
+	private String nickname; //닉네임
 	private String title; //글제목
 	private String content; //글본문
 	private int scheduleno; //스케줄넘버?
@@ -14,10 +15,11 @@ public class Board {
 	
 	@Override
 	public String toString() {
-		return "board [boardno=" + boardno + ", userid=" + userid + ", title=" + title + ", content=" + content
-				+ ", scheduleno=" + scheduleno + ", insertdate=" + insertdate + ", hit=" + hit + "]";
+		return "Board [boardno=" + boardno + ", userid=" + userid + ", nickname=" + nickname + ", title=" + title
+				+ ", content=" + content + ", scheduleno=" + scheduleno + ", insertdate=" + insertdate + ", hit=" + hit
+				+ "]";
 	}
-	
+
 	public int getBoardno() {
 		return boardno;
 	}
@@ -32,6 +34,14 @@ public class Board {
 	
 	public void setUserid(String userid) {
 		this.userid = userid;
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+	
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	
 	public String getTitle() {

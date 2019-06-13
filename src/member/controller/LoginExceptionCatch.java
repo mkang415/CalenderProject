@@ -15,7 +15,7 @@ public class LoginExceptionCatch extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		resp.sendRedirect("/WEB-INF/views/member/denied.jsp");
+		req.getRequestDispatcher("/WEB-INF/views/member/denied.jsp").forward(req, resp);;
 	
 	}
 

@@ -28,4 +28,6 @@ public interface MemberService {
 	public boolean pwUpdate(HttpServletRequest req);
 	
 	public boolean nicknameCheck(String nickname);
+	
+	public boolean isMyNickname(String nickname, String userid);
 }

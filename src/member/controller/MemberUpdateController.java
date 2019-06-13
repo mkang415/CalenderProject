@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dto.Member;
 import member.service.face.MemberService;
@@ -21,12 +22,19 @@ public class MemberUpdateController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		HttpSession session = req.getSession();
+		
+		if((boolean)session.getAttribute("login")==false) {
+			req.getRequestDispatcher("/denied").forward(req, resp);
+			return;
+		}
+		
 		Member member = memberservice.select(req);
 		
 		req.setAttribute("member", member);
 		
 		req.getRequestDispatcher("/WEB-INF/views/member/infoUpdate.jsp").forward(req, resp);
-		
+
 	}
 		
 	@Override
@@ -34,7 +42,7 @@ public class MemberUpdateController extends HttpServlet {
 
 		memberservice.update(req);
 		
-		req.getRequestDispatcher("/WEB-INF/views/member/infoUpdate").forward(req, resp);
+		resp.sendRedirect("/mypage/update");
 		
 		
 	}

@@ -14,7 +14,7 @@
 <form action="/login" method="post">
 
 아이디 : <input type="text" name="userid" placeholder="아이디를 입력하세요" /><br>
-비밀번호 : <input type="text" name="password" placeholder="비밀번호를 입력하세요" /><br>
+비밀번호 : <input type="password" name="password" placeholder="비밀번호를 입력하세요" /><br>
 
 <button>로그인</button> <button type="button">취소</button>
 

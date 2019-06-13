@@ -8,10 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.service.face.MemberService;
 import member.service.impl.MemberServiceImpl;
-import net.sf.json.JSONObject;
 
 @WebServlet("/nicknameCheck")
 public class NicknameCheck extends HttpServlet {
@@ -22,11 +22,16 @@ public class NicknameCheck extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		HttpSession session = req.getSession();
 		
 		String nickname = req.getParameter("nickname");
 		
 		boolean res = memberservice.nicknameCheck(nickname);
-
+		
+		if(res==false&&(boolean)session.getAttribute("login")==true) {
+			res = memberservice.isMyNickname(nickname, (String)session.getAttribute("userid"));
+			
+		}
 		PrintWriter pw = resp.getWriter();
 		
 		pw.print(res);

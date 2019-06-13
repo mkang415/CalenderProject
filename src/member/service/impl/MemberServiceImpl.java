@@ -41,9 +41,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member select(HttpServletRequest req) {
 		
-		req.getAttribute("userid");
+		HttpSession session = req.getSession();
 		
 		Member member = new Member();
+		
+		member.setUserid((String)session.getAttribute("userid"));
 		
 		return memberdao.selectMemberByUserid(member);
 	}
@@ -53,14 +55,25 @@ public class MemberServiceImpl implements MemberService{
 		
 		Member member = new Member();
 		
-		member.setAge(Integer.parseInt(req.getParameter("age")));
-		member.setGender(req.getParameter("gender"));
-		member.setNickname(req.getParameter("nickname"));
-		member.setTeamname(req.getParameter("teamname"));
-		member.setIntroduce(req.getParameter("introduce"));
+		HttpSession session = req.getSession();
 		
-		memberdao.update(member);
+		try {
+			req.setCharacterEncoding("utf-8");
 		
+			String uid = (String)session.getAttribute("userid");
+			
+			member.setUserid(uid);
+			member.setAge(Integer.parseInt(req.getParameter("age")));
+			member.setGender(req.getParameter("gender"));
+			member.setNickname(req.getParameter("nickname"));
+			member.setTeamname(req.getParameter("teamname"));
+			member.setIntroduce(req.getParameter("introduce"));
+			
+			memberdao.update(member);
+		
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -154,6 +167,20 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public boolean nicknameCheck(String nickname) {
 		return memberdao.nicknameCheck(nickname);
+	}
+
+	@Override
+	public boolean isMyNickname(String nickname, String userid) {
+
+		String id = memberdao.isMyNickname(nickname);
+		
+		boolean res = false;
+		
+		if(id!=null&&userid.equals(id)) {
+			res=true;
+		}
+		
+		return res;
 	}
 	
 		

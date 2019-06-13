@@ -78,7 +78,7 @@ public class MemberDaoImpl implements MemberDao{
 		try {
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, member.getUserid());
-			ps.setString(1, member.getPassword());
+			ps.setString(2, member.getPassword());
 			rs=ps.executeQuery();
 			
 			while(rs.next()) {
@@ -138,7 +138,32 @@ public class MemberDaoImpl implements MemberDao{
 
 	@Override
 	public void update(Member member) {
-		// TODO Auto-generated method stub
+
+		String sql="";
+		sql+="UPDATE MEMBER SET age=?, gender=?, nickname=?, teamname=?, introduce=?";
+		sql+=" WHERE userid=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, member.getAge());
+			ps.setString(2, member.getGender());
+			ps.setString(3, member.getNickname());
+			ps.setString(4, member.getTeamname());
+			ps.setString(5, member.getIntroduce());
+			ps.setString(6, member.getUserid());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		
 	}
 
@@ -314,6 +339,32 @@ public class MemberDaoImpl implements MemberDao{
 		}
 		
 		return res;
+	}
+
+	@Override
+	public String isMyNickname(String nickname) {
+
+		String id = null;
+		
+		String sql = "";
+		sql+="SELECT userid, nickname FROM MEMBER";
+		sql+=" WHERE nickname=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, nickname);
+		
+			rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				id = rs.getString("userid");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return id;
 	}
 
 

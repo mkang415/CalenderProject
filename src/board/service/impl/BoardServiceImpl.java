@@ -1,5 +1,6 @@
 package board.service.impl;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,12 @@ import util.Paging;
 
 public class BoardServiceImpl implements BoardService {
 	
-	// DAO 객체
+	//ReplyDAO 객체
 	private ReplyDao replyDao = new ReplyDaoImpl();
 
 	//BoardDao객체
 	private BoardDao boardDao = new BoardDaoImpl();
+	
 
 	@Override //list 전체검색
 	public List getList(Paging paging) {
@@ -46,7 +48,8 @@ public class BoardServiceImpl implements BoardService {
 		return paging;
 	}
 		
-
+//----------------------------------------------------------------------------------
+	
 	@Override //글번호로 게시글 조회
 	public Board getBoardno(HttpServletRequest req) {
 		
@@ -65,6 +68,8 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 
+//------------------------------------------------------------------------------------------
+	
 	@Override //게시판 상세보기
 	public Board view(Board viewBoard) {
 		
@@ -75,6 +80,8 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectBoardByBoardno(viewBoard);
 	}
 
+
+//------------------------------------------------------------------------------------------
 	
 	//게시글 작성 **
 	@Override
@@ -112,6 +119,10 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+
+	
+//------------------------------------------------------------------------------------------
+	
 	
 	//글 작성자인지 판단하기
 	@Override
@@ -133,6 +144,8 @@ public class BoardServiceImpl implements BoardService {
 		return true;
 	}
 
+//------------------------------------------------------------------------------------------	
+	
 	
 	//게시글 수정 **
 	@Override
@@ -152,6 +165,7 @@ public class BoardServiceImpl implements BoardService {
 			
 		}
 
+//------------------------------------------------------------------------------------------
 	
 	//게시글 삭제
 	@Override
@@ -161,36 +175,60 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	//----------댓글
+//------------------------------------------------------------------------------------------
+
+	//댓글꺼내기
 	@Override
 	public Reply getReply(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			req.setCharacterEncoding("UTF-8"); //한글인코딩
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		String replyNo = (String) req.getParameter("replyno");
+		String nickname = (String) req.getParameter("nickname");
+		String recontent = (String) req.getParameter("recontent");
+		
+		Reply reply = new Reply();
+		reply.setReplyno(Integer.parseInt(replyNo));
+		reply.setNickname(nickname);
+		reply.setReplyContent(recontent);
+		
+		return reply;
 	}
 
+	
+//--------------------------------------------------------------------------------------
+	
+	//댓글 입력
 	@Override
 	public void insertReply(Reply reply) {
-		// TODO Auto-generated method stub
-		
+		replyDao.insertReply(reply);
 	}
 
+//--------------------------------------------------------------------------------------
+	
+	//댓글리스트
 	@Override
 	public List getReplyList(Board board) {
-		// TODO Auto-generated method stub
-		return null;
+		return replyDao.selectReply(board);
 	}
 
+
+//------------------------------------------------------------------------------------------
+	
+	//댓글삭제
 	@Override
 	public boolean deleteReply(Reply reply) {
-		// TODO Auto-generated method stub
-		return false;
+		replyDao.deleteReply(reply);
+		
+		if(replyDao.countReply(reply)>0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
-//
-//	@Override
-//	public List search(String event, String team, String region) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
 
 	
 

@@ -126,16 +126,6 @@ $(document).ready(function() {
 		
 	});	
 	
-// 	$("#joinConfirm").click(function() { // 잘못된 데이터 입력이 없다면 회원가입 허용하는 스크립트 - MemberSignupController와 연결
-		
-// 		if(emailConfirm == true && pwConfirm == true && nicknameConfirm == true) {
-// 			$("#sendJoinRequest").submit();
-// 		} else {
-// 			document.getElementById('reject').innerHTML="입력한 정보를 다시 확인해주세요";
-// 		}
-		
-// 	})
-	
 });
 
 function join() {

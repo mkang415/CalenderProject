@@ -8,13 +8,14 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 
+var pwConfirm; // pw 중복여부
+
 $(document).ready(function() {
 	
 	$("#resignreason").hide();
 	
 });
 
-var pwConfirm; // pw 중복여부
 
 function pwCheck() { // pw 일치 여부 검사 스크립트
 	var password = $("#password").val();
@@ -35,21 +36,18 @@ function pwCheck() { // pw 일치 여부 검사 스크립트
 			console.log("실패");
 		}
 	});
-	
-	
-	alert(pwConfirm);
-	
-	if(pwConfirm == false) {
 		
-		alert("비밀번호를 다시 확인해주세요");
+	if(pwConfirm) {
 		
-	} else {
-
 		$("#pwChk").hide();
 		$("#resignreason").show();
 		
+	} else {
+
+		alert("비밀번호를 다시 확인해주세요");
+		
 	}
-};
+}
 
 </script>
 

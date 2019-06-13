@@ -3,6 +3,8 @@ package util;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
+// 이메일 발송을 위한 객체
+
 public class MailAuth extends Authenticator {
 
 	// 구글 SMTP ID

@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<h1>로그인 성공!</h1>
+<h1>비밀번호 변경 성공!</h1>
 
-<button type="button" onClick="location.href='/mypage/pwupdate'">확인</button>
+<button type="button" onClick="history.go(-1)">확인</button>
 
 </body>
 </html>

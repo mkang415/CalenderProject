@@ -25,7 +25,7 @@ public class NicknameCheck extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
-		
+				
 		String nickname = req.getParameter("nickname");
 		
 		boolean res = memberservice.nicknameCheck(nickname);
@@ -34,6 +34,7 @@ public class NicknameCheck extends HttpServlet {
 			res = memberservice.isMyNickname(nickname, (String)session.getAttribute("userid"));
 			
 		}
+		
 		PrintWriter pw = resp.getWriter();
 		
 		pw.print(res);

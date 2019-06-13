@@ -31,7 +31,7 @@ public class MemberSignupController extends HttpServlet {
 
 		memberservice.join(req);
 		
-		resp.sendRedirect("/schedule/week");
+		resp.sendRedirect("/main");
 	}
 	
 }

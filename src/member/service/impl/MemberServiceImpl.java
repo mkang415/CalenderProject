@@ -178,7 +178,7 @@ public class MemberServiceImpl implements MemberService{
 
 			member.setUserid((String)session.getAttribute("userid"));
 			member.setPassword(req.getParameter("password"));
-			
+			System.out.println(member.toString());
 			res = memberdao.pwCheck(member);
 			
 		} catch (UnsupportedEncodingException e) {

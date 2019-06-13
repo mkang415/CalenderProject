@@ -89,31 +89,28 @@ public class BoardServiceImpl implements BoardService {
 		
 		Board board = new Board();
 		
+		int boardno = boardDao.selectBoardno();
+		
+		//작성자 아이디 처리
+		board.setNickname((String) req.getSession().getAttribute("nickname"));
 		board.setTitle(req.getParameter("title"));
 		board.setContent(req.getParameter("content"));
+		
+		
+//		if (board != null) {
+//			board.setBoardno(boardno);
+//		
+//		if(board.getTitle()==null || "".equals(board.getTitle())){
+//			board.setTitle("(제목없음)");
+//		
+//			
+//		}
 		
 		boardDao.insert(board);
 		
 		
 		
 		
-//		Board board = null;
-//		board = new Board();
-//		int boardno = boardDao.selectBoardno();
-//		
-//		boardDao.insert(board);
-		
-//		if (board != null) {
-//				board.setBoardno(boardno);
-//			
-//			if(board.getTitle()==null || "".equals(board.getTitle())){
-//				board.setTitle("(제목없음)");
-//			
-//				//작성자 아이디 처리
-//				board.setUserid((String) req.getSession().getAttribute("userid"));
-//			}
-//			boardDao.insert(board);
-//		}
 		
 		
 		
@@ -129,7 +126,7 @@ public class BoardServiceImpl implements BoardService {
 	public boolean checkWriter(HttpServletRequest req) {
 		
 		//로그인한 세션 ID 얻기
-		String loginId = (String) req.getSession().getAttribute("userid");
+		String loginmember = (String) req.getSession().getAttribute("nickname");
 		
 		//작성한 게시글 번호 얻기
 		Board board = getBoardno(req);
@@ -138,9 +135,9 @@ public class BoardServiceImpl implements BoardService {
 		board = boardDao.selectBoardByBoardno(board);
 		
 		//게시글의 작성자와 로그인 아이디 비교
-//		if(!loginId.equals(board).getWriter())) {
-//			return false;
-//		}
+		if(!loginmember.equals(board.getNickname())) {
+			return false;
+		}
 		return true;
 	}
 
@@ -151,12 +148,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void update(HttpServletRequest req) {
 		
-		Board board = null;
-		
-		board = new Board();
+		Board board = new Board();
 		
 		board.setTitle(req.getParameter("title"));
+		board.setNickname((String) req.getSession().getAttribute("nickname"));
 		board.setContent(req.getParameter("content"));
+		
 		
 		boardDao.update(board);
 		
@@ -186,12 +183,12 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 		}
 		
-		String replyNo = (String) req.getParameter("replyno");
+		String boardNo = (String) req.getParameter("boardNo");
 		String nickname = (String) req.getParameter("nickname");
 		String recontent = (String) req.getParameter("recontent");
 		
 		Reply reply = new Reply();
-		reply.setReplyno(Integer.parseInt(replyNo));
+		reply.setBoardno(Integer.parseInt(boardNo));
 		reply.setNickname(nickname);
 		reply.setReplyContent(recontent);
 		

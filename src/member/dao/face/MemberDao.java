@@ -15,15 +15,15 @@ public interface MemberDao {
 	
 	public void update(Member member); // 회원정보 수정
 	
-	public int selectCntAll(String userid);
+	public int selectCntAll(String userid); // 페이징을 위한 글 수 반환
 
-	public List selectAll(Paging paging, String userid);
+	public List selectAll(Paging paging, String userid); // 회원 작성 게시글 목록 반환
 	
-	public boolean pwCheck(Member member);
+	public boolean pwCheck(Member member); // 비밀번호 중복검사
 	
-	public void pwUpdate(Member member);
+	public void pwUpdate(Member member); // 비밀번호 변경
 	
-	public boolean nicknameCheck(String nickname);
+	public boolean nicknameCheck(String nickname); // 닉네임 중복검사
 	
-	public String isMyNickname(String nickname);
+	public String isMyNickname(String nickname); // 닉네임 중복시 내 닉네임인지 확인
 }

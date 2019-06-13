@@ -84,8 +84,8 @@ function update() {
 		</tr>
 		<tr>
 			<td>성별</td>
-			<td><input type="radio" name="gender" value="M">남 
-				<input type="radio" name="gender" value="F">여
+			<td><input type="radio" name="gender" value="남성">남 
+				<input type="radio" name="gender" value="여성">여
 			</td>
 		</tr>
 		<tr>
@@ -96,12 +96,28 @@ function update() {
 			<td>좋아하는 팀</td>
 			<td>
 			<select name="teamname">
-				<option value="kia">기아</option>
-				<option value="nexen">넥센</option>
-				<option value="sk">sk</option>
-				<option value="samsung">삼성</option>
-				<option value="nc">nc</option>
-				<option value="lotte">꼴데</option>
+				<option value="KT">KT</option>
+				<option value="LG">LG</option>
+				<option value="NC">NC</option>
+				<option value="SK">SK</option>
+				<option value="기아">기아</option>
+				<option value="두산">두산</option>
+				<option value="롯데">롯데</option>
+				<option value="삼성">삼성</option>
+				<option value="키움">키움</option>
+				<option value="한화">한화</option>
+				<option value="서울">서울</option>
+				<option value="강원">강원</option>
+				<option value="경남">경남</option>
+				<option value="대구">대구</option>
+				<option value="상주">상주</option>
+				<option value="성남">성남</option>
+				<option value="수원">수원</option>
+				<option value="울산">울산</option>
+				<option value="인천">인천</option>
+				<option value="전북">전북</option>
+				<option value="제주">제주</option>
+				<option value="포항">포항</option>				
 			</select>
 			</td>
 		</tr>

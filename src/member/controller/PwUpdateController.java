@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import member.service.face.MemberService;
 import member.service.impl.MemberServiceImpl;
 
+// 비밀번호 변경 서블릿
+
 @WebServlet("/mypage/pwupdate")
 public class PwUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -15,6 +15,8 @@ import member.service.face.MemberService;
 import member.service.impl.MemberServiceImpl;
 import util.Paging;
 
+// 회원 작성 글 반환 서블릿
+
 @WebServlet("/mypage/myboard")
 public class MyPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -42,7 +44,7 @@ public class MyPageController extends HttpServlet {
 				
 		
 
-		req.getRequestDispatcher("/WEB-INF/views/member/mypage.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/member/myboardlist.jsp").forward(req, resp);
 	
 	}
 	

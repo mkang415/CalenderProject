@@ -14,6 +14,7 @@ import dto.Member;
 import member.service.face.MemberService;
 import member.service.impl.MemberServiceImpl;
 
+// 로그인 서블릿
 
 @WebServlet("/login")
 public class MemberLoginController extends HttpServlet {

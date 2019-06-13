@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService{
 	MemberDao memberdao = new MemberDaoImpl();
 	
 	@Override
-	public void join(HttpServletRequest req) {
+	public void join(HttpServletRequest req) { // 회원가입 서비스 메소드
 		
 		Member member = new Member();
 		
@@ -39,7 +39,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member select(HttpServletRequest req) {
+	public Member select(HttpServletRequest req) { // mypage - myboardlist 조회 서비스
 		
 		HttpSession session = req.getSession();
 		
@@ -51,7 +51,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public void update(HttpServletRequest req) {
+	public void update(HttpServletRequest req) { // 개인정보 수정 서비스
 		
 		Member member = new Member();
 		
@@ -77,7 +77,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Member getLoginMember(HttpServletRequest req) {
+	public Member getLoginMember(HttpServletRequest req) { // 로그인을 위한 회원 아이디, 비밀번호 일치 여부 확인 서비스
 		Member member = new Member();
 		
 		member.setUserid(req.getParameter("userid"));
@@ -87,7 +87,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean login(Member member) {
+	public boolean login(Member member) { // 로그인을 위해 DB에 회원 정보가 있는지 조회하는 서비스
 		
 		boolean res = false;
 		int cnt = memberdao.selectCntMemberByUserid(member);
@@ -103,7 +103,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public Member getMemberByUserid(Member member) {
+	public Member getMemberByUserid(Member member) { // 로그인 시 유저의 정보를 반환하기 위한 서비스
 
 		Member loginmember = new Member();
 		
@@ -113,7 +113,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Paging getCurPage(HttpServletRequest req, String userid) {
+	public Paging getCurPage(HttpServletRequest req, String userid) { // 페이징
 
 		// 전달파라미터 curPage 파싱
 		String param = req.getParameter("curPage");
@@ -135,7 +135,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List getList(Paging paging, String userid) {
+	public List getList(Paging paging, String userid) { // 페이징
 
 		List boardList = memberdao.selectAll(paging, userid);
 		
@@ -143,7 +143,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean pwUpdate(HttpServletRequest req) {
+	public boolean pwUpdate(HttpServletRequest req) { // 비밀번호 변경 서비스
 
 		boolean res = false;
 		
@@ -165,12 +165,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public boolean nicknameCheck(String nickname) {
+	public boolean nicknameCheck(String nickname) { // 회원가입, 회원정보 수정을 위해 닉네임 중복 여부를 판단하는 서비스
 		return memberdao.nicknameCheck(nickname);
 	}
 
 	@Override
-	public boolean isMyNickname(String nickname, String userid) {
+	public boolean isMyNickname(String nickname, String userid) { // 회원정보 수정 시 중복검사 후 자신의 아이디인지 확인하기 위한 서비스
 
 		String id = memberdao.isMyNickname(nickname);
 		
@@ -183,7 +183,4 @@ public class MemberServiceImpl implements MemberService{
 		return res;
 	}
 	
-		
-
-
 }

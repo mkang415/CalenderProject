@@ -13,6 +13,8 @@ import javax.servlet.http.HttpSession;
 import member.service.face.MemberService;
 import member.service.impl.MemberServiceImpl;
 
+// 닉네임 중복여부 검사 ajax를 위한 서블릿
+
 @WebServlet("/nicknameCheck")
 public class NicknameCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;

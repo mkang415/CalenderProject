@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import member.service.face.MemberService;
 import member.service.impl.MemberServiceImpl;
 
+// 회원가입 서블릿
+
 @WebServlet("/signup")
 public class MemberSignupController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

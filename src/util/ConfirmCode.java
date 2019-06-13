@@ -1,21 +1,10 @@
 package util;
 
 import java.util.Random;
-import java.util.UUID;
+
+// 이메일 인증번호 생성
 
 public class ConfirmCode {
-
-	public String confirmCode() {
-		
-		UUID uuid = UUID.randomUUID();
-		
-		String confirmcode = uuid.toString().split("-")[1]; // randon 4자리 uuid
-		
-//		System.out.println(confirmcode); // test code
-		
-		return confirmcode;
-		
-	}
 	
 	public int randomCode() {
 		

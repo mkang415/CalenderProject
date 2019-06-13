@@ -24,6 +24,8 @@ import mail.service.impl.MailServiceImpl;
 import util.ConfirmCode;
 import util.MailAuth;
 
+// 메일 발송 
+
 @WebServlet("/send")
 public class MailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

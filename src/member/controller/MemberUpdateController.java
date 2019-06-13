@@ -13,6 +13,8 @@ import dto.Member;
 import member.service.face.MemberService;
 import member.service.impl.MemberServiceImpl;
 
+// 회원정보수정 서블릿
+
 @WebServlet("/mypage/update")
 public class MemberUpdateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -31,10 +31,9 @@ public class BoardListController extends HttpServlet {
 //		System.out.println(paging);
 		
 		//게시판 목록 조회
-
 		List list = boardService.getList(paging);
-		
-		//model로 조회 결과 넣기
+
+		//MODEL로 결과 넣기
 		req.setAttribute("list", list);
 		
 		//view 지정

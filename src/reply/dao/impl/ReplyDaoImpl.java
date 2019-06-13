@@ -124,6 +124,8 @@ public class ReplyDaoImpl implements ReplyDao {
 		}
 	}
 
+	
+	//---------------------------------
 	@Override
 	public int countReply(Reply reply) {
 		// TODO Auto-generated method stub

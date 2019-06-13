@@ -37,6 +37,7 @@ function changes(value) {
 	
 }
 
+
 </script>
 
 <style type="text/css">
@@ -87,7 +88,7 @@ table, th{
 
 <div style="text-align: center;"><label>종목</label></div>
 
-<form name='form' style="text-align: center;">
+<form id="searchForm" action="/board/list" method="get" name='form' style="text-align: center;">
 	<input type="radio" name="sports" onclick="changes('base');"> 야구
 	
 	<input type="radio" name="sports" onclick="changes('foot');"> 축구
@@ -98,8 +99,11 @@ table, th{
 <br>
 
 <select name='sel' >
+<%-- <c:forEach items="${list }" var="a"> --%>
+<%-- <option value="${a.title }">${a.title}</option> --%>
+<%-- </c:forEach> --%>
 <option value=''>★선택하세요★</option>
-<option value='1'>기아타이거즈</option>
+<option value='기아'>기아타이거즈</option>
 <option value='2'>두산베어스</option>
 <option value='3'>롯데자이언츠</option>
 <option value='4'>삼성라이온즈</option>
@@ -111,7 +115,7 @@ table, th{
 <option value='10'>SK와이번스</option>
 </select>
 
-</form>
+
 
 <br>
 <div style="text-align: center">
@@ -138,6 +142,16 @@ table, th{
 </select>
 </div>
 
+<br>
+<div style="text-align:center">
+
+<input type="button" value="검색"/>
+<!-- <button type="submit" id="btnSearch" class="btn">검색</button> -->
+</div>
+</form>
+
+ 
+
 </div>
 
 
@@ -155,12 +169,13 @@ table, th{
 <thead>
 	<tr>
 		<th style="width: 5%;">번호</th>
-		<th style="width: 10%;">작성자</th>
+		<th style="width: 10%;">닉네임</th>
 		<th style="width: 10%;">제목</th>
 		<th style="width: 35%;">내용</th>
-		<th style="width: 10%;">스케줄</th>
-		<th style="width: 20%;">작성일</th>
-		<th style="width: 10%;">조회수</th>
+		<th style="width: 10%;">경기일자</th>
+		<th style="width: 10%;">경기팀</th>
+		<th style="width: 15%;">작성일</th>
+		<th style="width: 5%;">조회수</th>
 	</tr>
 </thead>
 
@@ -169,14 +184,17 @@ table, th{
  <tr>
  
  	<td>${i.boardno }</td>
- 	<td>${i.userid }</td>
+ 	<td>${i.nickname }</td>
  	<td><a href="/board/view?boardno=${i.boardno}">${i.title }</a></td>
  	<td>${i.content }</td>
- 	<td>${i.scheduleno }</td>
+ 	<td>${i.gamedate }</td>
+ 	<td>${i.team }</td>
  	<td><fmt:formatDate value="${i.insertdate }" pattern="yyyy-MM-dd"/></td>
  	<td>${i.hit }</td>
  </tr>
+ 
  </c:forEach>
+ 
  </table>
  
  <div id="pagingBox">
@@ -184,12 +202,26 @@ table, th{
  
  <div id="btnBox">
  <button id="btnWrite" class="btn btn-primary">글작성</button>
+ 
+
+ 
+ 
+ 
  </div>
  
  </div>
  
 </div>
+
+
+
+
+
+
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
+
+
+
 
 
 

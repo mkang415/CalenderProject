@@ -28,7 +28,7 @@ public class ManageDaoImpl implements ManageDao {
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += " SELECT rownum rnum, B.* FROM (";
-		sql += " SELECT boardno, title, userid, insertdate FROM board";
+		sql += " SELECT boardno, title, nickname, insertdate FROM board";
 		sql += " ORDER BY boardno DESC";
 		sql += " ) B";
 		sql += " ORDER BY rnum";
@@ -50,7 +50,7 @@ public class ManageDaoImpl implements ManageDao {
 				
 				board.setBoardno(rs.getInt("boardno"));
 				board.setTitle(rs.getString("title"));
-				board.setUserid(rs.getString("userid"));
+				board.setUserid(rs.getString("nickname"));
 				board.setInsertdate(rs.getDate("Insertdate"));
 				
 				System.out.println(board.toString());
@@ -116,7 +116,7 @@ public class ManageDaoImpl implements ManageDao {
 		
 		// 게시글 조회쿼리
 		String sql = "";
-		sql += "SELECT boardno, title, userid, content, scheduleno, insertdate FROM board";
+		sql += "SELECT boardno, title, nickname, content, scheduleno, insertdate FROM board";
 		sql += " WHERE boardno = ?";
 		
 		
@@ -131,7 +131,7 @@ public class ManageDaoImpl implements ManageDao {
 				
 				viewBoard.setBoardno(rs.getInt("boardno"));
 				viewBoard.setTitle(rs.getString("title"));
-				viewBoard.setUserid(rs.getString("userid"));
+				viewBoard.setUserid(rs.getString("nickname"));
 				viewBoard.setContent(rs.getString("content"));
 				viewBoard.setScheduleno(rs.getInt("scheduleno"));
 				viewBoard.setInsertdate(rs.getDate("Insertdate"));

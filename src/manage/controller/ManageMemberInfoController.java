@@ -1,7 +1,6 @@
 package manage.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,29 +8,32 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dto.Member;
 import manage.service.face.ManageMemberService;
 import manage.service.impl.ManageMemberServiceImpl;
-import util.Paging;
 
-@WebServlet("/manage/member")
-public class ManageMemberController extends HttpServlet {
+@WebServlet("/manage/memberinfo")
+public class ManageMemberInfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private ManageMemberService managememberService = new ManageMemberServiceImpl();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		Paging paging = managememberService.getCurPage(req);
 		
-		req.setAttribute("paging", paging);
+		Member infoMember = managememberService.getUserid(req);
 		
-		List list = managememberService.getList(paging);
+		req.setAttribute("infoMember", infoMember);
 		
-		req.setAttribute("list", list);
+		int cntReply = managememberService.getReply(req);
 		
-		req.getRequestDispatcher("/WEB-INF/views/manage/member.jsp").forward(req, resp);;
+		req.setAttribute("cntReply", cntReply);
 		
-	}
+		int cntBoard = managememberService.getcntBoard(req);
+		
+		req.setAttribute("cntBoard", cntBoard);
+		
+		req.getRequestDispatcher("/WEB-INF/views/manage/memberinfo.jsp").forward(req, resp);
 	
+	}
 }

@@ -105,7 +105,6 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		String getymd = getyear+"/"+getmonth+"/"+getday;
 		
 		
-		
 		List<Schedule> searchList = new ArrayList();
 		try {
 			if(event.equals("1")) {

@@ -7,9 +7,15 @@
 
  <c:import url="/WEB-INF/views/layout/header.jsp" /> 
  
+ <style type="text/css">
+ .inform {
+ 	display:block; width: 1000px; align:center;
+ }
  
+ 
+ </style>
    
- <div style="widht:1000px;">
+ <div class="inform">
     1. 개인정보의 처리 목적 <잘노는남매들>(‘www.matching.com’이하 ‘직관의 민족’) 은(는) 다음의 목적을 위하여 개인정보를 처리하고 있으며, 다음의 목적 이외의 용도로는 이용하지 않습니다.
 - 고객 가입의사 확인, 고객에 대한 서비스 제공에 따른 본인 식별.인증, 회원자격 유지.관리, 물품 또는 서비스 공급에 따른 금액 결제, 물품 또는 서비스의 공급.배송 등
 

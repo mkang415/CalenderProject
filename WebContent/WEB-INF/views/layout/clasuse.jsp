@@ -4,9 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
  <c:import url="/WEB-INF/views/layout/header.jsp" /> 
+<style type="text/css">
 
+.clasuse {display:table; width: 1000px; align:center;}
+
+
+</style>
  
- <div>
+ <div class="clasuse">
  
  전자상거래(인터넷사이버몰) 표준약관
 

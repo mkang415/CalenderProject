@@ -13,6 +13,9 @@ $(document).ready(function(){
 		location.href="/board/write";
 	});
 	
+// 	$("btnSearch").click(function() {
+// 		location.href="/board/list?search="+$("#seach").val();
+// 	});
 
 });
 
@@ -37,6 +40,15 @@ function changes(value) {
 	
 }
 
+
+
+// $("#selectForm").find("input[type=button]").click(function(){
+// 	$("#selectForm").attr({
+// 		"method": "get",
+// 		"action": "/board/list"
+// 	});
+// 	$("#selectForm").submit();
+// });
 </script>
 
 <style type="text/css">
@@ -87,7 +99,7 @@ table, th{
 
 <div style="text-align: center;"><label>종목</label></div>
 
-<form name='form' style="text-align: center;">
+<form id="searchForm" action="/board/list" method="get" name='form' style="text-align: center;">
 	<input type="radio" name="sports" onclick="changes('base');"> 야구
 	
 	<input type="radio" name="sports" onclick="changes('foot');"> 축구
@@ -98,8 +110,11 @@ table, th{
 <br>
 
 <select name='sel' >
+<%-- <c:forEach items="${list }" var="a"> --%>
+<%-- <option value="${a.title }">${a.title}</option> --%>
+<%-- </c:forEach> --%>
 <option value=''>★선택하세요★</option>
-<option value='1'>기아타이거즈</option>
+<option value='기아'>기아타이거즈</option>
 <option value='2'>두산베어스</option>
 <option value='3'>롯데자이언츠</option>
 <option value='4'>삼성라이온즈</option>
@@ -111,7 +126,7 @@ table, th{
 <option value='10'>SK와이번스</option>
 </select>
 
-</form>
+
 
 <br>
 <div style="text-align: center">
@@ -137,6 +152,16 @@ table, th{
 
 </select>
 </div>
+
+<br>
+<div style="text-align:center">
+
+<button type="submit" id="btnSearch" class="btn">검색</button>
+<!-- <input type="button" id="optionbtn" value="검색"/> -->
+</div>
+</form>
+
+ 
 
 </div>
 
@@ -176,7 +201,9 @@ table, th{
  	<td><fmt:formatDate value="${i.insertdate }" pattern="yyyy-MM-dd"/></td>
  	<td>${i.hit }</td>
  </tr>
+ 
  </c:forEach>
+ 
  </table>
  
  <div id="pagingBox">
@@ -184,11 +211,22 @@ table, th{
  
  <div id="btnBox">
  <button id="btnWrite" class="btn btn-primary">글작성</button>
+ 
+
+ 
+ 
+ 
  </div>
  
  </div>
  
 </div>
+
+
+
+
+
+
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
 
 
@@ -201,6 +239,19 @@ table, th{
 
 
 
+
+
+
+
+<form name="option" method="get" action="/board/list" >
+<select onchange="document.getElementById('KeyWord').value= this.options[this.selectedIndex].text">
+<option value="1">전체</option>
+<option value="2">지갑</option>
+<option value="3">시계</option>
+<option value="4">의류</option>
+</select>
+<input type="text" id="KeyWord" name="KeyWord" value="" >
+</form>
 
 
 

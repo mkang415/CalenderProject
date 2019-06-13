@@ -31,6 +31,8 @@ public interface BoardDao {
 	//게시글 삭제
 	public void delete(Board board);
 
+//	public List getList(String event, String team, String region);
+
 	
 	
 	

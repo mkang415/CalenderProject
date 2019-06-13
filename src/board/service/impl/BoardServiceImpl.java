@@ -8,14 +8,14 @@ import board.dao.face.BoardDao;
 import board.dao.impl.BoardDaoImpl;
 import board.service.face.BoardService;
 import dto.Board;
+import dto.Reply;
 import reply.dao.face.ReplyDao;
 import reply.dao.impl.ReplyDaoImpl;
 import util.Paging;
 
 public class BoardServiceImpl implements BoardService {
 	
-	// DAO 객체 
-
+	// DAO 객체
 	private ReplyDao replyDao = new ReplyDaoImpl();
 
 	//BoardDao객체
@@ -118,7 +118,7 @@ public class BoardServiceImpl implements BoardService {
 	public boolean checkWriter(HttpServletRequest req) {
 		
 		//로그인한 세션 ID 얻기
-//		String loginId = (String) req.getSession().getAttribute("userid");
+		String loginId = (String) req.getSession().getAttribute("userid");
 		
 		//작성한 게시글 번호 얻기
 		Board board = getBoardno(req);
@@ -159,6 +159,46 @@ public class BoardServiceImpl implements BoardService {
 
 		boardDao.delete(board);
 	}
+
+	
+	//----------댓글
+	@Override
+	public Reply getReply(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertReply(Reply reply) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List getReplyList(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deleteReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List search(String event, String team, String region) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	//-----------------------------------------------
+//	@Override
+//	public List search(String event, String team, String region) {
+//		List search = boardDao.getList(event, team, region);
+//		return search;
+//	}
 
 	
 

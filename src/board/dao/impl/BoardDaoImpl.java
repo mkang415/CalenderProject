@@ -320,4 +320,13 @@ public class BoardDaoImpl implements BoardDao {
 		
 	}
 
+	//---------------------------------------------
+//	@Override
+//	public List getList(String event, String team, String region) {
+//		
+//		
+//		
+//		return null;
+//	}
+
 }

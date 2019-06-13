@@ -28,7 +28,7 @@ public class BoardDaoImpl implements BoardDao {
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += " SELECT rownum rnum, B.* FROM (";
-		sql += " 	SELECT boardno, nickname, title, content, gamedate, team, insertdate, hit FROM board";
+		sql += " 	SELECT boardno, nickname, title, content, scheduleno, team, insertdate, hit FROM board";
 		sql += " 	ORDER BY boardno DESC";
 		sql += " )B";
 		sql += " ORDER BY rnum";
@@ -52,7 +52,7 @@ public class BoardDaoImpl implements BoardDao {
 				board.setNickname(rs.getString("nickname"));
 				board.setTitle(rs.getString("title"));
 				board.setContent(rs.getString("content"));
-				board.setGamedate(rs.getDate("gamedate"));
+				board.setScheduleno(rs.getInt("scheduleno"));
 				board.setTeam(rs.getString("team"));
 				board.setInsertdate(rs.getDate("insertdate"));
 				board.setHit(rs.getInt("hit"));
@@ -141,7 +141,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//게시글 조회
 		String sql = "";
-		sql += "SELECT boardno, nickname, title, content, gamedate, team, insertdate, hit FROM board";
+		sql += "SELECT boardno, nickname, title, content, scheduleno, team, insertdate, hit FROM board";
 		sql += " WHERE boardno = ?";
 		
 		try {
@@ -155,7 +155,7 @@ public class BoardDaoImpl implements BoardDao {
 				viewBoard.setNickname(rs.getString("nickname"));
 				viewBoard.setTitle(rs.getString("title"));
 				viewBoard.setContent(rs.getString("content"));
-				viewBoard.setGamedate(rs.getDate("gamedate"));
+				viewBoard.setScheduleno(rs.getInt("scheduleno"));
 				viewBoard.setTeam(rs.getString("team"));
 				viewBoard.setInsertdate(rs.getDate("insertdate"));
 				viewBoard.setHit(rs.getInt("hit"));
@@ -216,7 +216,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//다음 게시글 번호 조회
 		String sql = "";
-		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, GAMEDATE, TEAM, INSERTDATE, HIT)";
+		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, scheduleno, TEAM, INSERTDATE, HIT)";
 		sql += " VALUES(?,?,?,?,?,?,0)";
 		
 		try {
@@ -225,7 +225,7 @@ public class BoardDaoImpl implements BoardDao {
 			ps.setString(2, board.getNickname());
 			ps.setString(3, board.getTitle());
 			ps.setString(4, board.getContent());
-			ps.setDate(5, (Date)board.getGamedate());
+			ps.setInt(5, board.getScheduleno());
 			ps.setString(6, board.getTeam());
 			ps.setDate(7, (Date) board.getInsertdate());
 			

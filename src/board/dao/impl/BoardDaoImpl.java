@@ -307,7 +307,6 @@ public class BoardDaoImpl implements BoardDao {
 		}
 		
 	}
-<<<<<<< HEAD
 
 	//---------------------------------------------
 //	@Override
@@ -318,7 +317,6 @@ public class BoardDaoImpl implements BoardDao {
 //		return null;
 //	}
 
-=======
 	
 	
 	// 내가 쓴 글 보기 

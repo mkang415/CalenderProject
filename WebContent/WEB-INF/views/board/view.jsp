@@ -13,20 +13,40 @@ src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
-	//목록버튼 동작
-	$("#btnList").click(function() {
-		$(location).attr("href","/board/list");
+	
+	//댓글 입력
+	$("#btnReplyInsert").click(function(){
+		//게시글번호
+		${viewBoard.boardno}
+		
+		$form=$("<form>").attr({
+			action:"/reply/insert",
+			method: "post"
+		}).append(
+				$("<input>").attr({
+					type:"hidden",
+					name:"boardNo",
+					value:"${viewBoard.boardno}"
+				})
+				
+		).append (
+				$("<input>").attr({
+					type:"hidden",
+					name:"nickname",
+					value:"${sessionScope.nickname}"
+				})
+		
+		).append(
+				$("<textarea>").attr("name","content")
+				.css("display","none").text($("#recontent").val())
+				);
+		
+		$(document.body).append($form);
+		$from.submit();
 	});
 	
-	//수정버튼 동작
-	$("#btnUpdate").click(function() {
-		$(location).attr("href","/board/update?boardno=${viewBoard.boardno}");
-	});
-
-	//삭제버튼 동작
-	$("#btnDelete").click(function() {
-		$(location).attr("href","/board/delete?boardno=${viewBoard.boardno}");
-	});
+	
+	
 	
 	
 });
@@ -42,7 +62,7 @@ $(document).ready(function() {
 
 .contents {
 	width: 1200px;
-	height: 660px;
+/* 	height: 660px; */
 }
 
 table, tr{
@@ -61,7 +81,8 @@ table, tr{
 
 #vbtn {
 	text-align: center;
-	
+	position: fixed;
+	right: 50%;
 }
 
 
@@ -108,6 +129,13 @@ table, tr{
 	height:200px;
 	border:2px solid #666;
 } 
+
+
+
+#reply {
+	width: 1000px;
+	position: fixed;
+}
 </style>
 
 <div class = "contents">
@@ -117,9 +145,9 @@ table, tr{
 
 
 
-<c:if test="${login }">
-<button id="btnRecommend" class="btn pull-right" style="margin-top: 30px;"></button>
-</c:if>
+<%-- <c:if test="${login }"> --%>
+<!-- <button id="btnRecommend" class="btn pull-right" style="margin-top: 30px;"></button> -->
+<%-- </c:if> --%>
 
 <div class="clearfix">
 
@@ -178,7 +206,7 @@ table, tr{
 <tr>
 <td class="success" style="text-align: center">조회수</td><td colspan="2">${viewBoard.hit }</td>
 <td class="success" style="text-align: center">작성일</td><td colspan="2">${viewBoard.insertdate }</td>
-<td class="success" style="text-align: center">경기일자</td><td colspan="2">${viewBoard.gamedate }</td>
+<td class="success" style="text-align: center">스케줄</td><td colspan="2">${viewBoard.scheduleno}</td>
 </tr>
 
 
@@ -190,11 +218,77 @@ table, tr{
 
 <tr><td colspan="8">${viewBoard.content }</td></tr>
 
+
 </table>
 </div>
 </div>
+<br><br><br>
 
 
+
+
+<!---------------------댓글--------------------------------------------------->
+<div>
+<!-- 로그인 안한상태 -->
+<c:if test="${not login }">
+
+&nbsp&nbsp&nbsp<strong>로그인이 필요합니다</strong><br>
+&nbsp&nbsp&nbsp<button onclick='location.href="/login";'>로그인</button>
+&nbsp&nbsp&nbsp<button onclick='location.href="/signup";'>회원가입</button>
+
+</c:if>
+
+<!-- 로그인했을때 -->
+<c:if test="${login }">
+
+<!-- 댓글입력 -->
+<div class="form-inline text-center"  id="reply">
+
+	<input type="text" size="10" class="form-control" id="replyWriter" value="${nickname }" readonly="readonly"/>
+	<input type="text" class="form-control" id="recontent"/>
+	<button id="btnReplyInsert" class="btn">입력</button>
+</div>	<!-- 댓글 입력 end -->
+</c:if>
+
+
+<br><br>
+
+
+<!-- 댓글 리스트 -->
+<table class="table" id="reply" >
+<thead>
+<tr>
+	<th style="width: 5%;">번호</th>
+	<th style="width: 10%;">작성자</th>
+	<th style="width: 65%;">댓글</th>
+	<th style="width: 20%;">작성일</th>
+</tr>
+</thead>
+
+<tbody id="replyBody">
+<c:forEach items="${replyList }" var="reply">
+<tr data-commentno="${reply.replyno }">
+	<td>${reply.rnum }</td>
+	<td>${reply.nickname }</td><!-- 닉네임으로 해도 좋음 -->
+	<td>${reply.recontent }</td>
+	<td><fmt:formatDate value="${reply.insertDate }" pattern="yy-MM-dd hh:mm:ss" /></td>
+	<td>
+		<c:if test="${sessionScope.userid eq reply.userid }">
+		<button class="btn btn-default btn-xs"
+			onclick="deleteReply(${reply.replyNo });">삭제</button>
+		</c:if>
+	</td>
+	
+</tr>
+</c:forEach>
+</tbody>
+</table>	<!-- 댓글 리스트 end -->
+
+</div>  <!-- 댓글처리 end -->
+
+<br><br><br><br>
+
+<!-- -----------------------------버튼들--------------------------------------------------------- -->
 
 <div id="vbtn">	
 	<span><button id="btnList" class="btn btn-primary">목록</button></span>
@@ -214,6 +308,22 @@ table, tr{
 
 
 <script>
+//목록버튼 동작
+$("#btnList").click(function() {
+	$(location).attr("href","/board/list");
+});
+
+//수정버튼 동작
+$("#btnUpdate").click(function() {
+	$(location).attr("href","/board/update?boardno=${viewBoard.boardno}");
+});
+
+//삭제버튼 동작
+$("#btnDelete").click(function() {
+	$(location).attr("href","/board/delete?boardno=${viewBoard.boardno}");
+});
+
+
 $("#modal_open_btn").click(function(){
     $("#modal").attr("style", "display:block");
 });
@@ -227,4 +337,34 @@ $("#modal_open_btn").click(function(){
 
 
 
+
+
+
+
+
+
+
+
+<br><br><br><br>
+
+
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

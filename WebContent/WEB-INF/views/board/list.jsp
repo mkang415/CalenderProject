@@ -57,12 +57,13 @@ table, th{
 }
 
 #btnBox {
-	position: absolute;
+	position: fiexd;
 	top: 700px;
 	botton: 0px;
-	right: 380px;
+	right: 800px;
 	height: 40px;
 	margin: auto;
+	text-align: center;
 }
 
 #listtable {
@@ -172,7 +173,7 @@ table, th{
 		<th style="width: 10%;">닉네임</th>
 		<th style="width: 10%;">제목</th>
 		<th style="width: 35%;">내용</th>
-		<th style="width: 10%;">경기일자</th>
+		<th style="width: 10%;">스케줄</th>
 		<th style="width: 10%;">경기팀</th>
 		<th style="width: 15%;">작성일</th>
 		<th style="width: 5%;">조회수</th>
@@ -187,7 +188,7 @@ table, th{
  	<td>${i.nickname }</td>
  	<td><a href="/board/view?boardno=${i.boardno}">${i.title }</a></td>
  	<td>${i.content }</td>
- 	<td>${i.gamedate }</td>
+ 	<td>${i.scheduleno }</td>
  	<td>${i.team }</td>
  	<td><fmt:formatDate value="${i.insertdate }" pattern="yyyy-MM-dd"/></td>
  	<td>${i.hit }</td>
@@ -200,13 +201,9 @@ table, th{
  <div id="pagingBox">
  <c:import url="/WEB-INF/views/layout/paging.jsp"/>
  
+ <br><br><br>
  <div id="btnBox">
  <button id="btnWrite" class="btn btn-primary">글작성</button>
- 
-
- 
- 
- 
  </div>
  
  </div>

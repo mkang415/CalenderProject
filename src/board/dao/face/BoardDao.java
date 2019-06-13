@@ -31,7 +31,8 @@ public interface BoardDao {
 	//게시글 삭제
 	public void delete(Board board);
 
-	
+	// 내가 쓴 글 보기
+	public void myBoard(Board board);
 	
 	
 }

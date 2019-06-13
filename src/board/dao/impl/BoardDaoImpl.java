@@ -101,9 +101,8 @@ public class BoardDaoImpl implements BoardDao {
 			}
 		}
 		return totalCount;
+		
 	}
-	
-	
 	
 	
 	//게시글 조회수 +1
@@ -131,8 +130,6 @@ public class BoardDaoImpl implements BoardDao {
 				e.printStackTrace();
 			}
 		}
-		
-		
 		
 	}
 
@@ -187,7 +184,6 @@ public class BoardDaoImpl implements BoardDao {
 		//게시글 번호
 		int boardno = 0;
 		
-		
 		try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -208,6 +204,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//게시글 번호 반환
 		return boardno;
+		
 	}
 	
 	
@@ -242,20 +239,12 @@ public class BoardDaoImpl implements BoardDao {
 			}
 		}
 		
-		
-		
-		
 	}
-
-
-
 
 
 	//게시글 수정
 	@Override
 	public void update(Board board) {
-		
-//		System.out.println(board);
 		
 		String sql ="";
 		sql += "UPDATE board";
@@ -265,7 +254,6 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//DB객체
 		PreparedStatement ps = null;
-		
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -319,5 +307,34 @@ public class BoardDaoImpl implements BoardDao {
 		}
 		
 	}
-
+	
+	
+	// 내가 쓴 글 보기 
+	@Override
+	public void myBoard(Board board) {
+		
+		String sql = "";
+		sql += "SELECT  * FROM (";
+		sql += " SELECT boardno, userid, title, content, scheduleno, inserdate, hit FROM board";
+		sql += " ) ORDER BY insertdate";
+		sql += " WHERE userid = ?";
+		
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, board.getUserid());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
+		} finally {
+			try {
+				if(ps!=null)	ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

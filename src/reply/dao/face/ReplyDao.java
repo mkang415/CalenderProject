@@ -36,5 +36,6 @@ public interface ReplyDao {
 	 * @return int - 댓글 갯수 
 	 */
 	public int countReply(Reply reply);
+
 	
 }

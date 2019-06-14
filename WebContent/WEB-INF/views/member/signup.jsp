@@ -2,13 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="util.ConfirmCode" %>
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>signup</title>
-
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
 
 <script type="text/javascript">
 
@@ -32,7 +29,7 @@ function nickChk() { // 닉네임 일치 여부 검사 스크립트
 		, dataType:"text"
 		, success: function(val) {
 			console.log("성공");
-			console.log(val);
+// 			console.log(val);
 			nicknameConfirm = val;
 //				console.log(nicknameConfirm);
 		}
@@ -91,23 +88,20 @@ $(document).ready(function() {
 				"code" : code}
 			, dataType:"text"
 			, success: function(code) {
-				console.log("성공");				
-				console.log(code);
-				
+				console.log("성공");								
 			}
 			, error: function() {
 				console.log("실패");
 			}
 		});
-		
-		
+				
 		document.getElementById('verifycodeptag').innerHTML="인증번호를 입력하세요";
 	});
 	
 	$("#confirm").click(function() { // 이메일 인증번호 확인 스크립트
 		console.log("confirm code check");
 
-		console.log(code);
+// 		console.log(code);
 		console.log($("#emailcheck").val());
 		
 		if($("#emailcheck").val()==code) {			
@@ -129,67 +123,134 @@ $(document).ready(function() {
 });
 
 function join() {
-	
-	console.log(emailConfirm);
-	console.log(pwConfirm);
-	console.log(nicknameConfirm);
-	
-	
+
 	if(emailConfirm && pwConfirm && nicknameConfirm) {
 
 		console.log("모두 성공");
+		alert("회원가입을 축하드립니다!");
 		$("#sendJoinRequest").submit();
-	} else {
-		console.log("==============");
-		console.log(emailConfirm);
-		console.log(pwConfirm);
-		console.log(nicknameConfirm);
-		console.log("==============");
 		
+	} else {
+
 		document.getElementById('reject').innerHTML="입력한 정보를 다시 확인해주세요";
 	}
 }
 
 </script>
 
-</head>
-<body>
-<h1>signup test form</h1>
+
+
+<style type="text/css">
+
+.side{
+	float: left;
+}
+
+.right {
+	float: left;
+}
+
+.title { /* 회원탈퇴 가운데 정렬 */
+ 	text-align: center;
+ 	width: 1200px;
+}
+
+
+</style>
+
+
+
+<div class="center" style="width:1200px; height: 660px;">
+<br>
+<div class="title"><h1>회원 가입</h1></div>
 <hr>
 
+<div class="wrapper" align="center">
 <div><p id="verifycodeptag"></p></div>
 
 <form id="sendJoinRequest" action="/signup" method="post">
-email : <input type="text" id="email" name="email" placeholder="이메일 입력"/> <button type="button" id="verifycode">전송하기</button><br>
 
-인증번호 : <input type="text" id="emailcheck" name="emailcheck" placeholder="인증번호 입력"/> <button type="button" id="confirm">확인하기</button><br>
-
-비밀번호 : <input type="password" id="pw" name="password" placeholder="비밀번호 입력" onChange="isSame()"/><br>
-
-비밀번호 확인 : <input type="password" id="pwCheck" name="pwCheck" placeholder="비밀번호 확인" onChange="isSame()" />&nbsp;&nbsp;<span id="same"></span> <br>
-<p id="sameNickname"></p>
-닉네임 : <input type="text" id="nickname" name="nickname" placeholder="닉네임 입력"/> <button type="button" id="nicknameCheck" name="nicknameCheck" onClick="nickChk()">중복검사</button><br>
-
-연령대 : 
-<select name="age">
+<table>
+	<tr>
+		<td>email </td>
+		<td colspan="2"><input type="text" id="email" name="email" placeholder="이메일 입력"/> <button type="button" id="verifycode">전송하기</button></td>
+	</tr>
+	<tr>
+		<td>인증번호 </td>
+		<td colspan="2"><input type="text" id="emailcheck" name="emailcheck" placeholder="인증번호 입력"/> <button type="button" id="confirm">확인하기</button></td>	
+	</tr>
+	<tr>
+		<td>비밀번호 </td>
+		<td colspan="2"><input type="password" id="pw" name="password" placeholder="비밀번호 입력" onChange="isSame()"/></td>	
+	</tr>
+	<tr>
+		<td>비밀번호 확인&nbsp; </td>
+		<td><input type="password" id="pwCheck" name="pwCheck" placeholder="비밀번호 확인" onChange="isSame()" /></td>	
+		<td><span id="same"></span></td>
+	</tr>
+	<tr>
+		<td colspan="3"><p id="sameNickname"></p></td>
+	</tr>
+	<tr>
+		<td>닉네임 </td>
+		<td><input type="text" id="nickname" name="nickname" placeholder="닉네임 입력"/></td>	
+		<td><button type="button" id="nicknameCheck" name="nicknameCheck" onClick="nickChk()">중복검사</button></td>
+	</tr>
+		<tr>
+		<td>연령대 </td>
+		<td colspan="2">
+		<select name="age">
 		<option value="10">10대</option>
 		<option value="20">20대</option>
 		<option value="30">30대</option>
 		<option value="40">40대</option>
 		<option value="50">50대</option>
 		<option value="60">60대</option>
-</select><br>
-
-성별 : <input type="radio" name="gender" value="남성">남 
-	<input type="radio" name="gender" value="여성">여<br>
+		</select>
+		</td>	
+	</tr>
+	<tr>
+		<td>성별 </td>
+		<td colspan="2"><input type="radio" name="gender" value="남성">남 
+	<input type="radio" name="gender" value="여성">여</td>	
+	</tr>
+</table>
 
 <div><p id="reject"></p></div>
 
 <button type="button" id="joinConfirm" onClick="join()">가입하기</button> <button type="button">돌아가기</button>
 
+<!-- email : <input type="text" id="email" name="email" placeholder="이메일 입력"/> <button type="button" id="verifycode">전송하기</button><br> -->
+
+<!-- 인증번호 : <input type="text" id="emailcheck" name="emailcheck" placeholder="인증번호 입력"/> <button type="button" id="confirm">확인하기</button><br> -->
+
+<!-- 비밀번호 : <input type="password" id="pw" name="password" placeholder="비밀번호 입력" onChange="isSame()"/><br> -->
+
+<!-- 비밀번호 확인 : <input type="password" id="pwCheck" name="pwCheck" placeholder="비밀번호 확인" onChange="isSame()" />&nbsp;&nbsp;<span id="same"></span> <br> -->
+<!-- <p id="sameNickname"></p> -->
+<!-- 닉네임 : <input type="text" id="nickname" name="nickname" placeholder="닉네임 입력"/> <button type="button" id="nicknameCheck" name="nicknameCheck" onClick="nickChk()">중복검사</button><br> -->
+
+<!-- 연령대 :  -->
+<!-- <select name="age"> -->
+<!-- 		<option value="10">10대</option> -->
+<!-- 		<option value="20">20대</option> -->
+<!-- 		<option value="30">30대</option> -->
+<!-- 		<option value="40">40대</option> -->
+<!-- 		<option value="50">50대</option> -->
+<!-- 		<option value="60">60대</option> -->
+<!-- </select><br> -->
+
+<!-- 성별 : <input type="radio" name="gender" value="남성">남  -->
+<!-- 	<input type="radio" name="gender" value="여성">여<br> -->
+
+<!-- <div><p id="reject"></p></div> -->
+
+<!-- <button type="button" id="joinConfirm" onClick="join()">가입하기</button> <button type="button">돌아가기</button> -->
+
 </form>
+</div>
+</div>
 
 
-</body>
 
-</html>
+<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>

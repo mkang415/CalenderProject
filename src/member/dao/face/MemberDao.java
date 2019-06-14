@@ -2,6 +2,7 @@ package member.dao.face;
 
 import java.util.List;
 
+import dto.Exit;
 import dto.Member;
 import util.Paging;
 
@@ -26,4 +27,8 @@ public interface MemberDao {
 	public boolean nicknameCheck(String nickname); // 닉네임 중복검사
 	
 	public String isMyNickname(String nickname); // 닉네임 중복시 내 닉네임인지 확인
+	
+	public void deleteMember(String userid);
+	
+	public void exitReason(Exit exit);
 }

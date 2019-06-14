@@ -10,6 +10,7 @@ import java.util.List;
 
 import dbutil.DBConn;
 import dto.Board;
+import dto.Exit;
 import dto.Member;
 import member.dao.face.MemberDao;
 import util.Paging;
@@ -374,5 +375,54 @@ public class MemberDaoImpl implements MemberDao{
 		return id;
 	}
 
+	@Override
+	public void deleteMember(String userid) {
 
+		String sql = "";
+		sql+="DELETE FROM MEMBER";
+		sql+=" WHERE userid=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userid);
+			ps.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+	@Override
+	public void exitReason(Exit exit) {
+
+		String sql = "";
+		sql+="INSERT INTO EXIT(exitid, exitreason)";
+		sql+=" VALUES(?,?)";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, exit.getExitid());
+			ps.setString(2, exit.getExitreason());		
+			
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(ps!=null) ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 }
+

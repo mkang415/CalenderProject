@@ -1,11 +1,15 @@
 package member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import member.service.face.MemberService;
+import member.service.impl.MemberServiceImpl;
 
 // 회원탈퇴
 
@@ -13,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 public class MemberResignController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	MemberService memberservice = new MemberServiceImpl();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -23,7 +29,9 @@ public class MemberResignController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		memberservice.memberResign(req);
 		
+		resp.sendRedirect("/main");
 	
 	}
 	

@@ -30,7 +30,7 @@ public class PwCheck extends HttpServlet {
 		
 		PrintWriter pw = resp.getWriter();
 		
-		pw.print(res);
+		pw.print("{\"result\":"+res+"}");
 	
 	}
 	

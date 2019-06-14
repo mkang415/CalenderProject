@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import dto.Exit;
 import dto.Member;
 import member.dao.face.MemberDao;
 import member.dao.impl.MemberDaoImpl;
@@ -155,6 +156,8 @@ public class MemberServiceImpl implements MemberService{
 		member.setPassword(req.getParameter("pwConfirm"));
 		
 		if(memberdao.pwCheck(member)==true) {
+
+			member.setPassword(req.getParameter("newPw"));
 			memberdao.pwUpdate(member);
 			res=true;
 		} else {
@@ -205,6 +208,26 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return res;
+	}
+
+	@Override
+	public void memberResign(HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		
+
+		
+		Exit exitReason = new Exit();
+
+		String userid=(String)session.getAttribute("userid");
+		String reason = req.getParameter("reason");
+		
+		exitReason.setExitid(userid);
+		exitReason.setExitreason(reason);
+		
+		memberdao.exitReason(exitReason);
+		
+		memberdao.deleteMember(userid);
 	}
 
 

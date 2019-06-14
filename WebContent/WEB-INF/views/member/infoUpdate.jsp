@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>개인정보 수정</title>
+
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
+
 <script type="text/javascript">
 
 var nicknameConfirm; // 닉네임 중복여부 
@@ -58,12 +58,44 @@ function update() {
 
 </script>
 
-</head>
-<body>
 
-<h1>개인정보 수정 test form</h1>
+
+<style type="text/css">
+
+.side{
+	float: left;
+}
+
+.right {
+	float: left;
+}
+
+.title { /* 회원탈퇴 가운데 정렬 */
+ 	text-align: center;
+ 	width: 1200px;
+}
+
+</style>
+
+
+
+<div class="side" style="width:200px; background: #b4b4b4; float:left; height:660px;"> 
+<br><br><br>
+<div style="text-align: center;">나의글</div><br><br>
+<div style="text-align: center;">개인정보 수정</div>
+<br><br>
+<div style="text-align: center;">비밀번호 변경</div>
+<br><br><br><br><br><br><br><br><br><br>
+<div style="text-align: center;">회원탈퇴</div>
+<br>
+</div>
+
+<div class="center" style="width:1200px; height: 660px;">
+<br>
+<div class="title"><h1>회원정보 수정</h1></div>
 <hr>
-<div>
+
+<div align="center">
 <form id="updateRequest" action="/mypage/update" method="post">
 	<table>
 		<tr>
@@ -132,6 +164,8 @@ function update() {
 	
 </form>
 </div>
+</div>
 
-</body>
-</html>
+
+
+<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>

@@ -2,6 +2,10 @@
     <wb-module deploy-name="CalenderProject">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/WebContent"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.settings"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/build"/>
         <property name="context-root" value="CalenderProject"/>
         <property name="java-output-path" value="/CalenderProject/build/classes"/>
     </wb-module>

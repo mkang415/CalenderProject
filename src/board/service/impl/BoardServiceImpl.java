@@ -1,6 +1,9 @@
 package board.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +13,7 @@ import board.dao.impl.BoardDaoImpl;
 import board.service.face.BoardService;
 import dto.Board;
 import dto.Reply;
+import dto.Schedule;
 import reply.dao.face.ReplyDao;
 import reply.dao.impl.ReplyDaoImpl;
 import util.Paging;
@@ -88,13 +92,33 @@ public class BoardServiceImpl implements BoardService {
 	public void write(HttpServletRequest req) {
 		
 		Board board = new Board();
+//		Schedule schedule = null;
+//		schedule = new Schedule();
 		
-		int boardno = boardDao.selectBoardno();
+	//	req.getAttribute("baord");
 		
-		//작성자 아이디 처리
+		
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
 		board.setNickname((String) req.getSession().getAttribute("nickname"));
 		board.setTitle(req.getParameter("title"));
 		board.setContent(req.getParameter("content"));
+
+		String team = req.getParameter("team");
+		String gamedate = req.getParameter("insertdate");
+
+		int scheduleno = boardDao.scheduleno(team, gamedate);
+		
+	//	board.setScheduleno(scheduleno);
+		board.setTeam(req.getParameter("team"));
+		
+		
+		
+//		System.out.println("보드서비스에서 리퀘스터로 받은 값"+board);
 		
 		
 //		if (board != null) {
@@ -150,9 +174,18 @@ public class BoardServiceImpl implements BoardService {
 		
 		Board board = new Board();
 		
+		try {
+			req.setCharacterEncoding("UTF-8"); //한글 인코딩
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		String bono = req.getParameter("boardno");
+		int boardno= Integer.parseInt(bono);
+		
 		board.setTitle(req.getParameter("title"));
-		board.setNickname((String) req.getSession().getAttribute("nickname"));
 		board.setContent(req.getParameter("content"));
+		board.setBoardno(boardno);
 		
 		
 		boardDao.update(board);
@@ -183,12 +216,12 @@ public class BoardServiceImpl implements BoardService {
 			e.printStackTrace();
 		}
 		
-		String boardNo = (String) req.getParameter("boardNo");
+		String boardno = (String) req.getParameter("boardno");
 		String nickname = (String) req.getParameter("nickname");
 		String recontent = (String) req.getParameter("recontent");
 		
 		Reply reply = new Reply();
-		reply.setBoardno(Integer.parseInt(boardNo));
+		reply.setBoardno(Integer.parseInt(boardno));
 		reply.setNickname(nickname);
 		reply.setReplyContent(recontent);
 		

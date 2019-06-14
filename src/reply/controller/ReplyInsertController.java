@@ -19,12 +19,16 @@ public class ReplyInsertController extends HttpServlet {
     private BoardService boardService = new BoardServiceImpl();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8"); //한글인코딩
+		
+//		request.setAttribute("reply", request);
 		
 		Reply reply = boardService.getReply(request);
+		
+//		System.out.println(reply.toString());
 		
 		boardService.insertReply(reply);
 		

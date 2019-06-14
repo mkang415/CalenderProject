@@ -14,8 +14,27 @@ src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	
+	//목록버튼 동작
+	$("#btnList").click(function() {
+		$(location).attr("href","/board/list");
+	});
+
+	//수정버튼 동작
+	$("#btnUpdate").click(function() {
+		$(location).attr("href","/board/update?boardno=${viewBoard.boardno}");
+	});
+
+	//삭제버튼 동작
+	$("#btnDelete").click(function() {
+		$(location).attr("href","/board/delete?boardno=${viewBoard.boardno}");
+	});
+	
+	
 	//댓글 입력
 	$("#btnReplyInsert").click(function(){
+		
+		console.log($("#replynickname").val());
+		console.log($("#replyreContent").val());
 		//게시글번호
 		${viewBoard.boardno}
 		
@@ -38,19 +57,38 @@ $(document).ready(function() {
 		
 		).append(
 				$("<textarea>").attr("name","content")
-				.css("display","none").text($("#recontent").val())
+				.css("display","none").text($("#reContent").val())
 				);
 		
 		$(document.body).append($form);
-		$from.submit();
+		$form.submit();
 	});
-	
-	
-	
-	
-	
-});
+});	
 
+	//댓글삭제
+	function deleteReply(replyno) {
+		$.ajax({
+			type: "post"
+			,url:"/reply/delete"
+			,dataType: "json"
+			, data: {
+				replyno: replyno
+			}
+		,success: function(data){
+			if(data.success) {
+				$("[data-replyno='"+replyno+"']").remove();
+			} else {
+				alert("댓글삭제실패");
+			}
+		}
+		
+		, error: function() {
+			console.log("error");
+		}
+		});
+	
+	
+	}
 
 </script>
 
@@ -66,7 +104,7 @@ $(document).ready(function() {
 }
 
 table, tr{
-	border: 1;
+	border: 1px;
 	width: 1000px;
 	text-align: center;
 	
@@ -135,6 +173,8 @@ table, tr{
 	width: 1000px;
 	position: fixed;
 }
+
+
 </style>
 
 <div class = "contents">
@@ -142,11 +182,6 @@ table, tr{
 <div><h1 class="maching">직관 매칭 게시판</h1></div>
 
 
-
-
-<%-- <c:if test="${login }"> --%>
-<!-- <button id="btnRecommend" class="btn pull-right" style="margin-top: 30px;"></button> -->
-<%-- </c:if> --%>
 
 <div class="clearfix">
 
@@ -197,7 +232,7 @@ table, tr{
 <tr>
 <td class="success" style="text-align: center">글번호</td><td colspan="2">${viewBoard.boardno }</td>
 <td class="success" style="text-align: center">닉네임</td><td colspan="2">${viewBoard.nickname }</td>
-<td class="success" style="text-align: center">팀</td><td colspan="2">${viewBoard.team }</td>
+<td class="success" style="text-align: center">응원하는팀</td><td colspan="2">${viewBoard.team }</td>
 
 </tr>
 
@@ -255,30 +290,35 @@ table, tr{
 
 
 <!-- 댓글 리스트 -->
-<table class="table" id="reply" >
+<table class="table table-striped table-hover table-condensed table-bordered table-fixed" >
 <thead>
 <tr>
-	<th style="width: 5%;">번호</th>
-	<th style="width: 10%;">작성자</th>
+	<th style="width: 15%;">번호</th>
+	<th style="width: 10%;">닉네임</th>
+	<th style="width: 10%;">게시글번호</th>
 	<th style="width: 65%;">댓글</th>
-	<th style="width: 20%;">작성일</th>
 </tr>
 </thead>
 
 <tbody id="replyBody">
+
 <c:forEach items="${replyList }" var="reply">
+
 <tr data-replyno="${reply.replyno }">
+
 	<td>${reply.nickname }</td>
-	<td>${reply.recontent }</td>
-	<td><fmt:formatDate value="${reply.insertDate }" pattern="yy-MM-dd hh:mm:ss" /></td>
-	<td>
-<%-- 		<c:if test="${sessionScope.nickname eq reply.nickname }"> --%>
-<!-- 		<button class="btn btn-default btn-xs" -->
-<%-- 			onclick="deleteReply(${reply.replyno });">삭제</button> --%>
-<%-- 		</c:if> --%>
-	</td>
 	
+	<c:forEach items="${list }" var="board">
+	<td>${board.boardno }</td>
+	</c:forEach>
+	
+	<td>${reply.recontent }</td>
+	
+<%-- 	<c:if test="${reply.nickname eq reply.nickname }"> --%>
+<%-- 		<button class="btn btn-default btn-xs" onclick="deleteReply(${reply.replyno });">삭제</button> --%>
+<%-- 		</c:if> --%>
 </tr>
+
 </c:forEach>
 </tbody>
 </table>	<!-- 댓글 리스트 end -->
@@ -307,20 +347,7 @@ table, tr{
 
 
 <script>
-//목록버튼 동작
-$("#btnList").click(function() {
-	$(location).attr("href","/board/list");
-});
-
-//수정버튼 동작
-$("#btnUpdate").click(function() {
-	$(location).attr("href","/board/update?boardno=${viewBoard.boardno}");
-});
-
-//삭제버튼 동작
-$("#btnDelete").click(function() {
-	$(location).attr("href","/board/delete?boardno=${viewBoard.boardno}");
-});
+$(document).ready(function() {
 
 
 $("#modal_open_btn").click(function(){
@@ -329,7 +356,8 @@ $("#modal_open_btn").click(function(){
 
  $("#modal_close_btn").click(function(){
     $("#modal").attr("style", "display:none");
-});     
+});  
+	});  
 </script>
 
 

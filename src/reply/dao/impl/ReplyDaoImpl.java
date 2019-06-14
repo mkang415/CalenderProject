@@ -21,6 +21,7 @@ public class ReplyDaoImpl implements ReplyDao {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
+	//댓글 꺼내기
 	@Override
 	public List selectReply(Board board) {
 		String sql

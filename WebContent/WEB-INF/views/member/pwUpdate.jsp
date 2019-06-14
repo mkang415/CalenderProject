@@ -55,12 +55,12 @@ $(document).ready(function(){
 
 <div class="side" style="width:200px; background: #b4b4b4; float:left; height:660px;"> 
 <br><br><br>
-<div style="text-align: center;">나의글</div><br><br>
-<div style="text-align: center;">개인정보 수정</div>
+<div style="text-align: center;"><a href="/mypage/myboard">나의글</a></div><br><br>
+<div style="text-align: center;"><a href="/mypage/update">개인정보 수정</a></div>
 <br><br>
-<div style="text-align: center;">비밀번호 변경</div>
+<div style="text-align: center;"><a href="/mypage/pwupdate">비밀번호 변경</a></div>
 <br><br><br><br><br><br><br><br><br><br>
-<div style="text-align: center;">회원탈퇴</div>
+<div style="text-align: center;"><a href="/member/resign">회원탈퇴</a></div>
 <br>
 </div>
 

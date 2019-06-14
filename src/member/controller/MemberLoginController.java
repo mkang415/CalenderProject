@@ -44,6 +44,7 @@ public class MemberLoginController extends HttpServlet {
 			session.setAttribute("login", true);
 			session.setAttribute("userid", loginmember.getUserid());
 			session.setAttribute("nickname", loginmember.getNickname());
+			session.setAttribute("grade", loginmember.getGrade());
 			session.setMaxInactiveInterval(0);
 		
 			resp.sendRedirect("/main");

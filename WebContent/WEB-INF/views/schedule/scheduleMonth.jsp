@@ -8,8 +8,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:import url="/WEB-INF/views/layout/header.jsp"></c:import>
-<script type="text/javascript" 
-src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <style type="text/css">
 
@@ -115,7 +113,7 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<br>
 	</div>
 	<div id="selBB" <% if(chkEvent==2) { %>style="display: none"<% } %>>	
-		<select  id="bbt" name="baseballTeam">	<!-- 야구 팀 선택 -->
+		<select name="baseballTeam">	<!-- 야구 팀 선택 -->
 			<option value="all"<% if("all".equals(team)) { %>selected<% } %>>--- 야구팀 ---</option>
 			<option value="KT"<% if("KT".equals(team)) { %>selected<% } %>>KT 위즈</option>
 			<option value="LG"<% if("LG".equals(team)) { %>selected<% } %>>LG 트윈스</option>
@@ -131,7 +129,7 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	</div>
 	
 	<div id="selSC" <% if(chkEvent!=2) { %>style="display: none"<% } %>>
-		<select id="sct" name="soccerTeam">	<!-- 축구 팀 선택 -->
+		<select name="soccerTeam">	<!-- 축구 팀 선택 -->
 			<option value="all"<% if("all".equals(team)) { %>selected<% } %>>--- 축구팀 ---</option>
 			<option value="서울"<% if("서울".equals(team)) { %>selected<% } %>>FC 서울</option>
 			<option value="강원"<% if("강원".equals(team)) { %>selected<% } %>>강원 FC</option>
@@ -155,7 +153,7 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	</div>
 		<!-- 야구 팀 지역 선택 -->
 	<div id="BBregion" <% if(chkEvent==2) { %>style="display: none"<% } %>>	
-		<select id="bbr" name="BBregion">
+		<select name="BBregion">
 			<option value="all"<% if("all".equals(region)) { %>selected<% } %>>--- 전국 ---</option>
 			<option value="서울"<% if("서울".equals(region)) { %>selected<% } %>>서울</option>
 			<option value="인천"<% if("인천".equals(region)) { %>selected<% } %>>인천</option>
@@ -169,7 +167,7 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	</div>
 	
 	<div id="SCregion" <% if(chkEvent!=2) { %>style="display: none"<% } %>>
-		<select id="scr" name="SCregion">	<!-- 축구 팀 지역 선택 -->
+		<select name="SCregion">	<!-- 축구 팀 지역 선택 -->
 			<option value="all"<% if("all".equals(region)) { %>selected<% } %>>--- 전국 ---</option>
 			<option value="서울"<% if("서울".equals(region)) { %>selected<% } %>>서울</option>
 			<option value="춘천"<% if("춘천".equals(region)) { %>selected<% } %>>춘천</option>
@@ -198,11 +196,15 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 <br>
 <br>
 <br>
-
 <!-- 달력 테이블 생성 -->
 <table>
 	<tr>
-		<td style="width: 302px;"></td>
+		<td style="width: 302px;">
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="/manage/inputSchedule" style="font-size: 16px">추가</a>
+		&nbsp;&nbsp;&nbsp; 
+		<a href="/manage/deleteSchedule" style="font-size: 16px">삭제</a>
+		</td>
 		<td style= "width: 454px; height: 30px; text-align: center;">
 		<% if(month != 1) { 
 			if(chkEvent==0) {%>	<!-- 상세검색 전달 -->
@@ -265,6 +267,7 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 		<div class="schedule">
 			<% List<Schedule> monthList = monthMap.get(i-startDay-1);
 				for(int j=0; j<monthList.size(); j++) { %>	<!-- 해당날짜 일정 출력 -->
+					<a href="/board/list?schno=<%= monthList.get(j).getScheduleno() %>">
 					<!-- 홈팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
 					<img src="/logo/<%= chkIcon.get(monthList.get(j).getHometeam())%>"
 						style="width: 21px; height: 21px;"/>
@@ -273,7 +276,7 @@ src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 					<!-- 어웨이팀 이름으로 아이콘 주소 값 가져와서 이미지 불러옴 -->
 					<img src="/logo/<%= chkIcon.get(monthList.get(j).getAwayteam())%>"
 						style="width: 21px; height: 21px;"/><br>
-						 		
+					</a>
 				<% } %>
 			<% } %>
 		</div>	

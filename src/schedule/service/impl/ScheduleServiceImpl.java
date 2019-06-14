@@ -3,9 +3,6 @@ package schedule.service.impl;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
-import dto.Schedule;
 import schedule.dao.face.ScheduleDao;
 import schedule.dao.impl.ScheduleDaoImpl;
 import schedule.service.face.ScheduleService;

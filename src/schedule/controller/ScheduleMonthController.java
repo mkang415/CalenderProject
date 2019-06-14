@@ -45,7 +45,7 @@ public class ScheduleMonthController extends HttpServlet {
 		String event=(String)req.getParameter("event");	//	선택된 종목 값 전달받아 저장.
 		int chkEvent=0;	//	저장된 종목 값 숫자로 변환화여 저장할 변수 생성
 		if(event!=null) {
-			chkEvent=Integer.parseInt(event);	//	종목 값 숫자로 변환하여 저장 1: 야구, 2: 축구
+			chkEvent=Integer.parseInt(event);	//	종목 값 숫자로 변환하여 저장 (1: 야구, 2: 축구)
 		}
 //		System.out.println(chkEvent);
 //		System.out.println(event);

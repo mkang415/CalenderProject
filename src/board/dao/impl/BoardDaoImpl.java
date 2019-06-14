@@ -14,7 +14,6 @@ import dto.Board;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
-	// BoardDao에서 insert(), selectAll(), updateHit(), selectBoardByBoardno, selectBoardno() 누락되서 발생하는 error 표시 
 
 	// DB 관련 객체 
 	private Connection conn = DBConn.getConnection();
@@ -23,7 +22,6 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Override
 	public List selectAll(Paging paging) {
-		
 		
 		String sql = "";
 		sql += "SELECT * FROM (";
@@ -52,7 +50,7 @@ public class BoardDaoImpl implements BoardDao {
 				board.setNickname(rs.getString("nickname"));
 				board.setTitle(rs.getString("title"));
 				board.setContent(rs.getString("content"));
-				board.setGamedate(rs.getDate("gamedate"));
+				board.setScheduleno(rs.getInt("scheduleno"));
 				board.setTeam(rs.getString("team"));
 				board.setInsertdate(rs.getDate("insertdate"));
 				board.setHit(rs.getInt("hit"));
@@ -141,7 +139,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//게시글 조회
 		String sql = "";
-		sql += "SELECT boardno, nickname, title, content, gamedate, team, insertdate, hit FROM board";
+		sql += "SELECT boardno, nickname, title, content, scheduleno, team, insertdate, hit FROM board";
 		sql += " WHERE boardno = ?";
 		
 		try {
@@ -155,7 +153,7 @@ public class BoardDaoImpl implements BoardDao {
 				viewBoard.setNickname(rs.getString("nickname"));
 				viewBoard.setTitle(rs.getString("title"));
 				viewBoard.setContent(rs.getString("content"));
-				viewBoard.setGamedate(rs.getDate("gamedate"));
+				viewBoard.setScheduleno(rs.getInt("scheduleno"));
 				viewBoard.setTeam(rs.getString("team"));
 				viewBoard.setInsertdate(rs.getDate("insertdate"));
 				viewBoard.setHit(rs.getInt("hit"));
@@ -174,9 +172,10 @@ public class BoardDaoImpl implements BoardDao {
 		return viewBoard;
 	}
 
-	// gameDate 기반으로 지역 조회
+	
+	// 지역 조회
 	@Override
-	public Board selectBoardByGamedate(Board view) {
+	public Board selectBoardByTeamRegion(Board viewBoard) {
 
 		String sql = "";
 		sql += "select * from board";

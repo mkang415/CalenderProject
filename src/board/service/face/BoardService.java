@@ -62,6 +62,6 @@ public interface BoardService {
 	//게시글 삭제
 	public void delete(Board board);
 	
-//	public List search(String event, String team, String region);
+	public List selectBoardByTeamRegion(String event, String team, String region);
 
 }

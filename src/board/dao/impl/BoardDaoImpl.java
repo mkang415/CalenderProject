@@ -11,6 +11,7 @@ import java.util.List;
 import board.dao.face.BoardDao;
 import dbutil.DBConn;
 import dto.Board;
+import dto.Schedule;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
@@ -217,19 +218,19 @@ public class BoardDaoImpl implements BoardDao {
 		
 		
 		String sql = "";
-		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, scheduleno, TEAM, HIT)";
-		sql += " VALUES(?,?,?,?,?,?,0)";
+		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, scheduleno, insertdate, TEAM, HIT)";
+		sql += " VALUES(board_seq.nextval,?,?,?,?,sysdate,?,0)";
 		
 		
 		
 		try {
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, board.getBoardno());
-			ps.setString(2, board.getNickname());
-			ps.setString(3, board.getTitle());
-			ps.setString(4, board.getContent());
-			ps.setInt(5, board.getScheduleno());
-			ps.setString(6, board.getTeam());
+			
+			ps.setString(1, board.getNickname());
+			ps.setString(2, board.getTitle());
+			ps.setString(3, board.getContent());
+			ps.setInt(4, board.getScheduleno());
+			ps.setString(5, board.getTeam());
 			
 			ps.executeUpdate();
 			
@@ -351,5 +352,31 @@ public class BoardDaoImpl implements BoardDao {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public int scheduleno(String team, String gamedate) {
+		
+		int scheduleno = 0;
+		
+		String sql = "";
+		sql += "SELECT schduleno FROM schedule";
+		sql += " WHERE insertdate=?";
+		sql += " And hometeam=?";
+		sql += " And awayteam=?";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			
+			ps.setString(1, gamedate);
+			ps.setString(2, team);
+			ps.setString(3, team);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return scheduleno;
 	}
 }

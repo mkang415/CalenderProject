@@ -13,11 +13,12 @@ src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 <script type="text/javascript">
 $(document).ready(function() {
+	
 	//목록버튼 동작
 	$("#btnList").click(function() {
 		$(location).attr("href","/board/list");
 	});
-	
+
 	//수정버튼 동작
 	$("#btnUpdate").click(function() {
 		$(location).attr("href","/board/update?boardno=${viewBoard.boardno}");
@@ -29,8 +30,66 @@ $(document).ready(function() {
 	});
 	
 	
-});
+	//댓글 입력
+	$("#btnReplyInsert").click(function(){
+		
+		//console.log($("#replynickname").val());
+		//console.log($("#replyreContent").val());
+		
+		//게시글번호
+		//${viewBoard.boardno}
+		
+		$form=$("<form>").attr({
+			action:"/reply/insert",
+			method: "post"
+		}).append(
+				$("<input>").attr({
+					type:"hidden",
+					name:"boardno",
+					value:"${viewBoard.boardno}"
+				})
+				
+		).append (
+				$("<input>").attr({
+					type:"hidden",
+					name:"nickname",
+					value:"${nickname}"
+				})
+		
+		).append(
+				$("<textarea>").attr("name","content")
+				.css("display","none").text($("#reContent").val())
+				);
+		
+		$(document.body).append($form);
+		$form.submit();
+	});
+});	
 
+	//댓글삭제
+	function deleteReply(replyno) {
+		$.ajax({
+			type: "post"
+			,url:"/reply/delete"
+			,dataType: "json"
+			, data: {
+				replyno: replyno
+			}
+		,success: function(data){
+			if(data.success) {
+				$("[data-replyno='"+replyno+"']").remove();
+			} else {
+				alert("댓글삭제실패");
+			}
+		}
+		
+		, error: function() {
+			console.log("error");
+		}
+		});
+	
+	
+	}
 
 </script>
 
@@ -42,11 +101,12 @@ $(document).ready(function() {
 
 .contents {
 	width: 1200px;
-	height: 660px;
+	overflow:auto; /*자동스크롤*/
+/* 	height: 660px; */
 }
 
 table, tr{
-	border: 1;
+	border: 1px;
 	width: 1000px;
 	text-align: center;
 	
@@ -60,8 +120,8 @@ table, tr{
 }
 
 #vbtn {
-	text-align: center;
-	
+	position: fixed;
+	right: 50%;
 }
 
 
@@ -108,6 +168,20 @@ table, tr{
 	height:200px;
 	border:2px solid #666;
 } 
+
+
+
+#reply {
+	width: 1200px;
+	position: fixed;
+}
+
+#replylist{
+	width: 1200px;
+	text-align: center;
+}
+
+
 </style>
 
 <div class = "contents">
@@ -115,11 +189,6 @@ table, tr{
 <div><h1 class="maching">직관 매칭 게시판</h1></div>
 
 
-
-
-<c:if test="${login }">
-<button id="btnRecommend" class="btn pull-right" style="margin-top: 30px;"></button>
-</c:if>
 
 <div class="clearfix">
 
@@ -170,7 +239,7 @@ table, tr{
 <tr>
 <td class="success" style="text-align: center">글번호</td><td colspan="2">${viewBoard.boardno }</td>
 <td class="success" style="text-align: center">닉네임</td><td colspan="2">${viewBoard.nickname }</td>
-<td class="success" style="text-align: center">팀</td><td colspan="2">${viewBoard.team }</td>
+<td class="success" style="text-align: center">응원하는팀</td><td colspan="2">${viewBoard.team }</td>
 
 </tr>
 
@@ -178,7 +247,7 @@ table, tr{
 <tr>
 <td class="success" style="text-align: center">조회수</td><td colspan="2">${viewBoard.hit }</td>
 <td class="success" style="text-align: center">작성일</td><td colspan="2">${viewBoard.insertdate }</td>
-<td class="success" style="text-align: center">경기일자</td><td colspan="2">${viewBoard.gamedate }</td>
+<td class="success" style="text-align: center">스케줄</td><td colspan="2">${viewBoard.scheduleno}</td>
 </tr>
 
 
@@ -190,11 +259,86 @@ table, tr{
 
 <tr><td colspan="8">${viewBoard.content }</td></tr>
 
+
 </table>
 </div>
 </div>
+<br><br><br>
 
 
+
+
+<!---------------------댓글--------------------------------------------------->
+<div>
+<hr>
+<!-- 로그인 안한상태 -->
+<c:if test="${not login }">
+
+&nbsp&nbsp&nbsp<strong>로그인이 필요합니다</strong><br>
+&nbsp&nbsp&nbsp<button onclick='location.href="/login";'>로그인</button>
+&nbsp&nbsp&nbsp<button onclick='location.href="/signup";'>회원가입</button>
+
+</c:if>
+
+<!-- 로그인했을때 -->
+<c:if test="${login}">
+
+
+
+<!-- 댓글입력 -->
+<div class="form-inline text-center"  id="reply">
+
+	<input type="text" size="10" class="form-control" id="replyWriter" value="${nickname }" readonly="readonly"/>
+	<input type="text" size="120" class="form-control" id="replyContent"/>
+<!-- 	<textarea rows="2" cols="100" class="form-control" id="replyContent" ></textarea> -->
+	<button id="btnReplyInsert" class="btn" >입력</button>
+</div>	<!-- 댓글 입력 end -->
+</c:if>
+
+
+<br><br><br><br><br>
+
+
+<!-- 댓글 리스트 -->
+<table class="table table-striped table-hover table-condensed table-bordered table-fixed
+" id="replylist">
+<thead>
+<tr>
+	<th style="width: 5%;">번호</th>
+	<th style="width: 10%;">닉네임</th>
+	<th style="width: 10%;">게시글번호</th>
+	<th style="width: 75%;">댓글</th>
+</tr>
+</thead>
+
+<tbody id="replyBody">
+
+<c:forEach items="${replyList }" var="reply">
+
+<tr data-replyno="${reply.replyno }">
+
+	<td>${reply.nickname }</td>
+	
+	<c:forEach items="${list }" var="board">
+	<td>${board.boardno }</td>
+	</c:forEach>
+	
+	<td>${reply.recontent }</td>
+	
+	<c:if test="${reply.nickname == sessionScope.sessionNickname}">
+		<button class="btn btn-danger btn-sm" onclick="deleteReply(${reply.replyno });">삭제</button>
+		</c:if>
+</tr>
+
+</c:forEach>
+</tbody>
+</table>	<!-- 댓글 리스트 end -->
+
+</div>  <!-- 댓글처리 end -->
+
+<br><br><br><br>
+
+<!-- -----------------------------버튼들--------------------------------------------------------- -->
 
 <div id="vbtn">	
 	<span><button id="btnList" class="btn btn-primary">목록</button></span>
@@ -214,17 +358,51 @@ table, tr{
 
 
 <script>
+$(document).ready(function() {
+
+
 $("#modal_open_btn").click(function(){
     $("#modal").attr("style", "display:block");
 });
 
  $("#modal_close_btn").click(function(){
     $("#modal").attr("style", "display:none");
-});     
+});  
+	});  
 </script>
 
 
 
 
 
+
+
+
+
+
+
+
+
+<br><br><br><br>
+
+
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

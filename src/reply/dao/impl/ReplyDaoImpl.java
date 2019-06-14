@@ -21,6 +21,7 @@ public class ReplyDaoImpl implements ReplyDao {
 	private PreparedStatement ps;
 	private ResultSet rs;
 	
+	//댓글 꺼내기
 	@Override
 	public List selectReply(Board board) {
 		String sql
@@ -28,15 +29,15 @@ public class ReplyDaoImpl implements ReplyDao {
 				+ "SELECT rownum rnum, B.* FROM ("
 				+ "	SELECT"
 				+ "		replyno,"
+				+ "		nickname,"
 				+ "		boardno,"
-				+ "		userid,"
-				+ "		replyContent,"
+				+ "		recontent,"
 				+ "		insertdate"
-				+ "	FROM commentTb"
+				+ "	FROM reply"
 				+ "	WHERE boardno = ?"
-				+ "	ORDER BY writtendate DESC"
+				+ "	ORDER BY insertdate DESC"
 				+ "	) B"
-				+ ") ORDER BY replyno";
+				+ ") ORDER BY rnum";
 		
 		List replyList = new ArrayList();
 		
@@ -51,9 +52,9 @@ public class ReplyDaoImpl implements ReplyDao {
 				Reply reply = new Reply();
 				
 				reply.setReplyno(rs.getInt("replyno"));
+				reply.setNickname(rs.getString("nickname"));
 				reply.setBoardno(rs.getInt("boardno"));
-				reply.setUserid(rs.getString("userid"));
-				reply.setReplyContent(rs.getString("replyContent"));
+				reply.setReplyContent(rs.getString("recontent"));
 				reply.setInsertdate(rs.getDate("insertDate"));
 				
 				replyList.add(reply);
@@ -68,30 +69,37 @@ public class ReplyDaoImpl implements ReplyDao {
 				e.printStackTrace();
 			}
 		}
-		
+		System.out.println(replyList);
 		return replyList;
 	}
+
 	
+//--------------------------------------------------------------------------------------
+	
+	//댓글 입력
 	@Override
 	public void insertReply(Reply reply) {
 		String sql
-		= "INSERT INTO replyTB ("
+		= "INSERT INTO reply ("
 			+ "		replyno,"
+			+ " 	nickname,"
 			+ " 	boardno,"	
-			+ " 	userid,"	
-			+ " 	replyContent )"
+			+ " 	recontent )"
 			+ " VALUES ("
-			+ " 	replyTb_seq.nextval,"
+			+ " 	reply_seq.nextval,"
 			+ " 	?,"
-			+ " 	?."
+			+ " 	?,"
 			+ " 	? )";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			
-			ps.setInt(1,  reply.getBoardno());
-			ps.setString(2,  reply.getUserid());
+			ps.setString(1,  reply.getNickname());
+			ps.setInt(2,  reply.getBoardno());
 			ps.setString(3,  reply.getReplyContent());
+			
+			ps.executeUpdate();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -107,7 +115,7 @@ public class ReplyDaoImpl implements ReplyDao {
 	@Override
 	public void deleteReply(Reply reply) {
 		String sql
-		= "DELETE replyTB"
+		= "DELETE reply"
 			+ " WHERE replyno = ?";
 		
 		try {
@@ -126,10 +134,37 @@ public class ReplyDaoImpl implements ReplyDao {
 
 	
 	//---------------------------------
+	
+	//댓글수
 	@Override
 	public int countReply(Reply reply) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		String sql = "SELECT COUNT(*) FROM reply WHERE replyno=?";
+		int cnt=0;
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			
+			ps.setInt(1, reply.getReplyno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+			cnt = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)	rs.close();
+				if(ps!=null) 	ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return cnt;
 	}
 
 }

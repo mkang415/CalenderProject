@@ -47,10 +47,10 @@
 }
 
 .more {
-	display: block;
+	display: inline;
 	width: 80px;
 	hight: 20px;
-	background-image:url('/logo_upload/semi_default.png');
+/*  	background-image:url('/logo/semi_default.png');  */ 
 	background-position: 80px -78px;
 	
 }
@@ -89,6 +89,7 @@
 
 .list {
   float:left;
+  position: fixed;
 }
 
 .list li {
@@ -180,7 +181,7 @@ $(document).ready(function(){
     </c:if>
 	
 	    <!-- 로그인상태 -->
-    <c:if test="${not login }">
+    <c:if test="${login }">
 	
 	
 	
@@ -194,7 +195,6 @@ $(document).ready(function(){
 	<div class="board">
   	<ul class="list">
   	<li> 프로필 </li>
-
   	<li onClick="location.href='/mypage/update'"> 개인정보수정 </li>
   	<li onClick="location.href='/logout'"> 로그아웃</li>
   	</ul>

@@ -11,6 +11,7 @@ import java.util.List;
 import board.dao.face.BoardDao;
 import dbutil.DBConn;
 import dto.Board;
+import dto.Schedule;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
@@ -26,7 +27,7 @@ public class BoardDaoImpl implements BoardDao {
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += " SELECT rownum rnum, B.* FROM (";
-		sql += " 	SELECT boardno, nickname, title, content, gamedate, team, insertdate, hit FROM board";
+		sql += " 	SELECT boardno, nickname, title, content, scheduleno, team, insertdate, hit FROM board";
 		sql += " 	ORDER BY boardno DESC";
 		sql += " )B";
 		sql += " ORDER BY rnum";
@@ -244,20 +245,22 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void insert(Board board) {
 		
-		//다음 게시글 번호 조회
+		
+		
 		String sql = "";
-		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, GAMEDATE, TEAM, INSERTDATE, HIT)";
-		sql += " VALUES(?,?,?,?,?,?,0)";
+		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, scheduleno, insertdate, TEAM, HIT)";
+		sql += " VALUES(board_seq.nextval,?,?,?,?,sysdate,?,0)";
+		
+		
 		
 		try {
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, board.getBoardno());
-			ps.setString(2, board.getNickname());
-			ps.setString(3, board.getTitle());
-			ps.setString(4, board.getContent());
-			ps.setDate(5, (Date)board.getGamedate());
-			ps.setString(6, board.getTeam());
-			ps.setDate(7, (Date) board.getInsertdate());
+			
+			ps.setString(1, board.getNickname());
+			ps.setString(2, board.getTitle());
+			ps.setString(3, board.getContent());
+			ps.setInt(4, board.getScheduleno());
+			ps.setString(5, board.getTeam());
 			
 			ps.executeUpdate();
 			
@@ -379,5 +382,31 @@ public class BoardDaoImpl implements BoardDao {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public int scheduleno(String team, String gamedate) {
+		
+		int scheduleno = 0;
+		
+		String sql = "";
+		sql += "SELECT schduleno FROM schedule";
+		sql += " WHERE insertdate=?";
+		sql += " And hometeam=?";
+		sql += " And awayteam=?";
+		
+		try {
+			ps=conn.prepareStatement(sql);
+			
+			ps.setString(1, gamedate);
+			ps.setString(2, team);
+			ps.setString(3, team);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return scheduleno;
 	}
 }

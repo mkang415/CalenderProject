@@ -3,6 +3,7 @@ package board.dao.face;
 import java.util.List;
 
 import dto.Board;
+import dto.Schedule;
 import util.Paging;
 
 public interface BoardDao {
@@ -37,5 +38,6 @@ public interface BoardDao {
 	// 내가 쓴 글 보기
 	public void myBoard(Board board);
 	
-	
+	//scheduleno로 insertdate?
+	public int scheduleno(String team, String gamedate);
 }

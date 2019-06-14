@@ -60,40 +60,40 @@ $(document).ready(function() {
 <div style="text-align: center">
 <form action="/board/write" method="post">
 <table border="1" id="up" class="table tale-bordered">
-<tr><td class="success" style="text-align: center">아이디</td><td>${userid }</td></tr>
+<tr><td class="success" style="text-align: center">닉네임</td><td>${nickname }</td></tr>
 
 
 <tr><td class="secondary" style="text-align: center">제목</td><td><input type="text" name="title" style="width:100%"/></td></tr>
 <tr><td class="warning" style="text-align: center">직관날짜 
-<input type="date" value="달력"/></td> <!-- 직관날짜는 boarddto에 없음 -->
+<input type="date" value="" name="insertdate"/></td> <!-- 직관날짜는 boarddto에 없음 -->
 <td style="text-align: center" class="info">응원하는 팀<br>
 
 
-<select name="issuetype" id="issuetype">
-<option>야구</option>
-<option>기아타이거즈</option>
-<option>두산베어스</option>
-<option>롯데자이언츠</option>
-<option>삼성라이온즈</option>
-<option>키움히어로즈</option>
-<option>한화이글스</option>
-<option>KT위즈</option>
-<option>LG트윈즈</option>
-<option>NC다이노스</option>
-<option>SK와이번스</option>
+<select name="team" id="team">
+<option value="야구">야구</option>
+<option value="기아">기아</option>
+<option value="두산">두산</option>
+<option value="롯데">롯데</option>
+<option value="삼성">삼성라이온즈</option>
+<option value="키움">키움히어로즈</option>
+<option value="한화">한화이글스</option>
+<option value="KT">KT위즈</option>
+<option value="LG">LG트윈즈</option>
+<option value="NC">NC다이노스</option>
+<option value="SK">SK와이번스</option>
 </select>
-<select>
-<option>축구</option>
-<option>강원FC</option>
-<option>경남FC</option>
-<option>대구FC</option>
-<option>상주FC</option>
-<option>성남FC</option>
-<option>수원삼성블루윙즈</option>
-<option>울산현대</option>
-<option>인천유나이티드</option>
-<option>전북현대모터스</option>
-<option>제주유나이티드</option>
+<select name="team" id="team">
+<option value="축구">축구</option>
+<option value="강원">강원FC</option>
+<option value="경남">경남FC</option>
+<option value="대구">대구FC</option>
+<option value="상주">상주FC</option>
+<option value="성남">성남FC</option>
+<option value="수원">수원삼성블루윙즈</option>
+<option value="울산">울산현대</option>
+<option value="인천">인천유나이티드</option>
+<option value="전북">전북현대모터스</option>
+<option value="제주">제주유나이티드</option>
 
 
 

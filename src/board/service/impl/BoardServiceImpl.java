@@ -1,5 +1,9 @@
 package board.service.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,17 +13,19 @@ import board.dao.impl.BoardDaoImpl;
 import board.service.face.BoardService;
 import dto.Board;
 import dto.Reply;
+import dto.Schedule;
 import reply.dao.face.ReplyDao;
 import reply.dao.impl.ReplyDaoImpl;
 import util.Paging;
 
 public class BoardServiceImpl implements BoardService {
 	
-	// DAO 객체
+	//ReplyDAO 객체
 	private ReplyDao replyDao = new ReplyDaoImpl();
 
 	// BoardDao객체
 	private BoardDao boardDao = new BoardDaoImpl();
+	
 
 	@Override //list 전체검색
 	public List getList(Paging paging) {
@@ -46,7 +52,8 @@ public class BoardServiceImpl implements BoardService {
 		return paging;
 	}
 		
-
+//----------------------------------------------------------------------------------
+	
 	@Override //글번호로 게시글 조회
 	public Board getBoardno(HttpServletRequest req) {
 		
@@ -64,6 +71,8 @@ public class BoardServiceImpl implements BoardService {
 		return board;
 	}
 
+//------------------------------------------------------------------------------------------
+	
 	@Override //게시판 상세보기
 	public Board view(Board viewBoard) {
 		
@@ -74,46 +83,75 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectBoardByBoardno(viewBoard);
 	}
 
+
+//------------------------------------------------------------------------------------------
 	
 	//게시글 작성 **
 	@Override
 	public void write(HttpServletRequest req) {
 		
 		Board board = new Board();
+//		Schedule schedule = null;
+//		schedule = new Schedule();
 		
+	//	req.getAttribute("baord");
+		
+		
+		try {
+			req.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		board.setNickname((String) req.getSession().getAttribute("nickname"));
 		board.setTitle(req.getParameter("title"));
 		board.setContent(req.getParameter("content"));
+
+		String team = req.getParameter("team");
+		String gamedate = req.getParameter("insertdate");
+
+		int scheduleno = boardDao.scheduleno(team, gamedate);
 		
-		boardDao.insert(board);
+	//	board.setScheduleno(scheduleno);
+		board.setTeam(req.getParameter("team"));
 		
+
+		
+		
+//		System.out.println("보드서비스에서 리퀘스터로 받은 값"+board);
+		
+
 	
 //		Board board = null;
 //		board = new Board();
 //		int boardno = boardDao.selectBoardno();
 //		
 //		boardDao.insert(board);
+
 		
 //		if (board != null) {
-//				board.setBoardno(boardno);
+//			board.setBoardno(boardno);
+//		
+//		if(board.getTitle()==null || "".equals(board.getTitle())){
+//			board.setTitle("(제목없음)");
+//		
 //			
-//			if(board.getTitle()==null || "".equals(board.getTitle())){
-//				board.setTitle("(제목없음)");
-//			
-//				//작성자 아이디 처리
-//				board.setUserid((String) req.getSession().getAttribute("userid"));
-//			}
-//			boardDao.insert(board);
 //		}
 		
+
 	}
 
+
+	
+//------------------------------------------------------------------------------------------
+	
 	
 	//글 작성자인지 판단하기
 	@Override
 	public boolean checkWriter(HttpServletRequest req) {
 		
 		//로그인한 세션 ID 얻기
-		String loginId = (String) req.getSession().getAttribute("userid");
+		String loginmember = (String) req.getSession().getAttribute("nickname");
 		
 		//작성한 게시글 번호 얻기
 		Board board = getBoardno(req);
@@ -122,29 +160,41 @@ public class BoardServiceImpl implements BoardService {
 		board = boardDao.selectBoardByBoardno(board);
 		
 		//게시글의 작성자와 로그인 아이디 비교
-//		if(!loginId.equals(board).getWriter())) {
-//			return false;
-//		}
+		if(!loginmember.equals(board.getNickname())) {
+			return false;
+		}
 		return true;
 	}
 
+//------------------------------------------------------------------------------------------	
+	
 	
 	//게시글 수정 **
 	@Override
 	public void update(HttpServletRequest req) {
 		
-		Board board = null;
+		Board board = new Board();
 		
-		board = new Board();
+		try {
+			req.setCharacterEncoding("UTF-8"); //한글 인코딩
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		String bono = req.getParameter("boardno");
+		int boardno= Integer.parseInt(bono);
 		
 		board.setTitle(req.getParameter("title"));
 		board.setContent(req.getParameter("content"));
+		board.setBoardno(boardno);
+		
 		
 		boardDao.update(board);
 		
 		 
 		}
 
+//------------------------------------------------------------------------------------------
 	
 	//게시글 삭제
 	@Override
@@ -154,29 +204,59 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	//----------댓글
+//------------------------------------------------------------------------------------------
+
+	//댓글꺼내기
 	@Override
 	public Reply getReply(HttpServletRequest req) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			req.setCharacterEncoding("UTF-8"); //한글인코딩
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		String boardno = (String) req.getParameter("boardno");
+		String nickname = (String) req.getParameter("nickname");
+		String recontent = (String) req.getParameter("recontent");
+		
+		Reply reply = new Reply();
+		reply.setBoardno(Integer.parseInt(boardno));
+		reply.setNickname(nickname);
+		reply.setReplyContent(recontent);
+		
+		return reply;
 	}
 
+	
+//--------------------------------------------------------------------------------------
+	
+	//댓글 입력
 	@Override
 	public void insertReply(Reply reply) {
-		// TODO Auto-generated method stub
-		
+		replyDao.insertReply(reply);
 	}
 
+//--------------------------------------------------------------------------------------
+	
+	//댓글리스트
 	@Override
 	public List getReplyList(Board board) {
-		// TODO Auto-generated method stub
-		return null;
+		return replyDao.selectReply(board);
 	}
 
+
+//------------------------------------------------------------------------------------------
+	
+	//댓글삭제
 	@Override
 	public boolean deleteReply(Reply reply) {
-		// TODO Auto-generated method stub
-		return false;
+		replyDao.deleteReply(reply);
+		
+		if(replyDao.countReply(reply)>0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	@Override

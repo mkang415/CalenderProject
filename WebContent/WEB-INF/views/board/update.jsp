@@ -57,7 +57,7 @@ $(document).ready(function() {
 
 <table border="1" id="up"  class="table tale-bordered">
 
-<tr><td class="success" style="text-align: center">아이디</td><td>${userid }</td></tr>
+<tr><td class="success" style="text-align: center">닉네임</td><td>${nickname }</td></tr>
 <tr><td class="success" style="text-align: center">제목</td>
 <td><input type="text" name="title" style="width:100%" value="${viewBoard.title }"/></td></tr>
 <tr><td class="success" style="text-align: center" colspan="2">본문</td></tr>

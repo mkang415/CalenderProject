@@ -101,7 +101,8 @@ textarea.form-control {
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
     color: #fff; }
-  .site-hero.overlay:before {
+    /* 배경화면 어둡게 */
+ /* .site-hero.overlay:before {
     background: rgba(0, 0, 0, 0.45);
     content: "";
     position: absolute;
@@ -110,7 +111,7 @@ textarea.form-control {
     top: 0;
     left: 0;
     bottom: 0;
-    right: 0; }
+    right: 0; }*/
   .site-hero.inner-page {
     height: 50vh;
     min-height: 700px; }

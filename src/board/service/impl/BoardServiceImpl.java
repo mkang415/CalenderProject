@@ -18,7 +18,7 @@ public class BoardServiceImpl implements BoardService {
 	// DAO 객체
 	private ReplyDao replyDao = new ReplyDaoImpl();
 
-	//BoardDao객체
+	// BoardDao객체
 	private BoardDao boardDao = new BoardDaoImpl();
 
 	@Override //list 전체검색
@@ -26,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectAll(paging);
 	}
 	
-	//게시글 curPage 파싱
+	// 게시글 curPage 파싱
 	@Override
 	public Paging getCurPage(HttpServletRequest req) {
 		//전달파라미터 curPage 파싱
@@ -36,10 +36,10 @@ public class BoardServiceImpl implements BoardService {
 			curPage = Integer.parseInt(param);
 		}
 
-		//전체 게시글 수
+		// 전체 게시글 수
 		int totalCount = boardDao.selectCntAll();
 		
-		//페이징 객체 생성
+		// 페이징 객체 생성
 		Paging paging = new Paging(totalCount, curPage);
 		
 		
@@ -60,7 +60,6 @@ public class BoardServiceImpl implements BoardService {
 		//board객체 생성
 		Board board = new Board();
 		board.setBoardno(boardno);
-		
 		
 		return board;
 	}
@@ -87,9 +86,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		boardDao.insert(board);
 		
-		
-		
-		
+	
 //		Board board = null;
 //		board = new Board();
 //		int boardno = boardDao.selectBoardno();
@@ -107,8 +104,6 @@ public class BoardServiceImpl implements BoardService {
 //			}
 //			boardDao.insert(board);
 //		}
-		
-		
 		
 	}
 
@@ -148,8 +143,6 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.update(board);
 		
 		 
-		
-			
 		}
 
 	
@@ -185,17 +178,13 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return false;
 	}
-//
-//	@Override
-//	public List search(String event, String team, String region) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
+	@Override
+	public List selectBoardByTeamRegion(String event, String team, String region) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	
-
-	
-
-
 	
 }

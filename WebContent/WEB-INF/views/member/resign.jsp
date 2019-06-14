@@ -10,16 +10,16 @@
 
 $(document).ready(function() {
 	
-$("#resignreason").hide();
+	$("#resignreason").hide();
 	
 });
 
-var passwordConfirm = false; // 닉네임 중복여부 
+var pwConfirm; // pw 중복여부
 
-function pwCheck() { // 닉네임 일치 여부 검사 스크립트
+function pwCheck() { // pw 일치 여부 검사 스크립트
 	var password = $("#password").val();
-	alert(password);
-
+	alert("테스트코드, 입력받은 비밀번호 : " + password);
+	
 	$.ajax({
 		type:"post"
 		, url:"/pwChk"
@@ -28,16 +28,18 @@ function pwCheck() { // 닉네임 일치 여부 검사 스크립트
 		, success: function(val) {
 			console.log("성공");
 			console.log(val);
-			passwordConfirm = val;
-//				console.log(nicknameConfirm);
+			
+			pwConfirm = val;
 		}
 		, error: function() {
 			console.log("실패");
 		}
 	});
 	
-	if(passwordConfirm == false) {
-// 		console.log("테스트 : 값이 false여야함" + nicknameConfirm);
+	
+	alert(pwConfirm);
+	
+	if(pwConfirm == false) {
 		
 		alert("비밀번호를 다시 확인해주세요");
 		

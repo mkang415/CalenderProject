@@ -7,8 +7,8 @@
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 
 <div class="main_content">
-	<!-- bootstrap 적용된 index.jsp import -->
-	<c:import url="/WEB-INF/views/main/index.jsp"/>
+	<h3>메인 컨텐츠 영역입니다.</h3>
+	<c:import url="/WEB-INF/views/main/index.html"/>
 </div>
 
 <!-- footer 영역 -->

@@ -34,6 +34,7 @@ public interface BoardService {
 	//게시글 삭제
 	public void delete(Board board);
 	
+
 //	public List search(String event, String team, String region);
 	
 	//-------------------------댓글----------------------
@@ -64,6 +65,8 @@ public interface BoardService {
 		 * @return boolean - 삭제 성공 여부
 		 */
 		public boolean deleteReply(Reply reply);
+
+	public List selectBoardByTeamRegion(String event, String team, String region);
 
 
 }

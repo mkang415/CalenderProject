@@ -15,7 +15,6 @@ import dto.Schedule;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
-	// BoardDao에서 insert(), selectAll(), updateHit(), selectBoardByBoardno, selectBoardno() 누락되서 발생하는 error 표시 
 
 	// DB 관련 객체 
 	private Connection conn = DBConn.getConnection();
@@ -24,7 +23,6 @@ public class BoardDaoImpl implements BoardDao {
 	
 	@Override
 	public List selectAll(Paging paging) {
-		
 		
 		String sql = "";
 		sql += "SELECT * FROM (";
@@ -175,7 +173,39 @@ public class BoardDaoImpl implements BoardDao {
 		return viewBoard;
 	}
 
+	
+	// 지역 조회
+	@Override
+	public Board selectBoardByTeamRegion(Board viewBoard) {
 
+		String sql = "";
+		sql += "select * from board";
+   		sql += " where scheduleno in(";
+        sql += " select scheduleno from schedule";
+        sql += " where (hometeam = ? or awayteam = ?)"; 
+        sql += " and hometeam in (select teamname from team where region = ?));";
+
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, viewBoard);
+
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)	rs.close();
+				if(ps!=null)	ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return viewBoard;
+	}
+
+
+	// 게시글 조회 
 	@Override
 	public int selectBoardno() {
 		

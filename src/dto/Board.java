@@ -16,10 +16,12 @@ public class Board {
 	
 	@Override
 	public String toString() {
+
 		return "Board [boardno=" + boardno + ", nickname=" + nickname + ", title=" + title + ", content=" + content
-				+ ", gamedate=" + scheduleno + ", team=" + team + ", insertdate=" + insertdate + ", hit=" + hit + "]";
+				+ ", scheduleno=" + scheduleno + ", team=" + team + ", insertdate=" + insertdate + ", hit=" + hit + "]";
+
 	}
-	
+
 	public int getBoardno() {
 		return boardno;
 	}

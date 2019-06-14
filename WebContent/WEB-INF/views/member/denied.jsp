@@ -10,7 +10,7 @@
 
 <h1>로그인 후 이용해주세요</h1>
 
-<button type="button" onClick="history.go(-1)">돌아가기</button>
+<button type="button" onClick="/main">메인으로</button>
 
 </body>
 </html>

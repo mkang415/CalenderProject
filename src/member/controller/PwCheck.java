@@ -26,9 +26,11 @@ public class PwCheck extends HttpServlet {
 
 		boolean res = memberservice.pwCheck(req);
 
+		System.out.println(res);
+		
 		PrintWriter pw = resp.getWriter();
 		
-		pw.print(res);
+		pw.print("{\"result\":"+res+"}");
 	
 	}
 	

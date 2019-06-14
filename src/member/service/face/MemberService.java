@@ -32,4 +32,6 @@ public interface MemberService {
 	public boolean nicknameCheck(String nickname); // 닉네임 중복검사
 	
 	public boolean isMyNickname(String nickname, String userid); // 회원정보 변경 - 닉네임 중복 시 내 닉네임인지 검사
+	
+	public void memberResign(HttpServletRequest req);
 }

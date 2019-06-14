@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import dto.Exit;
 import dto.Member;
 import member.dao.face.MemberDao;
 import member.dao.impl.MemberDaoImpl;
@@ -113,7 +114,7 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public Paging getCurPage(HttpServletRequest req, String userid) { // 페이징
+	public Paging getCurPage(HttpServletRequest req, String nickname) { // 페이징
 
 		// 전달파라미터 curPage 파싱
 		String param = req.getParameter("curPage");
@@ -125,7 +126,7 @@ public class MemberServiceImpl implements MemberService{
 		}
 
 		// 전체 게시글 수
-		int totalCount = memberdao.selectCntAll(userid);
+		int totalCount = memberdao.selectCntAll(nickname);
 
 		// 페이징 객체 생성
 		Paging paging = new Paging(totalCount, curPage);
@@ -135,9 +136,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public List getList(Paging paging, String userid) { // 페이징
+	public List getList(Paging paging, String nickname) { // 페이징
 
-		List boardList = memberdao.selectAll(paging, userid);
+		List boardList = memberdao.selectAll(paging, nickname);
 		
 		return boardList;
 	}
@@ -155,6 +156,8 @@ public class MemberServiceImpl implements MemberService{
 		member.setPassword(req.getParameter("pwConfirm"));
 		
 		if(memberdao.pwCheck(member)==true) {
+
+			member.setPassword(req.getParameter("newPw"));
 			memberdao.pwUpdate(member);
 			res=true;
 		} else {
@@ -178,7 +181,7 @@ public class MemberServiceImpl implements MemberService{
 
 			member.setUserid((String)session.getAttribute("userid"));
 			member.setPassword(req.getParameter("password"));
-			
+			System.out.println(member.toString());
 			res = memberdao.pwCheck(member);
 			
 		} catch (UnsupportedEncodingException e) {
@@ -205,6 +208,26 @@ public class MemberServiceImpl implements MemberService{
 		}
 		
 		return res;
+	}
+
+	@Override
+	public void memberResign(HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		
+
+		
+		Exit exitReason = new Exit();
+
+		String userid=(String)session.getAttribute("userid");
+		String reason = req.getParameter("reason");
+		
+		exitReason.setExitid(userid);
+		exitReason.setExitreason(reason);
+		
+		memberdao.exitReason(exitReason);
+		
+		memberdao.deleteMember(userid);
 	}
 
 

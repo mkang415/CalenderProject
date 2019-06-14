@@ -23,10 +23,10 @@ public class BoardUpdateController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//로그인한 사람의 글이 아니면 중단하고 목록으로 리다이렉트
-//		if(!boardService.checkWriter(req)) {
-//			resp.sendRedirect("/board/list");
-//			return;
-//		}  //나중에 로그인이랑 합쳤을때 주석풀기
+		if(!boardService.checkWriter(req)) {
+			resp.sendRedirect("/board/list");
+			return;
+		}  
 		
 		//게시글 번호 파싱
 		Board viewBoard = boardService.getBoardno(req);

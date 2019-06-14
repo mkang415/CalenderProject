@@ -169,23 +169,26 @@ table, tr{
 <!-- table table-bordered -->
 <tr>
 <td class="success" style="text-align: center">글번호</td><td colspan="2">${viewBoard.boardno }</td>
-<td class="success" style="text-align: center">아이디</td><td colspan="2">${viewBoard.userid }</td>
+<td class="success" style="text-align: center">닉네임</td><td colspan="2">${viewBoard.nickname }</td>
+<td class="success" style="text-align: center">팀</td><td colspan="2">${viewBoard.team }</td>
+
 </tr>
 
 
 <tr>
 <td class="success" style="text-align: center">조회수</td><td colspan="2">${viewBoard.hit }</td>
 <td class="success" style="text-align: center">작성일</td><td colspan="2">${viewBoard.insertdate }</td>
+<td class="success" style="text-align: center">경기일자</td><td colspan="2">${viewBoard.gamedate }</td>
 </tr>
 
 
 <tr>
-<td class="success" style="text-align: center">제목</td><td colspan="6">${viewBoard.title }</td>
+<td class="success" style="text-align: center">제목</td><td colspan="7">${viewBoard.title }</td>
 </tr>
 
-<tr><td class="success" style="text-align: center" colspan="6">본문</td></tr>
+<tr><td class="success" style="text-align: center" colspan="8">본문</td></tr>
 
-<tr><td colspan="6">${viewBoard.content }</td></tr>
+<tr><td colspan="8">${viewBoard.content }</td></tr>
 
 </table>
 </div>
@@ -195,7 +198,7 @@ table, tr{
 
 <div id="vbtn">	
 	<span><button id="btnList" class="btn btn-primary">목록</button></span>
-	<c:if test="${userid eq viewBoard.userid }">
+	<c:if test="${userid eq viewBoard.nickname }">
 	</c:if>
 	<span id="root">
 	<button type="button" id="modal_open_btn" class="btn btn-warning">신고</button>

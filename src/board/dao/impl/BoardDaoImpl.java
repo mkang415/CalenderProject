@@ -14,7 +14,6 @@ import dto.Board;
 import util.Paging;
 
 public class BoardDaoImpl implements BoardDao {
-	// BoardDao에서 insert(), selectAll(), updateHit(), selectBoardByBoardno, selectBoardno() 누락되서 발생하는 error 표시 
 
 	// DB 관련 객체 
 	private Connection conn = DBConn.getConnection();
@@ -24,11 +23,10 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List selectAll(Paging paging) {
 		
-		
 		String sql = "";
 		sql += "SELECT * FROM (";
 		sql += " SELECT rownum rnum, B.* FROM (";
-		sql += " 	SELECT boardno, userid, title, content, scheduleno, insertdate, hit FROM board";
+		sql += " 	SELECT boardno, nickname, title, content, gamedate, team, insertdate, hit FROM board";
 		sql += " 	ORDER BY boardno DESC";
 		sql += " )B";
 		sql += " ORDER BY rnum";
@@ -49,10 +47,11 @@ public class BoardDaoImpl implements BoardDao {
 				Board board = new Board();
 				
 				board.setBoardno(rs.getInt("boardno"));
-				board.setUserid(rs.getString("userid"));
+				board.setNickname(rs.getString("nickname"));
 				board.setTitle(rs.getString("title"));
 				board.setContent(rs.getString("content"));
 				board.setScheduleno(rs.getInt("scheduleno"));
+				board.setTeam(rs.getString("team"));
 				board.setInsertdate(rs.getDate("insertdate"));
 				board.setHit(rs.getInt("hit"));
 				
@@ -101,9 +100,8 @@ public class BoardDaoImpl implements BoardDao {
 			}
 		}
 		return totalCount;
+		
 	}
-	
-	
 	
 	
 	//게시글 조회수 +1
@@ -132,8 +130,6 @@ public class BoardDaoImpl implements BoardDao {
 			}
 		}
 		
-		
-		
 	}
 
 	
@@ -143,7 +139,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//게시글 조회
 		String sql = "";
-		sql += "SELECT boardno, userid, title, content, scheduleno, insertdate, hit FROM board";
+		sql += "SELECT boardno, nickname, title, content, scheduleno, team, insertdate, hit FROM board";
 		sql += " WHERE boardno = ?";
 		
 		try {
@@ -154,10 +150,11 @@ public class BoardDaoImpl implements BoardDao {
 			
 			while (rs.next()) {
 				viewBoard.setBoardno(rs.getInt("boardno"));
-				viewBoard.setUserid(rs.getString("userid"));
+				viewBoard.setNickname(rs.getString("nickname"));
 				viewBoard.setTitle(rs.getString("title"));
 				viewBoard.setContent(rs.getString("content"));
 				viewBoard.setScheduleno(rs.getInt("scheduleno"));
+				viewBoard.setTeam(rs.getString("team"));
 				viewBoard.setInsertdate(rs.getDate("insertdate"));
 				viewBoard.setHit(rs.getInt("hit"));
 			}
@@ -175,7 +172,39 @@ public class BoardDaoImpl implements BoardDao {
 		return viewBoard;
 	}
 
+	
+	// 지역 조회
+	@Override
+	public Board selectBoardByTeamRegion(Board viewBoard) {
 
+		String sql = "";
+		sql += "select * from board";
+   		sql += " where scheduleno in(";
+        sql += " select scheduleno from schedule";
+        sql += " where (hometeam = ? or awayteam = ?)"; 
+        sql += " and hometeam in (select teamname from team where region = ?));";
+
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, viewBoard);
+
+		} catch (SQLException e){
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null)	rs.close();
+				if(ps!=null)	ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return viewBoard;
+	}
+
+
+	// 게시글 조회 
 	@Override
 	public int selectBoardno() {
 		
@@ -186,7 +215,6 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//게시글 번호
 		int boardno = 0;
-		
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -208,6 +236,7 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//게시글 번호 반환
 		return boardno;
+		
 	}
 	
 	
@@ -217,17 +246,18 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//다음 게시글 번호 조회
 		String sql = "";
-		sql += "INSERT INTO board(BOARDNO, USERID, TITLE, CONTENT, SCHEDULENO, INSERTDATE, HIT)";
+		sql += "INSERT INTO board(BOARDNO, NICKNAME, TITLE, CONTENT, GAMEDATE, TEAM, INSERTDATE, HIT)";
 		sql += " VALUES(?,?,?,?,?,?,0)";
 		
 		try {
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, board.getBoardno());
-			ps.setString(2, board.getUserid());
+			ps.setString(2, board.getNickname());
 			ps.setString(3, board.getTitle());
 			ps.setString(4, board.getContent());
-			ps.setInt(5, board.getScheduleno());
-			ps.setDate(6, (Date) board.getInsertdate());
+			ps.setDate(5, (Date)board.getGamedate());
+			ps.setString(6, board.getTeam());
+			ps.setDate(7, (Date) board.getInsertdate());
 			
 			ps.executeUpdate();
 			
@@ -242,20 +272,12 @@ public class BoardDaoImpl implements BoardDao {
 			}
 		}
 		
-		
-		
-		
 	}
-
-
-
 
 
 	//게시글 수정
 	@Override
 	public void update(Board board) {
-		
-//		System.out.println(board);
 		
 		String sql ="";
 		sql += "UPDATE board";
@@ -265,7 +287,6 @@ public class BoardDaoImpl implements BoardDao {
 		
 		//DB객체
 		PreparedStatement ps = null;
-		
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -320,4 +341,43 @@ public class BoardDaoImpl implements BoardDao {
 		
 	}
 
+	//---------------------------------------------
+//	@Override
+//	public List getList(String event, String team, String region) {
+//		
+//		
+//		
+//		return null;
+//	}
+
+	
+	
+	// 내가 쓴 글 보기 
+	@Override
+	public void myBoard(Board board) {
+		
+		String sql = "";
+		sql += "SELECT  * FROM (";
+		sql += " SELECT boardno, nickname, title, content, scheduleno, inserdate, hit FROM board";
+		sql += " ) ORDER BY insertdate";
+		sql += " WHERE userid = ?";
+		
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, board.getNickname());
+			
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
+		} finally {
+			try {
+				if(ps!=null)	ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

@@ -13,11 +13,10 @@ $(document).ready(function(){
 		location.href="/board/write";
 	});
 	
-
 });
 
 
-//라이오버튼클릭시 option 바뀜
+//라디오버튼클릭시 option 바뀜
 function changes(value) {
 	
 	if(value=='base') {
@@ -27,6 +26,7 @@ function changes(value) {
 		nArray = new Array("강원 FC","경남FC","대구FC","상주FC","성남FC","수원삼성블루윙즈","울산현대"
 				,"인천유나이티드","전북현대모터스","제주유나이티드","포항스틸러스","FC서울");
 	}
+	
 	for (i=0; i<form.sel.length; i++){
 		form.sel.options[i] = null;
 	}
@@ -37,6 +37,8 @@ function changes(value) {
 	
 }
 
+
+
 </script>
 
 <style type="text/css">
@@ -44,7 +46,6 @@ table, th{
 	text-align: center;
 	
 }
-
 
 .maching { /* 매칭게시판 가운데 정렬 */
  	text-align: center;
@@ -70,14 +71,10 @@ table, th{
 }
 </style>
 
-<script>
+<!-- <script>
 
 
-
-</script>
-
-
-
+</script> -->
 
 
 
@@ -87,7 +84,7 @@ table, th{
 
 <div style="text-align: center;"><label>종목</label></div>
 
-<form name='form' style="text-align: center;">
+<form id="searchForm" action="/board/list" method="get" name='form' style="text-align: center;">
 	<input type="radio" name="sports" onclick="changes('base');"> 야구
 	
 	<input type="radio" name="sports" onclick="changes('foot');"> 축구
@@ -98,6 +95,9 @@ table, th{
 <br>
 
 <select name='sel' >
+<%-- <c:forEach items="${list }" var="a"> --%>
+<%-- <option value="${a.title }">${a.title}</option> --%>
+<%-- </c:forEach> --%>
 <option value=''>★선택하세요★</option>
 <option value='1'>기아타이거즈</option>
 <option value='2'>두산베어스</option>
@@ -111,35 +111,44 @@ table, th{
 <option value='10'>SK와이번스</option>
 </select>
 
-</form>
+
 
 <br>
 <div style="text-align: center">
 <label>지역</label><br>
 <select>
-
-<option>★선택하세요★</option>
-<option>광주</option>
-<option>대구</option>
-<option>대전</option>
-<option>부산</option>
-<option>상주</option>
-<option>서울 특별시</option>
-<option>성남</option>
-<option>수원</option>
-<option>울산</option>
-<option>인천</option>
-<option>전주</option>
-<option>제주</option>
-<option>창원</option>
-<option>춘천</option>
-<option>포항</option>
+	
+	<option value='0'>★선택하세요★</option>
+	<option value='1'>광주</option>
+	<option value='2'>대구</option>
+	<option value='3'>대전</option>
+	<option value='4'>부산</option>
+	<option value='5'>상주</option>
+	<option value='6'>서울</option>
+	<option value='7'>성남</option>
+	<option value='8'>수원</option>
+	<option value='9'>울산</option>
+	<option value='10'>인천</option>
+	<option value='11'>전주</option>
+	<option value='12'>제주</option>
+	<option value='13'>창원</option>
+	<option value='14'>춘천</option>
+	<option value='15'>포항</option>
 
 </select>
 </div>
 
-</div>
+<br>
+	<div style="text-align:center">
+	
+	<input type="button" value="검색"/>
+	<!-- <button type="submit" id="btnSearch" class="btn">검색</button> -->
+	</div>
+</form>
 
+ 
+
+</div>
 
 
 
@@ -155,12 +164,13 @@ table, th{
 <thead>
 	<tr>
 		<th style="width: 5%;">번호</th>
-		<th style="width: 10%;">작성자</th>
+		<th style="width: 10%;">닉네임</th>
 		<th style="width: 10%;">제목</th>
 		<th style="width: 35%;">내용</th>
-		<th style="width: 10%;">스케줄</th>
-		<th style="width: 20%;">작성일</th>
-		<th style="width: 10%;">조회수</th>
+		<th style="width: 10%;">경기일자</th>
+		<th style="width: 10%;">경기팀</th>
+		<th style="width: 15%;">작성일</th>
+		<th style="width: 5%;">조회수</th>
 	</tr>
 </thead>
 
@@ -169,14 +179,17 @@ table, th{
  <tr>
  
  	<td>${i.boardno }</td>
- 	<td>${i.userid }</td>
+ 	<td>${i.nickname }</td>
  	<td><a href="/board/view?boardno=${i.boardno}">${i.title }</a></td>
  	<td>${i.content }</td>
- 	<td>${i.scheduleno }</td>
+ 	<td>${i.gamedate }</td>
+ 	<td>${i.team }</td>
  	<td><fmt:formatDate value="${i.insertdate }" pattern="yyyy-MM-dd"/></td>
  	<td>${i.hit }</td>
  </tr>
+ 
  </c:forEach>
+ 
  </table>
  
  <div id="pagingBox">
@@ -184,26 +197,18 @@ table, th{
  
  <div id="btnBox">
  <button id="btnWrite" class="btn btn-primary">글작성</button>
+ 
+
+ 
  </div>
  
  </div>
  
 </div>
+
+
+
 <c:import url="/WEB-INF/views/layout/footer.jsp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -33,8 +33,6 @@ public class BoardViewController extends HttpServlet {
 		// model로 게시글 전달
 		req.setAttribute("viewBoard", viewBoard);
 		
-		// view 지정
-		req.getRequestDispatcher("/WEB-INF/views/board/view.jsp").forward(req, resp);
 		
 		// 댓글 리스트 전달 
 		Reply reply = new Reply();

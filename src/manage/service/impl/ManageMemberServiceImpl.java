@@ -40,11 +40,44 @@ public class ManageMemberServiceImpl implements ManageMemberService {
 		return managememberDao.selectAll(paging);
 	}
 
+
+
+
+
 	@Override
-	public Member view(Member viewMember) {
-	
-		return managememberDao.selectMemberByTeamname(viewMember);
+	public Member getUserid(HttpServletRequest req) {
+
+		String param = req.getParameter("userid");
+		
+		
+		return managememberDao.view(param);
 	}
+
+
+
+	@Override
+	public int getReply(HttpServletRequest req) {
+		
+		String reply = req.getParameter("replyno");
+		
+		return managememberDao.cntReply(reply);
+	}
+
+
+
+	@Override
+	public int getcntBoard(HttpServletRequest req) {
+		
+		String cntBoard = req.getParameter("nickname");
+		
+		return managememberDao.cntBoard(cntBoard);
+	}
+	
+	
+
+
+
+	
 	
 	
 

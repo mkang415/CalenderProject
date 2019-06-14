@@ -49,8 +49,9 @@ $(document).ready(function() {
 #hwrite {
 	text-align: center;
 }
-</style>
 
+
+</style>
 <div class="container">
 
 <h3 id="hwrite">게시글 쓰기</h3>
@@ -63,9 +64,12 @@ $(document).ready(function() {
 
 
 <tr><td class="secondary" style="text-align: center">제목</td><td><input type="text" name="title" style="width:100%"/></td></tr>
-<tr><td class="warning" style="text-align: center">직관날짜 <button>달력</button></td> <!-- 직관날짜는 boarddto에 없음 -->
+<tr><td class="warning" style="text-align: center">직관날짜 
+<input type="date" value="달력"/></td> <!-- 직관날짜는 boarddto에 없음 -->
 <td style="text-align: center" class="info">응원하는 팀<br>
-<select>
+
+
+<select name="issuetype" id="issuetype">
 <option>야구</option>
 <option>기아타이거즈</option>
 <option>두산베어스</option>

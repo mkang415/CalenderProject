@@ -13,7 +13,7 @@ import manage.service.face.ManageMemberService;
 import manage.service.impl.ManageMemberServiceImpl;
 import util.Paging;
 
-@WebServlet("/manage/managemember")
+@WebServlet("/manage/member")
 public class ManageMemberController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
@@ -30,7 +30,7 @@ public class ManageMemberController extends HttpServlet {
 		
 		req.setAttribute("list", list);
 		
-		req.getRequestDispatcher("/WEB-INF/views/manage/managemember.jsp").forward(req, resp);;
+		req.getRequestDispatcher("/WEB-INF/views/manage/member.jsp").forward(req, resp);;
 		
 	}
 	

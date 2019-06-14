@@ -112,48 +112,125 @@ public class ManageMemberDaoImpl implements ManageMemberDao {
 				return totalCount;
 	}
 
+	
+
 	@Override
-	public Member selectMemberByTeamname(Member viewMember) {
-		// 게시글 조회쿼리
-				String sql = "";
-				sql += "SELECT userid, age, gender, iconno, nickname, joinDate, teamname, introduce FROM Member";
-				sql += " WHERE teamname = ?";
+	public Member view(String param) {
+		
+		Member viewMember = new Member();
+		
+		String sql = "";
+		sql += "SELECT userid, age, gender, iconno, nickname, joinDate, teamname, introduce FROM Member";
+		sql += " WHERE userid = ?";
+		
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, param);
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
 				
+				viewMember.setUserid(rs.getString("userid"));
+				viewMember.setAge(rs.getInt("age"));
+				viewMember.setGender(rs.getString("gender"));
+				viewMember.setIconno(rs.getInt("iconno"));
+				viewMember.setNickname(rs.getString("nickname"));
+				viewMember.setJoindate(rs.getDate("joindate"));
+				viewMember.setTeamname(rs.getString("teamname"));
+				viewMember.setIntroduce(rs.getString("introduce"));
 				
-				try {
-					ps = conn.prepareStatement(sql);
-					
-					ps.setString(1, viewMember.getTeamname());
-					
-					rs = ps.executeQuery();
-					
-					while (rs.next()) {
-						
-						viewMember.setUserid(rs.getString("userid"));
-						viewMember.setAge(rs.getInt("age"));
-						viewMember.setGender(rs.getString("gender"));
-						viewMember.setIconno(rs.getInt("iconno"));
-						viewMember.setNickname(rs.getString("nickname"));
-						viewMember.setJoindate(rs.getDate("joindate"));
-						viewMember.setTeamname(rs.getString("teamname"));
-						viewMember.setIntroduce(rs.getString("introduce"));
-						
-					}
-					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
-					try {
-						if (rs != null)
-							rs.close();
-						if (ps != null)
-							ps.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				
-				return viewMember;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return viewMember;
+	}
+
+	@Override
+	public int cntReply(String reply) {
+		
+		String sql = "";
+		sql += "select count(*) from reply where nickname = ?";
+		
+		int totalCount = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, reply);
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				totalCount = rs.getInt(1);
+				System.out.println(totalCount);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// 자원 해제
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return totalCount;
+	}
+
+	@Override
+	public int cntBoard(String cntBoard) {
+
+		String sql = "";
+		sql += "select count(*) from board where nickname = ?";
+
+		int totalCount = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(1, cntBoard);
+			
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				totalCount = rs.getInt(1);
+				System.out.println(totalCount);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// 자원 해제
+				if (rs != null)
+					rs.close();
+				if (ps != null)
+					ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return totalCount;
+		
 	}
 
 }

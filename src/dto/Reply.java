@@ -5,7 +5,7 @@ import java.util.Date;
 public class Reply {
 
 	private int replyno;
-	private String userid;
+	private String nickname;
 	private int boardno;
 	private String replyContent;
 	private Date insertdate;
@@ -13,7 +13,7 @@ public class Reply {
 	@Override
 	public String toString() {
 		return "Comment [replyno = " + replyno
-				+ ", boardno = " + boardno + ", userid = " + userid
+				+ ", boardno = " + boardno + ", nickname = " + nickname
 				+ ", replyContent = " + replyContent + ", insertdate = " + insertdate 
 				+ ", getClass() = " + getClass() + ", hashCode() = " + hashCode()
 				+ ", toString() = " + super.toString() + "]";
@@ -35,12 +35,12 @@ public class Reply {
 		this.boardno = boardNo;
 	}
 
-	public String getUserid() {
-		return userid;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getReplyContent() {

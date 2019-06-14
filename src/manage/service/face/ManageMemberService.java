@@ -13,6 +13,11 @@ public interface ManageMemberService {
 
 	public List getList(Paging paging);
 	
-	public Member view(Member viewMember);
+	public Member getUserid(HttpServletRequest req);
 
+	public int getReply(HttpServletRequest req);
+
+	public int getcntBoard(HttpServletRequest req);
+
+	
 }

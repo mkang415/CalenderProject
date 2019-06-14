@@ -8,17 +8,17 @@ import board.dao.face.BoardDao;
 import board.dao.impl.BoardDaoImpl;
 import board.service.face.BoardService;
 import dto.Board;
+import dto.Reply;
 import reply.dao.face.ReplyDao;
 import reply.dao.impl.ReplyDaoImpl;
 import util.Paging;
 
 public class BoardServiceImpl implements BoardService {
 	
-	// DAO 객체 
-
+	// DAO 객체
 	private ReplyDao replyDao = new ReplyDaoImpl();
 
-	//BoardDao객체
+	// BoardDao객체
 	private BoardDao boardDao = new BoardDaoImpl();
 
 	@Override //list 전체검색
@@ -26,7 +26,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.selectAll(paging);
 	}
 	
-	//게시글 curPage 파싱
+	// 게시글 curPage 파싱
 	@Override
 	public Paging getCurPage(HttpServletRequest req) {
 		//전달파라미터 curPage 파싱
@@ -36,10 +36,10 @@ public class BoardServiceImpl implements BoardService {
 			curPage = Integer.parseInt(param);
 		}
 
-		//전체 게시글 수
+		// 전체 게시글 수
 		int totalCount = boardDao.selectCntAll();
 		
-		//페이징 객체 생성
+		// 페이징 객체 생성
 		Paging paging = new Paging(totalCount, curPage);
 		
 		
@@ -60,7 +60,6 @@ public class BoardServiceImpl implements BoardService {
 		//board객체 생성
 		Board board = new Board();
 		board.setBoardno(boardno);
-		
 		
 		return board;
 	}
@@ -87,9 +86,7 @@ public class BoardServiceImpl implements BoardService {
 		
 		boardDao.insert(board);
 		
-		
-		
-		
+	
 //		Board board = null;
 //		board = new Board();
 //		int boardno = boardDao.selectBoardno();
@@ -108,8 +105,6 @@ public class BoardServiceImpl implements BoardService {
 //			boardDao.insert(board);
 //		}
 		
-		
-		
 	}
 
 	
@@ -118,7 +113,7 @@ public class BoardServiceImpl implements BoardService {
 	public boolean checkWriter(HttpServletRequest req) {
 		
 		//로그인한 세션 ID 얻기
-//		String loginId = (String) req.getSession().getAttribute("userid");
+		String loginId = (String) req.getSession().getAttribute("userid");
 		
 		//작성한 게시글 번호 얻기
 		Board board = getBoardno(req);
@@ -148,8 +143,6 @@ public class BoardServiceImpl implements BoardService {
 		boardDao.update(board);
 		
 		 
-		
-			
 		}
 
 	
@@ -161,7 +154,37 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
+	//----------댓글
+	@Override
+	public Reply getReply(HttpServletRequest req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public void insertReply(Reply reply) {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public List getReplyList(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean deleteReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List selectBoardByTeamRegion(String event, String team, String region) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 	
 }

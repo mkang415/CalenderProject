@@ -6,10 +6,8 @@
 <!-- header 영역 -->
 <c:import url="/WEB-INF/views/layout/header.jsp"/>
 
-<div class="main_content">
-	<!-- bootstrap 적용된 index.jsp import -->
-	<c:import url="/WEB-INF/views/main/index.jsp"/>
-</div>
+<!-- bootstrap 적용된 index.jsp import -->
+<c:import url="/WEB-INF/views/main/index.jsp"/>
 
 <!-- footer 영역 -->
 <c:import url="/WEB-INF/views/layout/footer.jsp"/>

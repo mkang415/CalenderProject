@@ -33,10 +33,11 @@ $(document).ready(function() {
 	//댓글 입력
 	$("#btnReplyInsert").click(function(){
 		
-		console.log($("#replynickname").val());
-		console.log($("#replyreContent").val());
+		//console.log($("#replynickname").val());
+		//console.log($("#replyreContent").val());
+		
 		//게시글번호
-		${viewBoard.boardno}
+		//${viewBoard.boardno}
 		
 		$form=$("<form>").attr({
 			action:"/reply/insert",
@@ -52,7 +53,7 @@ $(document).ready(function() {
 				$("<input>").attr({
 					type:"hidden",
 					name:"nickname",
-					value:"${sessionScope.nickname}"
+					value:"${nickname}"
 				})
 		
 		).append(
@@ -100,6 +101,7 @@ $(document).ready(function() {
 
 .contents {
 	width: 1200px;
+	overflow:auto; /*자동스크롤*/
 /* 	height: 660px; */
 }
 
@@ -170,8 +172,13 @@ table, tr{
 
 
 #reply {
-	width: 1000px;
+	width: 1200px;
 	position: fixed;
+}
+
+#replylist{
+	width: 1200px;
+	text-align: center;
 }
 
 
@@ -274,14 +281,17 @@ table, tr{
 </c:if>
 
 <!-- 로그인했을때 -->
-<c:if test="${login }">
+<c:if test="${login}">
+
+
 
 <!-- 댓글입력 -->
 <div class="form-inline text-center"  id="reply">
 
 	<input type="text" size="10" class="form-control" id="replyWriter" value="${nickname }" readonly="readonly"/>
-	<textarea rows="2" cols="100" class="form-control" id="replyContent" ></textarea>
-	<button id="btnReplyInsert" class="btn">입력</button>
+	<input type="text" size="120" class="form-control" id="replyContent"/>
+<!-- 	<textarea rows="2" cols="100" class="form-control" id="replyContent" ></textarea> -->
+	<button id="btnReplyInsert" class="btn" >입력</button>
 </div>	<!-- 댓글 입력 end -->
 </c:if>
 
@@ -290,13 +300,14 @@ table, tr{
 
 
 <!-- 댓글 리스트 -->
-<table class="table table-striped table-hover table-condensed table-bordered table-fixed" >
+<table class="table table-striped table-hover table-condensed table-bordered table-fixed
+" id="replylist">
 <thead>
 <tr>
-	<th style="width: 15%;">번호</th>
+	<th style="width: 5%;">번호</th>
 	<th style="width: 10%;">닉네임</th>
 	<th style="width: 10%;">게시글번호</th>
-	<th style="width: 65%;">댓글</th>
+	<th style="width: 75%;">댓글</th>
 </tr>
 </thead>
 
@@ -314,9 +325,9 @@ table, tr{
 	
 	<td>${reply.recontent }</td>
 	
-<%-- 	<c:if test="${reply.nickname eq reply.nickname }"> --%>
-<%-- 		<button class="btn btn-default btn-xs" onclick="deleteReply(${reply.replyno });">삭제</button> --%>
-<%-- 		</c:if> --%>
+	<c:if test="${reply.nickname == sessionScope.sessionNickname}">
+		<button class="btn btn-danger btn-sm" onclick="deleteReply(${reply.replyno });">삭제</button>
+		</c:if>
 </tr>
 
 </c:forEach>

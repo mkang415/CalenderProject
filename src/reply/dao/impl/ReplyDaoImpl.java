@@ -144,17 +144,20 @@ public class ReplyDaoImpl implements ReplyDao {
 		
 		try {
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, reply.getReplyno());
-			rs = ps.executeQuery();
-			rs.next();
-			cnt = rs.getInt(1);
 			
+			ps.setInt(1, reply.getReplyno());
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+			cnt = rs.getInt(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				if(rs!=null)	rs.close();
-				ps.close();
+				if(ps!=null) 	ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
